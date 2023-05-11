@@ -7,7 +7,7 @@ class PostTest {
 void testSetName() {
 	Post post = new Post("TESTER", "2022-04-12 01:01:48", "Happy Wedding");
 	post.setName("DEVOPS");
-	kassertEquals("DEVOPS", post.getName());
+	    assertEquals("DEVOPS", post.getName());
 	}
 }
 
