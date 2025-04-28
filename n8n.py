@@ -10,7 +10,7 @@ class Pipeline:
         self.name = "N8N Agent Pipeline"
         self.api_url = "https://n8n.skcc-infra.net/webhook/myflow"     # Set correct hostname
         self.api_key = ""                                    # Insert your actual API key here
-        self.verify_ssl = True
+        self.verify_ssl = False
         self.debug = False
         # Please note that N8N do not support stream reponses
 
