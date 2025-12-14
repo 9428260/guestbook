@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+/*-------------------------------------------------------------------
+	common css
+	: 기본 layout 및 각 component 에서 사용하는 기본 스타일을 
+	  이곳에서 정의 합니다.
+---------------------------------------------------------------------*/
+/* location */
+.prj-list { position: relative; margin-right: 20px; color: #999999; }
+.prj-list strong { color:#666;}
+.Dropdownbutton.typea,
+.Dropdownbutton.typea:hover { cursor: pointer; margin-top: -1px; min-width: 250px; color: #999999; text-align: left; border: 0; background: transparent; }
+.Dropdownbutton.typea:after { content: ''; display: inline-block; width: 8px; height: 5px; position: absolute; right: 0; background: url("../images/ico-arrow-down.png") no-repeat; }
+.Dropdownbutton.typea:hover:after {background: url("../images/ico-arrow-down-hover.png") no-repeat}
+.history-list { flex: 1; text-align: right; }
+.history-list a {color: #777777}
+.history-list a:after { content: ''; display: inline-block; position: relative; top: 0; width: 5px; height: 8px; margin: 0 10px; background: url("../images/ico-arrow-right.png") no-repeat; }
+.history-list a:hover:after {background: url("../images/ico-arrow-right-hover.png") no-repeat;}
+.history-list a:last-child {color: #222222;}
+.history-list a:last-child:after {content: none;}
+
+
+/*---------------------------------------
+	contents css
+---------------------------------------*/
+.comparison_text { font-size: 14px; color:#444;}
+.comparison_text em { color:#eb0430;}
+
+
+/* 조회조건 검색영역*/
+.search_box { padding: 10px 20px; background: #f9f9f9; border-top: 2px solid #444; border-bottom: 1px solid #dddddd; display:block; width:100%; }
+.search_box .Textinput { width: 24%;}
+.box-title { display: inline-block; margin-right: 50px; font-size: 1.14rem; color: #444444; }
+
+
+/* Quick Link setting */
+.setting_wrap { display:block; overflow:visible;}
+.setting_wrap > ul { margin-left: -3%;}
+.setting_wrap > ul > li { display:inline-block; width: 30%; vertical-align: top; margin-left: 3%; margin-bottom: 30px; border-bottom: 2px solid #e5e5e5;}
+.setting_wrap > ul > li dl dt { font-size: 18px; color:#222; font-weight: 400; border-bottom: 2px solid #444; padding: 0 0 10px 0; }
+.setting_wrap .set_list { }
+.setting_wrap .set_list > li { display:block; padding:8px 20px 10px; border-top: 2px solid #f6f6f6; }
+.setting_wrap .set_list > li:hover { background:#f9f9f9; }
+.setting_wrap .set_list > li:first-child { border-top:0;}
+
+/*---------------------------------------
+	Login css
+---------------------------------------*/

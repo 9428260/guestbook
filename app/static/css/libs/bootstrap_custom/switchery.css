@@ -1,0 +1,305 @@
+/* ========================================
+   Switchery Styles
+   Extracted from ui-guide-dev/ui/css/components.css (lines 831-930)
+   and ui-guide-dev/ui/css/guide.css (lines 370-397)
+   ======================================== */
+
+/* ========================================
+   Switchery 기본 스타일
+   ======================================== */
+
+.switchery {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  display: block;
+  line-height: 1;
+  width: 36px;
+  height: 18px;
+  position: relative;
+  box-sizing: content-box;
+  border-radius: 100px;
+}
+
+.form-check-switchery .switchery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+}
+
+.form-check-switchery.disabled .switchery {
+  cursor: default;
+}
+
+.switchery > small {
+  background-color: #fff;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 100px;
+}
+
+.form-check-switchery:not(.dropdown-item) {
+  padding-left: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.form-check-switchery:not(.dropdown-item) .form-check-label {
+  font-size: 13px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+}
+
+.form-check-switchery:not(.dropdown-item).form-check-right {
+  padding-left: 0;
+  padding-right: 48px;
+}
+
+.form-check-switchery:not(.dropdown-item).form-check-right .form-check-label {
+  font-size: 13px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+}
+
+.form-check-switchery:not(.dropdown-item).form-check-right .switchery {
+  left: auto;
+  right: 0;
+}
+
+.form-check-switchery-double.form-check-switchery {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.form-check-switchery-double.form-check-switchery .switchery {
+  margin-top: 0;
+}
+
+.form-check-switchery-double .form-check-label {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.form-check-switchery-double .switchery {
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.form-check-switchery-double input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.dropdown-item.form-check-switchery .form-check-label {
+  padding-left: 70px;
+  font-size: 13px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+}
+
+.dropdown-item.form-check-switchery .switchery {
+  top: 50%;
+  left: 16px;
+  margin-top: -9px;
+}
+
+.dropdown-item.form-check-right.form-check-switchery .form-check-label {
+  padding-right: 70px;
+  font-size: 13px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+}
+
+.dropdown-item.form-check-right.form-check-switchery .switchery {
+  left: auto;
+  right: 16px;
+}
+
+/* ========================================
+   Switchery Change Text 스타일
+   ======================================== */
+
+.form-check-switchery.inner-text-1 {
+  position: relative;
+}
+
+.form-check-switchery.inner-text-1 .switchery {
+  width: 46px;
+}
+
+.form-check-switchery.inner-text-1 .form-check-label .form-check-input-switchery-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1.2;
+  z-index: 2;
+  transition: left 0.2s ease;
+}
+
+.form-check-switchery.inner-text-1 .form-check-label .switchery {
+  background-color: #999 !important;
+}
+
+.form-check-switchery.inner-text-1 .form-check-label input[type=checkbox]:checked ~ .form-check-input-switchery-text {
+  left: 0;
+}
+
+/* ========================================
+   OPME Console Switchery 커스터마이징
+   ======================================== */
+
+/* 모든 Switchery 기본 컬러 통일 */
+.switchery {
+  background-color: #455A64;
+  border-color: #455A64;
+}
+
+.switchery > small {
+  background-color: #fff;
+}
+
+/* 체크된 상태의 Switchery */
+.switchery.checked {
+  background-color: #455A64;
+  border-color: #455A64;
+}
+
+.switchery.checked > small {
+  background-color: #fff;
+}
+
+/* ========================================
+   Switchery 호버 및 포커스 상태
+   ======================================== */
+
+.switchery:hover {
+  border-color: #007bff;
+}
+
+.switchery:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* ========================================
+   Switchery 비활성화 상태
+   ======================================== */
+
+.switchery.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.switchery.disabled > small {
+  background-color: #e9ecef;
+}
+
+/* ========================================
+   Switchery 애니메이션
+   ======================================== */
+
+.switchery {
+  transition: background-color 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+
+.switchery > small {
+  transition: background-color 0.4s, left 0.2s;
+}
+
+/* ========================================
+   Switchery 반응형 스타일
+   ======================================== */
+
+@media (max-width: 767.98px) {
+  .form-check-switchery:not(.dropdown-item) {
+    padding-left: 40px;
+  }
+  
+  .form-check-switchery:not(.dropdown-item).form-check-right {
+    padding-right: 40px;
+  }
+  
+  .form-check-switchery:not(.dropdown-item) .form-check-label,
+  .form-check-switchery:not(.dropdown-item).form-check-right .form-check-label {
+    min-height: 16px;
+  }
+  
+  .switchery {
+    width: 32px;
+    height: 16px;
+  }
+  
+  .switchery > small {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ========================================
+   Switchery 접근성 개선
+   ======================================== */
+
+.form-check-switchery input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-check-switchery .form-check-label {
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+}
+
+.form-check-switchery .form-check-label:focus-within .switchery {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* ========================================
+   Switchery 다크 테마 지원
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  .switchery {
+    background-color: #495057;
+    border-color: #6c757d;
+  }
+  
+  .switchery > small {
+    background-color: #adb5bd;
+  }
+  
+  .form-check-switchery.inner-text-1 .form-check-label .switchery {
+    background-color: #6c757d !important;
+  }
+} 

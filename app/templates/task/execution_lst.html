@@ -1,0 +1,156 @@
+{% extends "common.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/task/execution_lst.js') }}"></script>
+<script type="text/javascript">
+var sse_enable = '{{ sse_enable | safe }}';
+</script>
+{% endblock %}
+
+{% block page_content %}
+<!-- contents -->
+<div class="contents-area">
+    <!-- top area -->
+    <div class="cont_head">
+        <h2 class="title">태스크실행 목록</h2>
+        <div class="btn-right">
+            <!--div class="title-txt" style="display: inline-block;">페이지 새로고침</div-->
+            <div class="tip_btn">
+                <button id="btn_refresh" class="Button btn-ico btn-refresh"></button>
+                <div class="Tooltip" data-position="left">결과 재조회</div>
+            </div>
+        </div>
+        <div class="title-txt">태스크 실행 결과를 조회합니다.</div>
+    </div>
+
+    <div class="cont_body">
+        <div class="half-layout table_wrap">
+            <div class="half-contents">
+                <div class="search_wrap" id="execution_list">
+                    <div class="con_title">
+                        <h3 class="sub-title">태스크실행 조회 조건</h3>
+                        <div class="title-txt">아래 조회 결과 중 조건을 입력하여 조회합니다.</div>
+                    </div>
+
+                    <div class="search_table_wrap">
+                        <div class="search_area_title w80px">태스크 ID</div>
+                        <div class="search_area_input">
+                            <input type="text" id="task_id" name="task_id" class="Textinput textinput_c w180px" placeholder="Exact"/>
+                            <button id="btn_sel_task_id" name="btn_sel_task_id" class='Button input'><span class='icon_search_input'></span></button>
+                        </div>
+                        <div class="search_area_title w80px">소유자 ID</div>
+                        <div class="search_area_input">
+                            <input type="text" id="owner_id" name="owner_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                            <button id="btn_sel_owner_id" name="btn_sel_owner_id" class='Button input'><span class='icon_search_input'></span></button>
+                        </div>
+                        <div class="search_area_init_btn">
+                            <button id="btn_init" name="btn_sel" class='Button btn sm'>초기화</button>
+                        </div>
+                        <div class="search_area_sel_btn">
+                            <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table_wrap">
+                    <div class="con_title">
+                        <h3 class="sub-title">태스크실행 조회 결과</h3>
+                        <div class="title-txt">결과를 클릭하여 우측에 실행 정보를 조회합니다.</div>
+                    </div>
+                    <div class="list" id="execution_grid"></div>
+                </div>
+            </div>
+            <div class="half-contents">
+                <div id="execution_info" class="table_wrap">
+                    <div class="con_title">
+                        <h3 class="sub-title">실행 정보</h3>
+                    </div>
+                    <table class="Table Form-type">
+                        <colgroup>
+                            <col class="w130px">
+                            <col class="wAuto">
+                            <col class="w130px">
+                            <col class="wAuto">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>Execution No.</th>
+                                <td></td>
+                                <th>상태</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>태스크 ID</th>
+                                <td></td>
+                                <th>결과</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>실행 유형</th>
+                                <td></td>
+                                <th>시작일시</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>실행 ID</th>
+                                <td></td>
+                                <th>종료일시</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Argument</th>
+                                <td class="long_value_ellipsis"></td>
+                                <th>실행 노드수</th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="search_wrap" id="execution_node_list">
+                    <div class="con_title">
+                        <h3 class="sub-title">실행 정보 조회 조건</h3>
+                        <div class="title-txt">아래 조회 결과 중 조건을 입력하여 조회합니다.</div>
+                    </div>
+
+                    <div class="search_table_wrap">
+                        <div class="search_area_title">Hostname</div>
+                        <div class="search_area_input">
+                            <input type="text" id="node_hostname" name="hostname" class="Textinput textinput_c w180px" placeholder="SubStr."/>
+                        </div>
+                        <div class="search_area_title">상태</div>
+                        <div class="search_area_input">
+                            <select id="node_status" name="node_status" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="search_area_title">결과</div>
+                        <div class="search_area_input">
+                            <select id="node_result" name="node_result" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="search_area_init_btn">
+                            <button id="btn_init_node" name="btn_init_node" class='Button btn sm'>초기화</button>
+                        </div>
+                        <div class="search_area_sel_btn">
+                            <button id="btn_sel_node" name="btn_sel_node" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table_wrap">
+                    <div class="con_title">
+                        <h3 class="sub-title">실행 정보 조회 결과</h3>
+                        <div class="title-txt">결과를 더블 클릭하면 태스크 실행 상세 정보 팝업창이 조회됩니다.</div>
+                        <div id="export_btn_area" class="btn-right">
+                            <div class="tip_btn">
+                                <button class="Button btn-ico btn-down" id="btn_gather_export">모음 데이터 내보내기</button>
+                                <div class="Tooltip">모음 데이터<br/>내보내기</div>
+                                <button class="Button btn-ico btn-down" id="btn_export">내보내기</button>
+                                <div class="Tooltip">실행결과<br/>내보내기</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list" id="execution_node_grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //contents wrap-->
+{% endblock %}

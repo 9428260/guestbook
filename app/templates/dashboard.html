@@ -1,0 +1,111 @@
+{% extends "common.html" %}
+{% block page_resource %}
+<!--<script src="{{ url_for('static', filename='js/libs/jquery/3.5.1/jquery-3.5.1.min.js') }}"></script>-->
+<link href="{{ url_for('static', filename='css/opme-dashboard.css') }}" rel="stylesheet" type="text/css">
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script type="text/javascript">
+{% if response is defined %}
+var response = JSON.parse('{{ response | tojson }}');
+{% endif %}
+</script>
+{% endblock %}
+
+{% block page_content %}
+<div class="contents-area dashboard">
+  <div class="cont_head">
+    <h2 class="title">Dashboard</h2>
+</div>
+    <div class="cont_body">
+        <div class="row">
+        <div class="my-task col-9">
+          <div class="con_title">
+            <h3 class="sub-title" style="flex: none;">My Task</h3>
+            <div class="title-txt" style="flex: auto;">가장 최근 수행된 태스크 결과입니다. (최대 6개)</div>
+            <div class="toolbox_right" title="실행결과 전체보기">
+                <a href="/execution" class="btn btn-sm btn-light btn-icon"><i class="icon-arrow-right8"></i></a>
+            </div>
+          </div>
+          <div class="details">
+            <div class="header d-flex align-items-center">
+              <div class="header-item" style="width: 50px;">
+                <span class="header-text">결과</span>
+              </div>
+              <div class="header-item" style="flex: 1 1 0;">
+                <span class="header-text">태스크 ID</span>
+              </div>
+              <div class="header-item" style="width: 240px;gap: 4px;padding-right: 0px;padding-left: 0px;">
+                <span class="header-text" style="width:60px;">실패</span>
+                <div class="header-divider"></div>
+                <span class="header-text" style="width:60px;">N/A</span>
+                <div class="header-divider"></div>
+                <span class="header-text" style="width:60px;">성공</span>
+              </div>
+              <div class="header-item" style="width: 96px;">
+                <span class="header-text">실행 유형</span>
+              </div>
+              <div class="header-item" style="width: 184px;">
+                <span class="header-text">최근 수행 일시</span>
+              </div>
+              <div class="header-item" style="width: 78px;">
+                <div></div>
+              </div>
+            </div>
+            <!-- 데이터가 있을 때 표시되는 task_list -->
+            <div data-property-1="Default" class="task_list" id="taskList">
+            </div>
+
+
+            <!-- 데이터가 없을 때 표시되는 nodata 영역 -->
+            <div class="nodata-container" id="nodataContainer" style="display:none;">
+              <div class="nodata-image"></div>
+              <div class="nodata-text">권한을 가지고 있는 태스크가 없습니다.</div>
+            </div>
+          </div>
+        </div>
+        <div class="resources col-3">
+          <div class="con_title">
+            <h3 class="sub-title">Resources</h3>
+          </div>
+          <div class="resource-cards">
+            <div class="card">
+              <div data-name="Manual" class="card-image">
+                <div class="card-icon" data-name="Manual"></div>
+              </div>
+              <div class="card-body">
+                <div class="card-content">
+                  <div class="card-title">사용자 매뉴얼</div>
+                  <div class="card-description">OPMATE 콘솔 사용법 가이드</div>
+                </div>
+                <a href="#" class="btn btn-light btn-lg" id="btn_manual">바로가기</a>
+              </div>
+            </div>
+            <div class="card">
+              <div data-name="Tag" class="card-image">
+                <div class="card-icon" data-name="Tag"></div>
+              </div>
+              <div class="card-body">
+                <div class="card-content">
+                  <div class="card-title">Tag 모아보기</div>
+                  <div class="card-description">연동 완료된 노드들에서 사용중인 Tag Key-Value 조회</div>
+                </div>
+                <a href="#" class="btn btn-light btn-lg" id="btn_tag_search">바로가기</a>
+              </div>
+            </div>
+            <div class="card">
+              <div data-name="Home" class="card-image">
+                <div class="card-icon" data-name="Home"></div>
+              </div>
+              <div class="card-body">
+                <div class="card-content">
+                  <div class="card-title">홈페이지</div>
+                  <div class="card-description">OPMATE 공식 홈페이지</div>
+                </div>
+                <a href="#" class="btn btn-light btn-lg" id="btn_home">바로가기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

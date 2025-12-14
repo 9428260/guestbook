@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<title>OPMATE eyes</title>
+		<script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+		<style>
+			h1 {padding-left:20px; font-size: 30px; letter-spacing: -0.05em;}
+			p{margin:0; padding:0}
+			body{font-family:Malgun Gothic,'맑은 고딕'; margin:0;}
+			.wrap{ margin:10px;}
+			table{width:100%; border-collapse:collapse; font-size:13px; letter-spacing: -1px; border:1px solid #ebebeb; border-top:2px solid #3f3f3f;  }
+			thead th{background-color:#fafafa; border-bottom:2px solid #3f3f3f; color:#000; padding:10px 0; border-left:1px solid #ebebeb;}
+			thead th:first-child{border-left:0}
+			th{border-top:1px solid #ebebeb;border-left:1px solid #ebebeb; color:#767676; padding:10px 10px; background-color:#fafafa; font-weight:normal;}
+			th:first-child{border-left:0px solid #ebebeb;}
+			tbody th{text-align:left; padding:10px 10px;}
+			td{border-top:1px solid #ebebeb; color:#616161; text-align:left; padding:10px 10px; border-left:1px solid #ebebeb;}
+			tr.complete td{cursor:pointer; }
+			a{color:#222; text-decoration:none;}
+			tr.first th,tr.first td{border-top:1px solid #666;}
+			tr.last th,tr.last td{border-bottom:1px solid #666;}
+			.tac{text-align:center;}
+			em.alert {  display: inline-block; padding: 2px 4px; border-radius: 5px; font-size: 11px; color:#fff; font-style: normal; font-weight: bold; background-color: darkorange; }
+			.last_change {  display: inline-block; padding: 2px 4px; border-radius: 5px; font-size: 11px; color:#fff; font-style: normal; font-weight: bold; background-color:darkred; }
+		</style>
+	</head>
+	<body>
+
+	<h1>OPMATE</h1>
+		<div class="wrap">
+			<table>
+				<colgroup>
+					<col width="11%" />
+					<col width="12%" />
+					<col width="11%" />
+					<col width="10%" />
+					<col width="30%" />
+					<col width="8%" />
+					<col width="auto" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th>Depth1</th>
+						<th>Depth2</th>
+						<th>Depth3</th>
+						<th>Depth4</th>
+						<th>File</th>
+						<th>날짜</th>
+						<th>Memo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="pop first">
+						<th>GUIDE</th>
+						<th>UI</th>
+						<th>UI GUIDE</th>
+						<th></th>
+						<td class="link">guide/guide_ui.html</td>
+						<td class="tac">
+							<div class="last_change">2020-09-21</div>
+						</td>
+						<td><em class="alert">알림</em></td>
+					</tr>
+					<!--tr class="pop">
+						<th></th>
+						<th>LAYOUT</th>
+						<th></th>
+						<th></th>
+						<td class="link">guide/layout.html</td>
+						<td class="tac">2020-07-09</td>
+						<td>-</td>
+					</tr-->
+					<tr class="pop first">
+						<th>SAMPLE</th>
+						<th>REST</th>
+						<th></th>
+						<th></th>
+						<td class="link">sample/pub_rest.html</td>
+						<td class="tac">2020-09-18</td>
+						<td>-</td>
+					</tr>
+					<tr class="pop ">
+						<th></th>
+						<th>COLOR</th>
+						<th></th>
+						<th></th>
+						<td class="link">sample/pub_color.html</td>
+						<td class="tac">2020-09-18</td>
+						<td>-</td>
+					</tr>
+					<tr class="pop first">
+						<th>USER</th>
+						<th>로그인</th>
+						<th></th>
+						<th></th>
+						<td class="link">user/pub_login.html</td>
+						<td class="tac">2020-09-21</td>
+						<td>-</td>
+					</tr>
+					<tr class="pop ">
+						<th></th>
+						<th>사용자 조회</th>
+						<th></th>
+						<th></th>
+						<td class="link">user/pub_user_lst.html</td>
+						<td class="tac">2020-09-21</td>
+						<td>-</td>
+					</tr>
+					<tr class="pop ">
+						<th></th>
+						<th>사용자 상세/등록/변경</th>
+						<th></th>
+						<th></th>
+						<td class="link">user/pub_user_dtl.html</td>
+						<td class="tac">
+							<div class="last_change">2020-10-12</div>
+						</td>
+						<td><em class="alert">알림</em></td>
+					</tr>
+					<tr class="pop ">
+						<th></th>
+						<th>사용자그룹 조회</th>
+						<th></th>
+						<th></th>
+						<td class="link">user/pub_usergrp_lst.html</td>
+						<td class="tac">
+							<div class="last_change">2020-10-19</div>
+						</td>
+						<td><em class="alert">알림</em></td>
+					</tr>
+					<tr class="pop ">
+						<th></th>
+						<th>사용자그룹 상세/등록/변경</th>
+						<th></th>
+						<th></th>
+						<td class="link">user/pub_usergrp_dtl.html</td>
+						<td class="tac">
+							<div class="last_change">2020-10-20</div>
+						</td>
+						<td><em class="alert">알림</em></td>
+					</tr>
+					<tr class="pop first">
+						<th>태스크</th>
+						<th>태스크 조회</th>
+						<th></th>
+						<th></th>
+						<td class="link">task/pub_task_lst.html</td>
+						<td class="tac">2021-02-01</td>
+						<td>-</td>
+					</tr>
+					<tr class="pop ">
+						<th></th>
+                        <th>태스크 상세/등록/변경</th>
+						<th></th>
+						<th></th>
+						<td class="link">task/pub_task_dtl.html</td>
+						<td class="tac">2021-02-01</td>
+						<td>-</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script>
+			$(document).ready(function(){
+				var url ="";
+				$('tr').on('mouseover', function(){
+					url = $(this).find('td.link').html();
+					if (url && url.length > 2) {
+						$(this).find('td').css('background-color','#ecf7fd');
+						//$(this).find('th').css('background-color','#eeeeee');
+					}
+				});
+				$('tr').on('mouseout', function(){
+					url = $(this).find('td.link').html();
+					if (url && url.length > 2) {
+						$(this).find('td').css('background-color','#ffffff');
+						//$(this).find('th').css('background-color','#fafafa');
+					}
+				})
+				/* 링크 */
+				$('tr.pop td.link').each(function(i) {
+					url = $(this).parent('tr').find('td.link').html();
+					tagA = '<a href="'+url+'">'+url+'</a>'; 
+					if(url == ""){ url ="#"};					
+					$(this).html(tagA);
+				});
+				$('tr').each(function(e) {
+					url = $(this).find('td.link').html();
+					if (url && url.length > 2) {
+						$(this).addClass('complete');
+					}
+				});
+				var $tac = $(".tac");
+				$tac.each(function(i) {
+					if ($(this).text() == "2015-11-30")
+					{
+						$(this).css("color","red").text($(this).text() + "수정");
+					}
+				});
+				var $yet = $(".yet");
+				$yet.each(function(i) {
+					$(this).find("th").eq(2).css("background-color","yellow");
+				});
+
+			})
+		</script>
+	</body>
+</html>

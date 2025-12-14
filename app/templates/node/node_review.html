@@ -1,0 +1,86 @@
+{% extends "common.html" %}
+{% block page_resource %}
+<!-- Hostname 목록 Multi 입력을 위한 codemirror Text Area 추가를 위해 css, js 추가 Start -->
+<link href="{{ url_for('static', filename='css/libs/codemirror/5.59.2/codemirror.css') }}" rel="stylesheet">
+<script src="{{ url_for('static', filename='js/libs/codemirror/5.59.2/codemirror.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/codemirror/5.59.2/mode/meta.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/codemirror/5.59.2/addon/mode/loadmode.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/codemirror/5.59.2/addon/display/autorefresh.js') }}"></script>
+
+<link href="{{ url_for('static', filename='css/libs/codemirror/5.59.2/theme/solarized.css') }}" rel="stylesheet">
+<!-- Hostname 목록 Multi 입력을 위한 codemirror Text Area 추가를 위해 css, js 추가 End -->
+
+<script type="text/javascript">
+// CodeMirror 에서 제공하는 Syntax 모드를 사용하기 위한 BaseURL.
+// - Jinja2로 하위 URL(%N/%N.js) 의 처리가 어려워 해당 부분은 js 에서 처리.
+CodeMirror.modeURL = "{{ url_for('static', filename='js/libs/codemirror/5.59.2/mode/') }}";
+</script>
+<script src="{{ url_for('static', filename='js/node/node_review.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="contents-area">
+    <div class="cont_head">
+        <h2 class="title">연결검토</h2>
+        <div class="title-txt">Hostname 목록을 입력하면 해당하는 노드의 연결 상태를 확인할 수 있습니다.</div>
+    </div>
+    <div class="cont_body">
+        <div class="search_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">조회 조건</h3>
+            </div>
+            <div class="search_table_wrap">
+                <div class="sc_input_content">
+                    <div class="search_area_title">
+                        <label for="case_include"><input type="checkbox" id="case_include" class="checkbox_c mg-left20px" name="case_include" checked>Hostname 대소문자 포함</label>
+                    </div>
+                    <div id="btn_area" class="btn-right">
+                        <div class="tip_btn">
+                            <button class="Button btn-ico btn-template-down" id="btn_template_download">템플릿 다운로드</button>
+                            <div class="Tooltip">템플릿 다운로드</div>
+                        </div>
+                        <div class="tip_btn">
+                            <button class="Button btn-ico btn-upload" id="btn_upload">업로드</button>
+                            <div class="Tooltip">엑셀업로드</div>
+                        </div>
+                    </div>
+                    <textarea id="script_content" name="script_content" class="Textarea" rows="10" placeholder=""></textarea>
+                </div>
+                <!-- 설정 스크립트 입력 정보 설명을 위한 영역 추가 (script Info) 부모창 (role, task) 에 따라 화면 init시에 jquery 에서 다른 정보 입력-->
+                <div id="sc_info" class="sc_input_content w500px mg-left20px mg-bottom10px"></div>
+                <div class="search_area_sel_btn">
+                    <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- list :s-->
+        <div class="table_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">평가 결과</h3>
+                <div id="export_btn_area" class="btn-right">
+		            <div class="tip_btn">
+			            <button class="Button btn-ico btn-down" id="btn_export">내보내기</button>
+			            <div class="Tooltip">평가결과<br/>내보내기</div>
+		            </div>
+                </div>
+            </div>
+            <!-- 평가 결과 노드 검색 Start -->
+            <div class="grid_search_wrap">
+                <div class="grid_search_input">
+                    <input type="text" id="search_keyword" name="search_keyword" class="Textinput textinput_c w180px h20px" placeholder="Any Text."/>
+                </div>
+                <div class="grid_search_btn">
+                    <button id="btn_search" name="btn_search" class='Button btn sm btn_sx bg-blue'><span class='icon_search'></span>검색</button>
+                    <button id="btn_next"   name="btn_next"   class='Button btn sm btn_sx bg-blue'>▼</button>
+                    <button id="btn_prev"   name="btn_prev"   class='Button btn sm btn_sx bg-blue'>▲</button>
+                    <button id="btn_end"    name="btn_end"    class='Button btn sm btn_sx bg-gray'>초기화</button>
+                </div>
+                <div id="search_info" class="grid_search_cnt"></div>
+            </div>
+            <!-- 평가 결과 노드 검색 End -->
+            <div class="list" id="node_grid"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

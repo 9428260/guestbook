@@ -1,0 +1,1880 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<templates>
+
+<!-- ====== -->
+<!-- Option -->
+<!-- ====== -->
+<template name="absoluteProgressPosition" description="[Option] showProgress API등에 의해 표현되는 프로그레스 HTML 엘리먼트는 기본적으로 CSS만으로 위치를 잡습니다. 이 옵션에 true를 입력하여 그리드에서 명시적으로 inline style을 활용하여 직접 프로그레스 HTML 엘리먼트의 좌표를 지정하게 할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+absoluteProgressPosition: false,</template>
+
+<template name="alwaysShowHorizontalScrollBar" description="[Option] 그리드 너비가 data의 행 길이(각 컬럼 너비의 합)보다 크더라도 테이블 아래에 스크롤 바 표시 여부를 정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+alwaysShowHorizontalScrollBar: true,</template>
+
+<template name="alwaysShowVerticalScrollBar" description="[Option] 그리드에 높이 값이 설정되어 있지 않을 때 테이블 우측에 스크롤 바 표시 여부를 정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+alwaysShowVerticalScrollBar: true,</template>
+
+<template name="autoColumnIndex" description="[Option] ColumnMapping Object에 각각의 컬럼마다 columnIndex 옵션을 지정하지 않고자 할 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+autoColumnIndex: true,</template>
+
+<template name="autoResize" description="[Option] 브라우저 창의 크기가 변할 때 그리드의 모양을 자동으로 다시 잡도록 해주는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+autoResize: true,</template>
+
+<template name="autoSortingType" description="[Option] columnMapping.sorting=true 옵션이 설정되어 있을 때, 데이터의 타입이 string 인지 number 인지를 자동으로 감지하는 기능입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+autoSortingType: true,</template>
+
+<template name="cellCache" description="[Option] 셀 엘리먼트를 캐시영역 메모리에 따로 보관하여 렌더링 성능을 향상시킵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellCache: {
+	enabled: true, // 셀 캐시를 사용할 것인가 여부 //변경
+	mode: 'pad' // 캐시 모드 설정
+},</template>
+
+<template name="cellInlineEdit" description="[Option] 더블 클릭으로 지정한 셀 하나만 편집모드로 변경할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellInlineEdit: true,</template>
+
+<template name="cellInlineEditOption" description="[Option] cellInlineEdit을 사용한 편집시의 세부 동작을 정의하는 옵션입니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellInlineEditOption: {
+	startEvent: 'click', //편집 시작 이벤트 //변경
+	focusMoveAtEditEnd: true, //엔터/탭키에 의한 편집 종료시 cellSelectable옵션에 의한 셀 포커스를 아래/오른쪽으로 이동시킬 것인가
+	allowStartEditWithInvalid: true, //columnMapping.valid와 같은 옵션에 의해 올바르지 않은 값이 있을경우 다른셀의 편집이 시작되지 않음. 이를 허용할 것인가 여부
+	endEditByOtherAreaClick: true //그리드 내에 편집이 개시된 셀 외의 아무영역을 클릭하면 편집이 종료됩니다. 스크롤바 등의 클릭/드래그시 편집종료를 막고자 할 경우 false를 적용
+},</template>
+
+<template name="cellPopupEdit" description="[Option] 특정 컬럼은 팝업을 띄워서 데이터를 수정하고자 할때 이 옵션에 컬럼 인덱스나 컬럼 키값을 배열 형태로 선언해 주면 됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellPopupEdit: [],</template>
+
+<template name="cellPopupEditOption" description="[Option] cellPopupEdit 옵션이 설정되어 있을 때 컬럼별 셀 편집 팝업에 대한 기능을 설정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellPopupEditOption : {
+	closeOuterClick: true,
+	height: 300,
+	width: 350,
+	minHeight: 150,
+	minWidth: 150,
+	movable: true,
+	savePopupSize: true,
+	startEvent: 'click' //변경
+},</template>
+
+<template name="cellRefreshOnRowSelect" description="[Option] selectorColumn, rowClickSelect 또는 rowSelect 와 같은 API에 의해 행을 선택하게 되면 selected 와 같은 CSS 클래스가 셀에 적용되어 사용자에게 행의 선택 여부를 보여줍니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellRefreshOnRowSelect: true,</template>
+
+<template name="cellSelectable" description="[Option] 그리드의 셀 하나만 선택 가능하게 하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellSelectable: true,</template>
+
+<template name="cellSelectableOption" description="[Option] cellSelectable 옵션을 사용할 때 활용하게 되는 동작에 대한 세부 옵션을 설정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellSelectableOption: {
+	copyCellStyle: false, // 선택영역을 복사할 때, 셀이 렌더링된 스타일을 복사하여 엑셀 등에서 적용되게 하고자 할 때 사용 //변경
+	copyRenderedText: false, // 선택영역을 복사할 때, 기본적으로 셀이 가지는 value를 복사합니다.
+	copyTextformOnly: false, // 일반 텍스트 형태로만 복사를 시도
+	useHomeEndKey: false	// HOME/END 키를 이용하여 그리드의 최상단/최하단으로 스크롤 이동할 수 있습니다.
+}</template>
+
+<template name="clientSortingOnDynamicDataSet" description="[Option] 클라이언트 정렬 여부를 설정하는 옵션으로 서버 데이터로 정렬을 위해서는 이 옵션을 false로 선언해서 on.sortToggle 이벤트 핸들러로 구현해야 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+clientSortingOnDynamicDataSet: false,</template>
+
+<template name="columnFixShowFrom" description="[Option] columnFix API 또는 columnFixUpto 옵션 옵션에 의해 컬럼고정을 하였을 때 특정 컬럼부터 렌더링을 하고자 할 때 원하는 컬럼의 columnIndex 또는 key값을 명시할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnFixShowFrom: 'alopex',</template>
+
+<template name="columnFixUpto" description="[Option] 컬럼을 고정하고자 할때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnFixUpto: 'alopex',</template>
+
+<template name="contextMenu" description="[Option] AlopexGrid 컨텍스트 메뉴 옵션을 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+contextMenu : [
+{
+	title: '', // 컨텍스트 메뉴 이름 설정
+	processor: function(data, $$cell, grid) { // 해당 메뉴를 클릭 했을 때 수행되는 프로세스
+
+	},
+	use: function(data, $$cell, grid) { // 해당 메뉴가 보이는 영역 설정
+		return $$cell.hasClass('headercell'); // 헤더 셀 영역에서 만 보임
+	}
+}, {
+	title: '',
+	processor: function(data, $$cell, grid) {
+
+	},
+	use: function(data, $$cell, grid) {
+		return ($$cell.hasClass('headercell') || $$cell.hasClass('bodycell')); // 헤더 셀, 본문 영역에서 보임
+	}
+}],</template>
+
+<template name="contextMenuEvent" description="[Option] 컨텍스트메뉴를 띄우기 위해 사용하는 이벤트를 바꾸고자 할 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+contextMenuEvent: 'contextmenu',</template>
+
+<template name="data" description="[Option] 그리드 최초 생성 시 초기 데이터를 설정할 수 있도록 해주는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+data: [],</template>
+
+<template name="deepCopyOnDataGet" description="[Option] dataGet, dataGetByIndex API는 기본적으로 reference를 가져오는 Shallow Copy인데 Deep Copy로 바꾸고자 할 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+deepCopyOnDataGet: true,</template>
+
+<template name="defaultColumnMapping" description="[Option] 사용자가 columnMapping 옵션을 구성하면서 공통으로 사용할 columnMapping 옵션의 key-value를 명시합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+defaultColumnMapping: {
+	align : 'center', // 컬럼의 공통 align 설정
+	resizing : true, // resizing 설정
+	sorting : true // sorting 설정
+},</template>
+
+<template name="defaultSorting" description="[Option] 최초 그리드 생성 시 적용할 정렬 정보를 지정할 수 있도록 해주는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+defaultSorting: {
+	sortingColumn: null,
+	sortingDirection: 'asc'
+},</template>
+
+<template name="defaultState" description="[Option] dataAdd와 dataSet API를 실행하여 데이터를 그리드에 추가되거나 새로 설정될 때 해당 데이터의 기본 상태를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+defaultState: {
+	dataAdd : {editing: true}, //dataAdd API로 데이터를 추가할 때 추가된 데이터는 편집 상태로 추가됩니다.
+	dataSet : {selected: true} //dataSet API로 새로 설정된 데이터는 선택된 채로 추가됩니다.
+},</template>
+
+<template name="disableCellRenderedEvent" description="[Option] cellRendered 이벤트는 셀이 화면에 새로 그려질 때 마다 항상 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableCellRenderedEvent: true,</template>
+
+<template name="disableCellSelectionRestore" description="[Option] focusInfo, focusRestore API는 3.4.4 버전부터 셀의 선택범위를 함께 복원합니다. 이를 사용하지 않고자 한다면 본 옵션에 true를 명시하십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableCellSelectionRestore: true,</template>
+
+<template name="disableFocusedState" description="[Option] 데이터에 관한 이벤트 중 마지막 이벤트가 클릭이 일어났음을 지시하는 data._state.focused 상태 값을 사용하지 않고자 한다면 이 옵션에 true 값을 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableFocusedState: true,</template>
+
+<template name="disableFoldingInEditingCell" description="[Option] 편집 셀에 그룹 접기 버튼, 트리 접기 버튼 표시 여부를 제어하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableFoldingInEditingCell: true,</template>
+
+<template name="disableHeaderClickSorting" description="[Option] columnMapping.sorting=true일 때 헤더 옆의 정렬 마크를 마우스 클릭을 하더라도 정렬 상태 변경이 없도록 하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableHeaderClickSorting: true,</template>
+
+<template name="disableSortClearOnReset" description="[Option] dataSet, dataEmpty 와 같은 API는 데이터의 초기화를 야기하므로 기존의 정렬상태를 초기화 하게 됩니다. 헤더클릭등에 의해 생성된 기존 정렬상태를 유지해야 한다면 본 옵션에 true를 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableSortClearOnReset: true,</template>
+
+<template name="disableTextSelection" description="[Option] 더블클릭에 의한 선택영역 생성 등 브라우저 상에서 텍스트의 선택 불가를 명시적인 옵션으로 처리하고자 한다면 본 옵션에 true를 주십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableTextSelection: true,</template>
+
+<template name="disableTreeEdit" description="[Option] 트리그리드 세부 옵션을 이용하여 depth값의 type이나 leaf여부 값 설정하는 방법을 명확하게 정의하지 않고 트리그리드를 사용하게 되면 데이터를 초기에 로드하자마자 편집이 될 수 있으므로, 트리의 편집기능을 사용하지 않고 읽기만 한다면 본 옵션을 true 로 설정하십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableTreeEdit: true,</template>
+
+<template name="disableValueEscape" description="[Option] columnMapping.render에 아무런 값이 없을 때 value를 그대로 반영하여 escaping 문자를 처리하지 않으려면 본 옵션에 true를 주십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+disableValueEscape: true,</template>
+
+<template name="editableNameWithKey" description="[Option] 그리드 기본 렌더러를 이용하여 셀을 편집할 때 그려지는 input 태그 등의 name attribute로 컬럼에 매핑된 key 명칭을 사용할 것인가를 지정하는 옵션입니다. 기본 렌더러 중 {type:'radio'} 사용 시에는 복수의 행 편집 과정에서 동일한 name이 사용되어 다른 행의 편집이 방해받을 수 있으므로 일반적으로 false로 두고 사용하는 것이 좋습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+editableNameWithKey: true,</template>
+
+<template name="ellipsisText" description="[Option] 텍스트 형태의 셀에 표현된 값이 셀의 너비를 넘어갔을 때 초과분을 ... 으로 표시하는가 여부를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+ellipsisText: true,</template>
+
+<template name="enableContextMenu" description="[Option] 기본 제공되는 컨텍스트 메뉴가 아닌 사용자가 정의한 컨텍스트 메뉴를 사용하고자 할 때 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableContextMenu: false,</template>
+
+<template name="enableDataGetAllByEmptyArray" description="[Option] 하위 호환성 옵션입니다. dataGet API에서 빈 어레이를 query object로 넣어 모든 데이터를 가져와야 한다면 본 옵션에 true를 주십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableDataGetAllByEmptyArray: true,</template>
+
+<template name="enableDefaultContextMenu" description="[Option] 기본으로 제공되는 컨텍스트 메뉴를 사용하지 않고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableDefaultContextMenu: false,</template>
+
+<template name="enableDropData" description="[Option] dragdropColumn 옵션으로 데이터 마우스 드래그앤 드롭이 가능할 때 서로 다른 그리드간의 이동 여부를 설정할 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableDropData: false,</template>
+
+<template name="enableHeaderSelect" description="[Option] 마우스로 헤더를 여러 개 선택하여 한꺼번에 열 너비를 조정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableHeaderSelect: true,</template>
+
+<template name="enableNewContextMenu" description="[Option] 기본 제공되는 뉴 컨텍스트 메뉴가 아닌 사용자가 정의한 뉴 컨텍스트 메뉴를 사용하고자 할 때 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableNewContextMenu: false,</template>
+
+<template name="enableNewDefaultContextMenu" description="[Option] 기본으로 제공되는 뉴 컨텍스트 메뉴를 사용하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enableNewDefaultContextMenu: false,</template>
+
+<template name="enlargeOption" description="[Option] 컨텍스트메뉴와 enlargeStart, enlargeExit API에 의한 전체보기 메뉴에서 적용할 옵션을 정의하는 기능입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+enlargeOption: {
+	closeButtonMarkup: 'X'
+},</template>
+
+<template name="endInlineEditByOuterClick" description="[Option] 편집 중인 셀을 외부 영역 클릭으로 편집 종료시킬 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+endInlineEditByOuterClick: true,</template>
+
+<template name="excelWorker" description="[Option] 엑셀내보내기와 엑셀가져오기 기능에서 사용하는 옵션에 대해 페이지 내에서 공통적으로 사용되는 옵션을 선언하고자 한다면 본 옵션에 세부 설정을 저장할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+excelWorker : {
+	exportOption: {},
+	importOption: {
+		titleToKeyMapping : {}
+	}
+},</template>
+
+<template name="extend" description="[Option] AlopexGrid.define API를 통해 선언한 옵션을 사용하고자 할 때 선언하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+extend : [],</template>
+
+<template name="extendStateOnAdd" description="[Option] dataAdd API에 입력된 데이터 Object 안에 _state query object가 존재할 때 이것을 그리드에 반영하여 데이터를 추가하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+extendStateOnAdd: false,</template>
+
+<template name="extendStateOnSet" description="[Option] dataSet API에 입력된 데이터 Object 안에 _state query object가 존재할 때 이것을 그리드에 반영하여 데이터를 초기화하고 새 데이터를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+extendStateOnSet: false,</template>
+
+<template name="fillUndefinedKey" description="[Option] 그리드의 columnMapping object에 명시된 키 값과 dataSet, dataAdd 되는 데이터의 키 값이 존재하지 않는 경우 강제로 빈 값을 채워 넣는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+fillUndefinedKey: '',</template>
+
+<template name="filter" description="[Option] filteringHeader 옵션이 활성화 되어 있을때 필터링 드롭다운의 기능을 설정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+filter: {
+	dataFilterInstant: false,
+	dataFilterSearch: false,
+	filterByEnter: false,
+	filterDelay: 450,
+	filterGridColumnOption: {},
+	filterGridOption: {},
+	focus: null,
+	minHeight: 200,
+	minWidth: 275,
+	movable: false,
+	removeFilterOptionByHidden: false,
+	saveFilterSize: false,
+	scrollResetAfterFilter: true,
+	sorting: false,
+	textFilterFunction: null,
+	title: false,
+	trimText: false,
+	typeList: ['equal','notequal','contain','notcontain','lt','lte','gt','gte'],
+	typeListDefault: {
+		selectValue: '',
+		expandSelectValue: '',
+		radioValue: 'and'
+	}
+},</template>
+
+<template name="filteringHeader" description="[Option] 그리드 필터 기능을 활성화시키는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+filteringHeader: true,</template>
+
+<template name="filteringHeaderHeight" description="[Option] filteringHeader 옵션 사용시 필터링 헤더 행 높이를 변경하고 싶을 떄 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+filteringHeaderHeight: 30,</template>
+
+<template name="fitTableWidth" description="[Option] 그리드 내부의 테이블 너비가 그리드 너비보다 좁을 때 테이블의 너비를 그리드 너비에 맞춰 확장시키는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+fitTableWidth: true,</template>
+
+<template name="flushCallback" description="[Option] 초기 데이터에서 추가/수정/삭제된 데이터들을 처리할 콜백 함수를 등록할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+flushCallback: function(addedDataList, editedDataList, deletedDataList) {
+
+},</template>
+
+<template name="footer" description="[Option] 그리드의 헤더 아래 또는 데이터 영역 아래에 데이터의 개수 또는 특정 컬럼의 합과 같은 통계정보를 볼 수 있는 footer를 놓을 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+footer: {
+	position: 'top',
+	usePageData: false,
+	autoColspan: false,
+	footerMapping: []
+},</template>
+
+<template name="footerRowHeight" description="[Option] 푸터의 높이를 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+footerRowHeight: 30,</template>
+
+<template name="forceRefreshAllOnCellEdit" description="[Option] cellEdit API 호출시 셀별로 리프레시를 할 것인지, 아니면 cellEdit API호출 후 전체 리프레시를 할 것인지를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+forceRefreshAllOnCellEdit: true,</template>
+
+<template name="forceRefreshAllOnDataEdit" description="[Option] dataEdit API 호출시 행별로 리프레시를 할 것인지, 아니면 dataEdit API호출 후 전체 리프레시를 할 것인지를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+forceRefreshAllOnDataEdit: true,</template>
+
+<template name="fullCompareForEditedState" description="[Option] dataEdit API는 기본적으로 편집 과정에서 이전과 값이 바뀌는 것이 있다면 data._state.edited = true로 설정합니다. 만일 최초의 값을 저장하는 data._original과 최종 값을 비교하여 edited state를 설정하고자 한다면 본 옵션을 true로 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+fullCompareForEditedState: true,</template>
+
+<template name="grouping" description="[Option] columnMapping.rowspan과 연관된 옵션입니다. rowspan 값이 true일 때 해당 열의 값이 연속된 데이터에서 동일할 때, 셀이 묶어져서 표현됩니다. 이때 컬럼이 여러 개일 때 앞선 컬럼의 내용 안에서만 그룹을 짓는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+grouping: {
+	by: [], // grouping 대상 컬럼 key 값을 입력하여 그룹핑 순서를 설정합니다.
+	useGroupRearrange : false, // grouping 대상 컬럼의 모든 데이터를 재정렬하여 셀 병합할 지 여부
+	useDragDropBetweenGroups: false, // 그룹 내에서만 드래그 앤 드롭 허용
+	useGroupRowspan:false, // 대상 컬럼에서 연속적으로 같은 값이 나타날 경우 셀을 병합할 지 여부
+	useGrouping:false, // rowspan된 행들을 한 그룹으로 취급하여 편집, 선택 등을 동시에 할 지 여부
+	groupRowspanMode : 0, // 그룹 소계의 표현 모드 설정
+	sortingPriority: [], // 정렬 시 grouping.by에 해당하는 값을 최우선 정렬할 지 여부
+},</template>
+
+<template name="header" description="[Option] 그리드의 컬럼 헤더 영역 표시를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+header: false,</template>
+
+<template name="headerGroup" description="[Option] 헤더그룹 옵션을 설정할때 사용합니다." autoinsert="true" context="javaScript" deleted="false" enabled="true">
+headerGroup: [
+	{fromIndex:, toIndex:, title:'', headerAlign : 'center'}, // {Index type: number|string}
+	{fromIndex:, toIndex:, title:'', headerAlign : 'left'},
+	{hideSubTitle: false} // 헤더그룹 하위의 컬럼 타이틀을 모두 숨길 때 사용
+],</template>
+
+<template name="headerRowHeight" description="[Option] 그리드 테이블의 헤더 높이를 지정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+headerRowHeight: 30,</template>
+
+<template name="height" description="[Option] 그리드의 높이를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+height: null,</template>
+
+<template name="hiddenColumnArea" description="[Option] 컬럼 숨김 영역을 그리드 위에 나타내어 드래그 앤 드롭을 통해 그리드의 컬럼을 숨길 수 있는 기능입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+hiddenColumnArea: false,</template>
+
+<template name="hiddenColumnOrderList" description="[Option] 컬럼 숨김 영역에 나타나는 컬럼의 순서를 정의 할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+hiddenColumnOrderList: ['alopex'],</template>
+
+<template name="hideGridFoldingButton" description="[Option] title 사용시 타이틀영역 우측에 표시되는 그리드 접기 버튼을 숨기고자 할 때엔 본 옵션에 true를 명시합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+hideGridFoldingButton: true,</template>
+
+<template name="hideSortingHandle" description="[Option] columMapping.sorting 이 true 값이어서 그리드의 해당 컬럼이 정렬이 가능할 때 헤더에 생기는 정렬 표시를 숨길 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+hideSortingHandle: true,</template>
+
+<template name="horizontalScrollMoveTempo" description="[Option] x축 스크롤바 빈칸을 눌렀을 때 이동되는 컬럼의 개수를 지정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+horizontalScrollMoveTempo: 3,</template>
+
+<template name="instantInlineEditType" description="[Option] cellInlineEdit = true 일 때 columnMapping.editable에 설정된 type을 마우스오버/셀포커스에 의해 자동으로 편집모드 전환 여부를 설정할 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+instantInlineEditType: ["radio", "checkbox"],</template>
+
+<template name="lazyScroll" description="[Option] 그리드는 기본적으로 사용자가 마우스를 이용하여 스크롤바를 움직이면 이에 맞추어 렌더링을 수행합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+lazyScroll: {
+	enabled: true, // 지연된 스크롤 렌더링 기능 사용 여부
+	refreshDelay: 400 // 스크롤바 이동이 멈추고 몇 ms 후에 refresh를 할 것인가를 지정
+},</template>
+
+<template name="leaveDeleted" description="[Option] 그리드에서 dataDelete API를 이용하여 데이터를 삭제한 경우 삭제된 데이터를 별도 영역으로 옮기지 않고 화면에 남겨둡니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+leaveDeleted: true,</template>
+
+<template name="mergeEditingImmediately" description="[Option] startEdit나 startCellEdit, rowinlineEdit, cellInlindeEdit 등의 사용으로 인해 데이터가 편집 중일 때 값이 변할 경우 편집 활성화 상태를 유지하면서 바로 변경된 값을 저장할 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+mergeEditingImmediately: true,</template>
+
+<template name="message" description="[Option] 특정 상황에서 화면에 보이고자 하는 메시지를 지정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+message: {
+	nodata: "No Data", // 화면에 데이터가 없을 때 보이는 메시지
+	filterNodata: null, // 필터링할 데이터가 없을 때 보이는 메시지
+	noFilteredData: null // 필터링된 데이터가 없을 때 보이는 메시지
+},</template>
+
+<template name="rowDragDrop" description="[Option] 드래그가 가능한 출력된 데이터 칼럼을 지정합니다. 해당 옵션 값이 true일때만 그리드의 출력된 데이터 컬럼을 마우스 드래그로 이동할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowDragDrop: false,</template>
+
+<template name="multiRowDragDrop" description="[Option] columnMapping.dragdropColumn 옵션이 true일 때, 다건의 데이터를 드래그 앤 드롭할 수 있게 하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+multiRowDragDrop: true,</template>
+
+<template name="newContextMenu" description="[Option] AlopexGrid 뉴 컨텍스트 메뉴 옵션을 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+newContextMenu : [
+{
+	id: '',	// 뉴 컨텍스트 메뉴의 순서와 사용유무를 설정하기 위한 id
+	title: '', // 뉴 컨텍스트 메뉴 이름 설정
+	processor: function(data, mapping, $$grid, e) { // 해당 메뉴를 클릭 했을 때 수행되는 프로세스
+
+	},
+	use: function(data, mapping, $$grid, e) { // 해당 메뉴가 보이는 영역 설정
+		var $$cell = AlopexGrid.parseEvent(e).$$cell;
+	  return $$cell.hasClass('headercell'); // 헤더 셀 영역에서 만 보임
+	},
+	subMenu : [	// 뉴 컨텍스트 메뉴의 하위 메뉴를 구성하기 위한 메뉴
+		{
+			title: '' ,
+			processor: function(data, mapping, $$grid, e) {
+
+			},
+			use: function(data, mapping, $$grid, e) {
+				var $$cell = AlopexGrid.parseEvent(e).$$cell;
+				return ($$cell.hasClass('headercell') || $$cell.hasClass('bodycell')); // 헤더 셀, 본문 영역에서 보임
+			},
+		}
+  ]
+}],</template>
+
+<template name="newContextMenuUseOrder" description="[Option] 뉴 컨텍스트 메뉴를 사용할 때 기본 제공되는 뉴 컨텍스트 메뉴와 사용자가 정의한 뉴 컨텍스트 메뉴를 원하는 순서 및 사용 유무를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+newContextMenuUseOrder : null,</template>
+
+<template name="numberingColumnFromZero" description="[Option] ColumnMapping.numberingColumn 이 존재할 때 숫자를 0 부터 표시할 것인지 1부터 표시할 것인지를 정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+numberingColumnFromZero: false,</template>
+
+<template name="optionMergeLegacyMode" description="[Option] 하위호환성 옵션입니다. 현재 그리드의 그리드 기본-글로벌 공통-option.extend-사용자 옵션 순의 합쳐지는 순서를 반대로 하고자 할 경우 본 옵션을 true로 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+optionMergeLegacyMode: true,</template>
+
+<template name="pager" description="[Option] 그리드의 페이징 위젯 사용 여부를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+pager: true,</template>
+
+<template name="paging" description="[Option] 그리드에서 페이징을 사용할 때 페이징 정보를 담는 object 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+paging: {
+	perPage: , // 한 화면에 표시하고자 하는 데이터 개수를 지정
+	pagerCount: , // 인접한 페이지의 링크를 몇개까지 보여줄 것인지를 지정
+	pagerTotal: true, // 총 조회건수 표시
+	pagerSelect: true, // 한 페이지에 보여줄 조회 건수
+	hidePageList: 'auto' // 데이터가 없을 경우 자동으로 페이지 숫자 목록과 화살표를 그리지 않음
+},</template>
+
+<template name="parseValueOnStartEdit" description="[Option] columnMapping.editable에 의해 편집 상태의 렌더링 값이 지정되어 있을 때 (예를 들면 select component를 사용할 때 등) 렌더링된 값을 그리드에 표시할지 여부를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+parseValueOnStartEdit: true,</template>
+
+<template name="preventScrollPropagation" description="[Option] 그리드 스크롤바가 스크롤 구간 끝에 위치해있을 때 마우스 휠이나 터치로 스크롤을 하면 브라우저 스크롤이 동작합니다. 브라우저 스크롤이 동작하지 않도록 하려면 해당 옵션을 true로 설정하면 됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+preventScrollPropagation: true,</template>
+
+<template name="progressStyleclass" description="[Option] progress바의 css 스타일을 재 정의할 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+progressStyleclass: '',</template>
+
+<template name="progressText" description="[Option] progress바에 나타나는 기본 글자로 원하는 대로 변경할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+progressText: 'loading...',</template>
+
+<template name="proxyRatio" description="[Option] 컬럼, 행의 드래그 앤 드롭 시 나타나는 proxy 엘리먼트의 사이즈를 조절할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+proxyRatio: {
+	column: {
+		height: 1,
+		width: 1
+	},
+	row: {
+		height: 1,
+		width: 0.5
+	}
+},</template>
+
+<template name="readonlyRender" description="[Option] 그리드의 columnMapping.render에 옵션 형태로 default render를 사용하게 할 때 readonly : true 추가 여부를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+readonlyRender: false,</template>
+
+<template name="renderMapping" description="[Option] columnMapping.render 또는 columnMapping.editable에 object형태의 렌더러를 공통설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+renderMapping: {
+	'key': {
+		renderer: function(value, data, render, mapping) { // 셀의 컨텐츠를 그리는 함수입니다.
+
+		},
+		postRender: function(cell, value, data, render, mapping, grid) { // 셀이 렌더링 된 후 셀을 파라미터로 받는 함수입니다.
+
+		},
+		editedValue: function (cell, data, render, mapping, grid) { // 편집 컴포넌트인 경우 셀의 내용을 추출하는 기능을 가지고 있습니다.
+
+		}
+	}
+},</template>
+
+<template name="renderRuleOption" description="[Option] 렌더러(columnMapping.render 또는 columnMapping.editable 오브젝트) 설정 중 rule array에 들어가는 오브젝트(rule 오브젝트)는 데이터가 가지는 값을 텍스트로 변환해서 사용자에게 보여주기 위한 정보를 담고 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+renderRuleOption: {
+	valueKey: 'alopex', // value key 설정
+	textKey: 'text', // text key 설정
+	htmlKey: 'html', // html key 설정
+	checkedKey: 'checked' //
+},</template>
+
+<template name="restoreFocusOnInvalidInlineEdit" description="[Option] rowInlineEdit 또는 cellInlineEdit 을 사용할 때 columnMapping.valid 또는 cellEdit 이벤트에서 return false; 를 하여 저장하려는 값이 잘못되었음이 확인되었을 경우 포커스를 마지막 편집 에러가 발생한 셀에 부여할 것인지를 결정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+restoreFocusOnInvalidInlineEdit: true,</template>
+
+<template name="rowFixCount" description="[Option] 틀고정된 데이터를 그리드 상단에 고정시킬때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowFixCount: 3,</template>
+
+<template name="rowFixShowFrom" description="[Option] rowFixCount 옵션 또는 rowFix API 에 의해 행고정을 실시할 때 특정 행 번호부터 렌더링을 하고자 한다면 본 옵션에 원하는 행번호를 입력합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowFixShowFrom: 3,</template>
+
+<template name="rowindexColumnFromZero" description="[Option] columnMapping.rowindexColumn은 데이터의 행 순서를 0부터 표현하는 컬럼입니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowindexColumnFromZero: false,</template>
+
+<template name="rowInlineEdit" description="[Option] 더블클릭을 이용하여 행을 편집모드로 바꿀 수 있도록 해주는 옵션입니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowInlineEdit: true,</template>
+
+<template name="rowInlineEditOption" description="[Option] rowInlineEdit을 사용한 편집시의 세부 동작을 정의하는 옵션입니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowInlineEditOption: {
+	startEvent: 'click', //편집을 시작하는 이벤트 //변경
+	endAllEditing: false, //API에 의해 별도로 편집이 개시된 데이터도 함께 편집종료
+	endEditByEnter: true, //편집도중에 엔터키를 눌러서 더블클릭에 의해 편집 개시된 행의 편집을 종료
+	endEditByOuterClick: false, //그리드 외부 영역을 클릭했을때에도 더블클리겡 의해 편집 개시된 행의 편집을 종료
+	disableEvent: false //rowInlineEditStart, rowInlineEditEnd 이벤트를 발생시키지 않음
+},</template>
+
+<template name="rowOption" description="[Option] row/data 단위로 렌더링 될 때 행 마크업에 적용할 옵션을 정의할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowOption: {
+	allowEdit: true, // 특정 행의 편집을 허용하지 않을 때 사용하는 옵션입니다.
+	allowPaste: true, // 특정 행에 cellSelection 기능에 의한 붙여넣기 기능을 허용하지 않을 때 사용하는 옵션입니다.
+	allowSelect: true // API, columnMapping.selectorColumn에 의한 선택여부, rowClickSelect 등 어떤 방법에 의해서도 데이터 선택을 막고자 할 때 사용합니다.
+},</template>
+
+<template name="rowPadding" description="[Option] 화면에 표시될 최소 행의 개수를 지정하여, 데이터가 없을 때 빈 행을 지정된 개수만큼 표시할 수 있도록 해주는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowPadding: true,</template>
+
+<template name="rowSelectOption" description="[Option] 행 선택 관련 세부 동작을 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowSelectOption: {
+	clickSelect : true, //selector column 외 영역 클릭을 통해 행 선택 제어 //변경
+	singleSelect : false, //다중 행 선택 제어
+	allowSingleUnselect : true, //singleSelect 옵션 사용할 때 UI상에서 클릭을 통해 행을 선택/선택해제 가능
+	radioColumn : false, //singleSelect 옵션 사용할 때 데이터의 행 선택 모드의 단건 허용 여부
+	groupSelect : true //grouping을 이용한 rowspan 기능 사용 시 span된 행의 묶음 선택 제어
+},</template>
+
+<template name="rowspanGroupEdit" description="[Option] grouping을 이용한 rowspan 기능 사용 시 span된 행들 중 하나만 편집모드에 진입하여도 다 같이 편집모드로 전환시킬 것인가를 선택하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowspanGroupEdit: false,</template>
+
+<template name="rowspanGroupFocus" description="[Option] grouping을 이용한 rowspan 기능 사용시 span된 행들에 개별적으로 focused state를 줄 지 rowspan범위에 모두 focused state를 줄 지 선택하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowspanGroupFocus: true,</template>
+
+<template name="rowspanGroupHovering" description="[Option] useClassHovering를 이용한 행 hovering 클래스 부여시 grouping을 이용한 rowspan 기능이 적용되었을 경우 rowspan범위 모두 hovering class를 줄 지 개별 행에만 줄 지 선택하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowspanGroupHovering: true,</template>
+
+<template name="scrollbarPreview" description="[Option] 스크롤바를 드래그하여 스크롤할 때 스크롤바 옆에 현재 위치한 행/컬럼에 대한 미리보기 정보를 제공하는 기능입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+scrollbarPreview: {
+	enabled: true, // 스크롤바 드래그 미리보기 기능 사용 유무를 설정합니다. //변경
+	row: 'default', // 세로스크롤시 행 미리보기로 보여줄 값을 정합니다.
+	column: 'default', // 가로스크롤시 컬럼 미리보기로 보여줄 값을 정합니다.
+	closeDelay: 1500, // 미리보기가 그려지고 몇 ms후에 닫을지를 정합니다.
+	rowDefaultFromZero: true // 세로스크롤 행 미리보기의 기본값을 적용할 때 행 번호를 0부터 취급할 것인지, 아니면 1부터 취급할 것인지를 정하는 옵션입니다.
+},</template>
+
+<template name="searchOption" description="[Option] startSearch API에 의한 검색은 본 옵션과 더불어 API가 받아들이는 파라미터에 의한 조합으로 검색결과를 모두 찾은 뒤 하이라이트를 바꾸며 사용자에게 검색 내용을 확인시켜주는 과정입니다. 검색 수행시 사용할 검색 옵션은 아래와 같으며, searchOption 에 적용된 설정은 startSearch API 호출시 기본으로 적용이 됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+searchOption: {
+	byColumn: false, // 검색시 하이라이트 전환을 행 단위로 넘기는것이 아닌 셀 단위로 넘길것인가 여부
+	caseSensitive: false, // 대소문자를 구분하여 검색할 것인가 여부
+	filterName: null, // useFilter 옵션 사용 시 그리드에 추가되는 필터명
+	ignoreWhiteSpace: false, // 스페이스, 엔터, 탭 과 같은 공백문자를 무시하고 검색할 것인가 여부
+	showProgress : false, // 검색시 그리드에 프로그래스바를 실행합니다. showPrgress 선언 시 내부에 progressText를 object 형태로 설정하여 search 시 프로그래스바의 progressText를 설정 할 수 있습니다.
+	targetColumn : [] // 검색시 범위를 한정지을 칼럼 리스트
+	useFilter: true, // 검색시 그리드의 필터 기능을 사용할 것인가 여부
+	useRenderToSearch: true, // 셀에 렌더링된 내용을 이용하여 검색할 것인가 여부
+	useRegex: false, // 사용자가 제시한 키워드를 JavaScript의 RegExp 오브젝트로 변환시켜 검색에 사용할 것인가 여부
+},</template>
+
+<template name="setOriginalFromStart" description="[Option] data._original 속성을 dataSet 또는 dataAdd시점에 생성할 것인가 여부를 지정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+setOriginalFromStart: true,</template>
+
+<template name="sortClearOnEdit" description="[Option] dataEdit API, cellEdit API 또는 cellInlineEdit 옵션에 의해 값이 바뀌었을 경우 정렬상태를 취소하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+sortClearOnEdit: true,</template>
+
+<template name="sortingNullNumberPosition" description="[Option] mapping.sorting = number 인 컬럼을 정렬할 때, 값이 없거나(undefined, null) 빈 스트링('')이 명시된 값을 정렬결과의 어느 위치에 보일 것인가를 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+sortingNullNumberPosition: 'bottom',</template>
+
+<template name="sortingNullStringPosition" description="[Option] mapping.sorting = true 인 컬럼을 정렬할 때, 값이 없거나(undefined, null) 빈 스트링('')이 명시된 값을 정렬결과의 어느 위치에 보일 것인가를 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+sortingNullStringPosition: null,</template>
+
+<template name="title" description="[Option] 그리드의 타이틀을 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+title: 'alopex',</template>
+
+<template name="titleMarkup" description="[Option] Option.title 의 타이틀과 그리드 접기 버튼 사이 영역에 html 마크업을 삽입하여 사용자가 원하는 대로 설정할 수 있도록 제공하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+titleMarkup: null,</template>
+
+<template name="tree" description="[Option] 데이터 간 parent-child 구조로 이루어져 접기/펴기 및 정렬이 가능한 트리 그리드를 사용하기 위한 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+tree: {
+	useTree: true, // 트리 사용여부를 표시합니다. //변경
+	idKey: null, // 데이터를 대표하는 유일한 id를 저장하는 key 값 입니다.
+	parentIdKey: null // parent의 id를 저장하는 key 값 입니다.
+},</template>
+
+<template name="trimUnmappedKey" description="[Option] columnMapping에 반영되지 않은 key-value가 있을 경우 본 옵션에 true 값을 설정하여 해당 key-value를 dataAdd 및 dataSet 시점에 제거할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+trimUnmappedKey: true,</template>
+
+<template name="useClassHovering" description="[Option] 마우스가 셀 위로 올라갔을 때 hovering 효과를 줄 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+useClassHovering: true,</template>
+
+<template name="useContinuousXScroll" description="[Option] x축 스크롤을 연속된 스크롤로 사용합니다. 단, 해당 기능 사용시 성능 저하가 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+useContinuousXScroll: true,</template>
+
+<template name="useContinuousYScroll" description="[Option] y축 스크롤을 연속된 스크롤로 사용합니다. 단, 해당 기능 사용시 성능 저하가 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+useContinuousYScroll: true,</template>
+
+<template name="useFrameSyncScroll" description="[Option] Animation Frame API를 사용한 화면 스크롤 갱신을 사용합니다. 구식 스크롤 갱신이 필요한 경우에만 false로 두십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+useFrameSyncScroll: false,</template>
+
+<template name="useScrollAcceleration" description="[Option] 스크롤바 빈 영역을 계속 클릭하고 있으면 스크롤이 가속되어 움직입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+useScrollAcceleration: false,</template>
+
+<template name="valueFilter" description="[Option] 데이터에 저장되는 값을 읽고 허용되지 않는 형태의 값이 있을 때 그리드 정의/필터링할 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+valueFilter: function(value, data) {
+
+},</template>
+
+<template name="verticalScrollMoveTempo" description="[Option] y축 스크롤바 빈칸을 눌렀을 때 이동되는 행의 개수를 지정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+verticalScrollMoveTempo: 3,</template>
+
+<template name="width" description="[Option] 그리드의 너비를 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+width: 300,</template>
+
+<template name="wrapCellContent" description="[Option] 그리드가 렌더링하는 셀의 컨텐츠를 `cell-content` 클래스 또는 입력된 클래스명을 가지는 div 엘리먼트로 감싸게 하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+wrapCellContent: true,</template>
+
+<!-- ================= -->
+<!-- ColumnMapping 옵션 -->
+<!-- ================= -->
+<template name="columnMapping" description="[Option.ColumnMapping] AlopexGrid 컬럼맵핑 옵션 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnMapping:[
+	{
+		width : '30px',
+		selectorColumn : true,
+		resizing: false
+	}, {
+		width:'50px',
+		numberingColumn:true,
+		resizing: false
+	}, {
+		key : 'column1',
+		title : 'column1',
+		width : '100px'
+	}, {
+		key : 'column2',
+		title : 'column2',
+		width : '100px'
+	}, {
+		key : 'column3',
+		title : 'column3',
+		width : '100px'
+	}, {
+		key : 'column4',
+		title : 'column4',
+		width : '100px'
+	}, {
+		key : 'column5',
+		title : 'column5',
+		width : '100px'
+	}, {
+		key : 'column6',
+		title : 'column6',
+		width : '100px'
+	}, {
+		key : 'column7',
+		title : 'column7',
+		width : '100px'
+	}
+],</template>
+
+<template name="column" description="[Option.ColumnMapping] 컬럼을 추가할때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">{
+	key: '',
+	title: '',
+	width: ''
+},</template>
+
+<template name="align" description="[Option.ColumnMapping] 셀의 데이터를 좌측/가운데/우측 으로 정렬하여 보여줄 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+align: 'left',</template>
+
+<template name="allowEdit" description="[Option.ColumnMapping] 행이 편집 상태일 때, 데이터 조건에 따라 현재 셀의 편집 허용 여부를 지정하고자 할 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+allowEdit: function(value, data, mapping) {
+
+},</template>
+
+<template name="allowPaste" description="[Option.ColumnMapping] cellSelectable = true 로 설정된 그리드에서 붙여넣기를 수행할 때 특정 셀에 붙여넣기 허용여부를 결정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+allowPaste: function(value, data, mapping, pasteValue) {
+
+},</template>
+
+<template name="cellPopupEditOption" description="[Option.ColumnMapping] cellPopupEdit 옵션이 설정되어 있을 때 컬럼 별 셀 편집 팝업에 대한 기능을 설정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+cellPopupEditOption: {
+	height: 300, //팝업의 높이를 지정합니다.
+	widht: 350, //팝업의 너비를 지정합니다.
+	movable: false //팝업 이동 유무를 설정합니다.
+},</template>
+
+<template name="colspan" description="[Option.ColumnMapping] 그리드 셀을 그리는 과정에서 colspan을 통해 컬럼들을 병합하고자 한다면 본 옵션을 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+colspan: 3,</template>
+
+<template name="colspanTo" description="[Option.ColumnMapping] 위의 colspan 옵션과 같이 컬럼을 병합하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+colspanTo: 3,</template>
+
+<template name="columnFolded" description="[Option.ColumnMapping] columnFoldingColumn이 설정되어 있을 경우 컬럼의 상태가 접혀져 있을 지 펼쳐져 있을 지 설정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnFolded: true,</template>
+
+<template name="columnFoldingColumn" description="[Option.ColumnMapping] 컬럼을 접고 펼칠 수 있는 버튼이 생성될 컬럼을 지정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnFoldingColumn: [1, 3],</template>
+
+<template name="columnFoldingHiddenType" description="[Option.ColumnMapping] 컬럼을 접고 펼칠 때 해당 컬럼들의 hidden 상태를 설정할 때 사용되는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnFoldingHiddenType: 'conceal',</template>
+
+<template name="columnIndex" description="[Option.ColumnMapping] 몇 번째 열에 대한 설정할 것인지 명시하는 값입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+columnIndex: 3,</template>
+
+<template name="defaultValue" description="[Option.ColumnMapping] dataAdd/dataSet 수행 시 columnMapping object에는 값이 있으나 데이터에는 key-value가 없을 때 기본으로 채워 넣을 값을 정의합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+defaultValue: 'alopex',</template>
+
+<template name="dragdropColumn" description="[Option.ColumnMapping] 드래그가 가능한 컬럼을 지정합니다.해당 옵션 값이 true일때만 그리드의 데이터를 마우스 드래그로 이동할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+dragdropColumn: true,</template>
+
+<template name="editable" description="[Option.ColumnMapping] true, object, function이 이 옵션에 설정되어 있는 경우, 행이 편집모드로 들어갈 때 editable 옵션에 지정된 대로 셀이 렌더링 되어서 사용자가 편집할 수 있는 상태로 만들어 줍니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+editable: true,</template>
+
+<template name="editedValue" description="[Option.ColumnMapping] columnMapping.editable 옵션에 함수를 지정하여 원하는 형태의 마크업을 생성한 경우, 그리드에서는 마크업 내부에서 어떤 형태로 값을 묘사하고 수정 가능하게 해 놓았는지 알 수 없기 때문에 수정된 값을 읽을 수 없습니다. columnMapping.editedValue에 함수를 지정하여, 마크업 내부의 데이터를 분석하고 데이터에 저장해야 하는 값을 추출할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+editedValue: function(cell, data, render, mapping, grid) {
+
+},</template>
+
+<template name="excludeFitWidth" description="[Option.ColumnMapping] option.fitTableWidth 옵션 사용시 모든 컬럼은 그리드의 너비에 맞게 컬럼의 너비를 늘이게 됩니다. 이때 늘어나지 않기를 원하는 개별 컬럼에 excludeFitWidth 옵션을 true로 명시하여 너비가 늘어나지 않게 정의할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+excludeFitWidth: true,</template>
+
+<template name="exportOption" description="[Option.ColumnMapping] exportDataType, exportRender, image로 이루어져 데이터의 숫자 포맷에 천자리 구분자 지정 옵션, 렌더된 데이터 형태 엑셀에도 지정 옵션이 있으며 이미지를 내보낼 수 있는 옵션을 정의할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+exportOption : {
+	exportDataType: null,
+	exportRender: true,
+	image : {},
+},</template>
+
+<template name="filter" description="[Option.ColumnMapping] 컬럼 그리드 정의/필터링 기능의 사용유무를 설정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+filter: true,</template>
+
+<template name="filterOption" description="[Option.ColumnMapping] option.filteringHeader 를 통한 컬럼 필터 적용시 이 옵션에 적용된 필터설정이 들어가게 됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+filterOption: {
+    type : '',
+    value : ''
+},</template>
+
+<template name="groupFoldingColumn" description="[Option.ColumnMapping] grouping 옵션을 사용하여 데이터를 그룹화 하였을 때 렌더링되는 컬럼의 그룹범위 전체를 접고 펼칠 수 있는 아이콘을 셀 영역 우측 끝부분에 그려줍니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupFoldingColumn: true,</template>
+
+<template name="groupFoldingHeader" description="[Option.ColumnMapping] grouping 옵션을 사용하여 데이터를 그룹화 하였을 때 지정된 그룹범위 전체를 접고 펼칠 수 있는 아이콘을 헤더에 그려줍니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupFoldingHeader: true,</template>
+
+<template name="groupFooter" description="[Option.ColumnMapping] grouping.useGroupFooter 옵션을 사용하였을 때 그룹 푸터에 렌더링될 내용을 정의할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupFooter: [],</template>
+
+<template name="groupFooterAlign" description="[Option.ColumnMapping] 그룹 푸터 셀의 텍스트 정렬 방향을 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupFooterAlign: 'center',</template>
+
+<template name="groupFooterStyleclass" description="[Option.ColumnMapping] 그룹 푸터 셀에 추가할 클래스를 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupFooterStyleclass: 'alopex',</template>
+
+<template name="groupHeader" description="[Option.ColumnMapping] 그룹 헤더에 렌더링 될 내용을 정의합니다. 자세한 내용은 위의 그룹 푸터 설명을 참고하십시오." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupHeader: [],</template>
+
+<template name="groupHeaderAlign" description="[Option.ColumnMapping] 그룹 헤더 셀의 텍스트 정렬방향을 정의하는 옵션입니다.
+" autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupHeaderAlign: 'center',</template>
+
+<template name="groupHeaderStyleclass" description="[Option.ColumnMapping] 그룹 헤더 셀에 추가할 클래스를 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+groupHeaderStyleclass: 'alopex',</template>
+
+<template name="headerAlign" description="[Option.ColumnMapping] 헤더셀의 가로방향 텍스트 정렬을 정의하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+headerAlign: 'left',</template>
+
+<template name="headerDragDrop" description="[Option.ColumnMapping] 헤더 영역에 드래그 앤 드롭 버튼을 생성하여 사용자는 마우스로 칼럼을 이동시킬 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+headerDragDrop: true,</template>
+
+<template name="headerStyleclass" description="[Option.ColumnMapping] 해당 컬럼의 헤더 영역에 추가하고자 하는 CSS class가 있을 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+headerStyleclass: 'alopex',</template>
+
+<template name="headerTooltip" description="[Option.ColumnMapping] 해당 칼럼의 헤더 영역의 툴팁을 제어 할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+headerTooltip: true,</template>
+
+<template name="hidden" description="[Option.ColumnMapping] 컬럼을 숨겨서 보여줄지 여부를 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+hidden: true,</template>
+
+<template name="highlight" description="[Option.ColumnMapping] 해당 셀이 특정한 조건에 해당될 때 highlight 효과를 주는 class를 추가하고자 한다면 highlight 옵션을 이용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+highlight: true,</template>
+
+<template name="inlineStyle" description="[Option.ColumnMapping] 해당 셀에만 추가하고자 하는 특정 css inline style이 있을 때, 이 옵션에 key-value 형태로 해당 inline style을 명시하여 추가할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+inlineStyle: {
+
+},</template>
+
+<template name="instantInlineEditable" description="[Option.ColumnMapping] instantInlineEditType 에 해당 컬럼을 추가한 것과 같은 기능을 하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+instantInlineEditable: true,</template>
+
+<template name="key" description="[Option.ColumnMapping] JSON 데이터에서 값을 꺼내올 key 값을 지정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+key: '',</template>
+
+<template name="maxWidth" description="[Option.ColumnMapping] 해당 칼럼의 최대 너비를 px 단위로 명시합니다. 30 또는 '30px' 와 같은 형태로 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+maxWidth: 30,</template>
+
+<template name="minWidth" description="[Option.ColumnMapping] 해당 칼럼의 최소 너비를 px 단위로 명시합니다. 30 또는 '30px' 와 같은 형태로 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+minWidth: 30,</template>
+
+<template name="multi" description="[Option.ColumnMapping] 데이터를 표현하는 하나의 셀에 두개 이상의 key를 매핑하여 여러줄로 데이터를 표현하고자 할 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+multi: [],</template>
+
+<template name="numberingColumn" description="[Option.ColumnMapping] 데이터가 그리드에서 몇 번째 데이터인지 표시하는 용도로 컬럼을 사용하고자 할 때 true로 설정하며, data 수만큼 내림차순으로 데이터를 표시하려면 'desc'로 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+numberingColumn: true,</template>
+
+<template name="readonly" description="[Option.ColumnMapping] 데이터 편집을 불가능하게 하여 사용자가 데이터를 보는 것만 가능하게 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+readonly: true,</template>
+
+<template name="refreshBy" description="[Option.ColumnMapping] columnMapping.editable에 의해 렌더링 되는 값이 다른 컬럼에 의존적일 때, 해당 옵션에 다른 컬럼의 키 값이나 컬럼 인덱스 값을 명시하여 타 컬럼의 값 변경에 대해 본 컬럼이 다시 렌더링될 수 있도록 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+refreshBy: 'key',</template>
+
+<template name="render" description="[Option.ColumnMapping] 저장된 데이터의 값을 다른 형태로 가공하여 표현하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+render: function ( value, data, render, mapping, grid ){
+
+},</template>
+
+<template name="resizing" description="[Option.ColumnMapping] 지정된 열의 너비를 마우스 드래그 앤 드롭으로 바꿀 수 있도록 하고자 할 때 사용하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+resizing: true,</template>
+
+<template name="rowindexColumn" description="[Option.ColumnMapping] 각 행의 높이 조절을 마우스 드래그로 변경할 수 있는 컬럼을 지정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowindexColumn: true,</template>
+
+<template name="rowResizing" description="[Option.ColumnMapping] 각 행의 높이 조절을 마우스 드래그로 변경할 수 있는 컬럼을 지정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowResizing: true,</template>
+
+<template name="rowspan" description="[Option.ColumnMapping] 해당 열의 값이 연속된 데이터에서 동일할 때, 이 값들을 하나의 셀로 묶어서 표현합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+rowspan: true,</template>
+
+<template name="selectorColumn" description="[Option.ColumnMapping] 데이터를 선택/선택해제 할 수 있는 체크박스를 표시하는 용도로 열을 사용하고자 할 때 true로 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+selectorColumn: true,</template>
+
+<template name="sorting" description="[Option.ColumnMapping] 지정된 열의 값을 기준으로 데이터를 정렬하여 순서를 바꾸어 보여줄 수 있는가 여부를 설정할 수 있는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+sorting: true,</template>
+
+<template name="styleclass" description="[Option.ColumnMapping] 셀에 추가하고자 하는 CSS class가 있을 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+styleclass: 'class',</template>
+
+<template name="title" description="[Option.ColumnMapping] 해당 컬럼의 헤더 제목 내용을 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+title: 'title',</template>
+
+<template name="tooltip" description="[Option.ColumnMapping] 그리드 셀에 마우스를 올렸을 때 매핑된 키의 값을 브라우저의 말풍선을 이용하여 렌더링 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+tooltip: false,</template>
+
+<template name="treeColumn" description="[Option.ColumnMapping] tree 옵션이 설정 되어 있을 때 컬럼에 트리의 하위 노드 펼치기/닫기 아이콘, leaf 여부 마크 그리고 depth에 따른 띄어쓰기 공간을 렌더링할지 여부를 정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+treeColumn: true,</template>
+
+<template name="treeColumnHeader" description="[Option.ColumnMapping] tree 옵션이 설정 되어 있을 때 컬럼 헤더에 전체 펼치기를 할 수 있는 마크 렌더링 여부를 정하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+treeColumnHeader: true,</template>
+
+<template name="valid" description="[Option.ColumnMapping] 해당 셀이 편집과정에서 가질 수 있는 값을 명시하는 옵션입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+valid: function ( value, data, mapping, cell ){
+
+},</template>
+
+<template name="value" description="[Option.ColumnMapping] JSON 데이터에 없는 key 값이라도 값을 명시하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+value: 'value',</template>
+
+<template name="width" description="[Option.ColumnMapping] 해당 컬럼의 너비를 px 단위로 명시합니다. 30 또는 '30px' 와 같은 형태로 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+width: 30,
+</template>
+
+<!-- ===== -->
+<!-- EVENT -->
+<!-- ===== -->
+
+<template name="cellEdit" description="[EVENT] 셀이 편집모드로 들어간 이후에 편집모드에서 빠져나오게 되면서 수정중이었던 값을 원 데이터 오브젝트로 저장하기 직전에 호출되는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellEdit", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var value = evObj.value;
+	var prevValue = evObj.prevValue;
+});</template>
+
+<template name="cellEditEnd" description="[EVENT] 셀이 편집모드로 들어간 이후에 편집모드에서 빠져나오게 되면 호출되는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellEditEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var value = evObj.value;
+	var prevValue = evObj.prevValue;
+});</template>
+
+<template name="cellEditInvalid" description="[EVENT] validFilter나 columnMapping.valid 옵션에 의해 유효성 체크에서 어긋난 데이터가 있을 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellEditInvalid", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var value = evObj.value;
+});</template>
+
+<template name="cellFocus" description="[EVENT] cellSelectable=true일 때 마우스 또는 키보드로 셀에 포커스를 주게 되면 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellFocus", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var cell = evObj.cell;
+	var $cell = evObj.$cell;
+});</template>
+
+<template name="cellInlineEditEnd" description="[EVENT] cellInlineEdit=true 일 때 해당 기능에 의해 편집이 종료된 셀에 대해 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellInlineEditEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+});</template>
+
+<template name="cellInlineEditStart" description="[EVENT] cellInlineEdit=true 일 때 해당 기능에 의해 편집이 시작된 셀에 대해 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellInlineEditStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+});</template>
+
+<template name="cellRendered" description="[EVENT] 셀이 그려졌을 때 매 셀마다 호출되는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellRendered", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var value = evObj.value;
+	var editing = evObj.editing;
+	var cell = evObj.cell;
+	var $cell = evObj.$cell;
+});</template>
+
+<template name="cellSelectionChange" description="[EVENT] cellSelectable=true 일 때 마우스로 처음 셀을 클릭한 후 마우스 드래그로 선택된 셀이 변경 혹은 선택 영역이 확대될 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellSelectionChange", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var selectionValueList = evObj.selectionValueList;
+	var fromSelectionRow = evObj.fromSelectionRow;
+	var toSelectionRow = evObj.toSelectionRow;
+	var fromSelectionColumn = evObj.fromSelectionColumn;
+	var toSelectionColumn = evObj.toSelectionColumn;
+});</template>
+
+<template name="cellSelectionEmpty" description="[EVENT] 셀 선택 영역이 없을 경우 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellSelectionEmpty", function(e) {
+
+});</template>
+
+<template name="cellSelectionEnd" description="[EVENT] cellSelectable=true일 때 마우스로 셀 선택이 완료되어 마우스 버튼을 떼면 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellSelectionEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var selectionValueList = evObj.selectionValueList;
+	var fromSelectionRow = evObj.fromSelectionRow;
+	var toSelectionRow = evObj.toSelectionRow;
+	var fromSelectionColumn = evObj.fromSelectionColumn;
+	var toSelectionColumn = evObj.toSelectionColumn;
+});</template>
+
+<template name="cellSelectionStart" description="[EVENT] cellSelectable=true일 때 마우스로 처음 셀을 클릭했을 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellSelectionStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var selectionValueList = evObj.selectionValueList;
+	var fromSelectionRow = evObj.fromSelectionRow;
+	var toSelectionRow = evObj.toSelectionRow;
+	var fromSelectionColumn = evObj.fromSelectionColumn;
+	var toSelectionColumn = evObj.toSelectionColumn;
+});</template>
+
+<template name="cellValueChanged" description="[EVENT] cellEditEnd 이벤트와 유사하나, 값이 변경되어 수정된 경우에만 호출되는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellValueChanged", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var value = evObj.value;
+	var prevValue = evObj.prevValue;
+});</template>
+
+<template name="cellValueEditing" description="[EVENT] columnMapping.editable 옵션에 의해 편집가능한 셀에서 편집을 하고 있을 때 사용자의 클릭 또는 키보드 입력에 의해 값이 바뀌게 되면 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("cellValueEditing", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var mapping = evObj.mapping;
+	var value = evObj.value;
+	var prevValue = evObj.prevValue;
+});</template>
+
+<template name="columnFolding" description="[EVENT] columnMapping.columnFoldingColumn 옵션에 의해 컬럼이 접힐 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("columnFolding", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var mapping = evObj.mapping;
+	var columnFolded = evObj.columnFolded;
+	var fromIndex = evObj.fromIndex;
+	var toIndex = evObj.toIndex;
+	var exceptionColList = evObj.exceptionColList;
+});</template>
+
+<template name="dataAdd" description="[EVENT] 그리드에 한건 또는 여러건의 새로운 데이터가 입력될 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataAdd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataAddEnd" description="[EVENT] 그리드에 데이터 입력이 종료되었을 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataAddEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataChanged" description="[EVENT] 그리드의 입력된 데이터가 편집에 의해 최초의 데이터와 다르게 변경될 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataChanged", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var type = evObj.type;
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataCopy" description="[EVENT] dataCopy API호출에 의해 그리드의 데이터가 복제될 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataCopy", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+	var copyoption = evObj.copyoption;
+});</template>
+
+<template name="dataCopyEnd" description="[EVENT] dataCopy API호출에 의해 그리드의 데이터가 복제 동작이 완료된 후 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataCopyEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataDelete" description="[EVENT] dataDelete API 호출에 의해 그리드의 데이터가 삭제 될 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataDelete", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataDeleteEnd" description="[EVENT] dataDeleted API 호출에 의해 그리드의 데이터가 삭제 완료 된 후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataDeleteEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataEdit" description="[EVENT] 그리드의 데이터가 dataEdit API 호출에 의해 편집될 때 발생합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataEdit", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataEditEnd" description="[EVENT] 그리드의 데이터가 dataEdit API 호출에 의해 수정이 완료되었을 떄 호출됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataEditEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataEmpty" description="[EVENT] 그리드를 초기화하여 추가되거나 설정된 데이터 값이 모두 사라지질 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataEmpty", function(e) {
+
+});</template>
+
+<template name="dataSelect" description="[EVENT] 그리드의 데이터가 선택될 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataSelect", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+	var select = evObj.select;
+});</template>
+
+<template name="dataSelectEnd" description="[EVENT] dataSelect 이벤트에 설명된 상황에 의해 데이터가 선택된 후 선택 동작이 완전히 끝난 뒤 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataSelectEnd", function(e) {
+
+});</template>
+
+<template name="dataSet" description="[EVENT] 그리드의 데이터를 초기화하고, 새로운 데이터를 입력될때 발생하는 이벤트 입니다. dataSet API 호출에 의해 발생합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataSet", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataSetEnd" description="[EVENT] 그리드의 데이터 초기화와 데이터 입력이 완료된 후 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataSetEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataUndelete" description="[EVENT] 그리드 데이터 삭제를 취소하여 데이터를 복구가 시작될 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataUndelete", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="dataUndeleteEnd" description="[EVENT] 그리드 데이터 삭제를 취소하여 데이터를 복구가 완료된 후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("dataUndeleteEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var datalist = evObj.datalist;
+});</template>
+
+<template name="filterChangeEnd" description="[EVENT] 필터의 조건이나 상태가 변경되어서 그리드에 반영이 완료되었을 떄 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("filterChangeEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var filterMap = evObj.filterMap;
+	var filterColumnMappingList = evObj.filterColumnMappingList;
+	var changeType = evObj.changeType;
+	var targetColumnMapping = evObj.targetColumnMapping;
+	var targetColumnFilterOption = evObj.targetColumnFilterOption;
+	var targetFilterMap = evObj.targetFilterMap;
+});</template>
+
+<template name="filterChangeStart" description="[EVENT] 필터의 조건이나 상태가 변경되어서 그리드에 반영되기 직전에 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("filterChangeStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var filterMap = evObj.filterMap;
+	var filterColumnMappingList = evObj.filterColumnMappingList;
+	var changeType = evObj.changeType;
+	var targetColumnMapping = evObj.targetColumnMapping;
+	var targetColumnFilterOption = evObj.targetColumnFilterOption;
+	var targetFilterMap = evObj.targetFilterMap;
+});</template>
+
+<template name="filterClear" description="[EVENT] 필터를 해제할 때 할생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("filterClear", function(e) {
+
+});</template>
+
+<template name="filterDelete" description="[EVENT] 설정된 사용자 필터 조건을 삭제할 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("filterDelete", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var filterMap = evObj.filterMap;
+	var filterName = evObj.filterName;
+	var filter = evObj.filter;
+});</template>
+
+<template name="filterSet" description="[EVENT] 필터가 새로 설정될 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("filterSet" , function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var filterMap = evObj.filterMap;
+	var filterName = evObj.filterName;
+	var filter = evObj.filter;
+});</template>
+
+<template name="gridInit" description="[EVENT] 그리드 최초 생성 시작 시 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("gridInit", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var element = evObj.element;
+	var option = evObj.option;
+});</template>
+
+<template name="gridInitEnd" description="[EVENT] 그리드 최소 생성 완료 후 발생하는 이벤트입니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("gridInitEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var element = evObj.element;
+	var option = evObj.option;
+});</template>
+
+<template name="gridRefresh" description="[EVENT] 그리드의 상태가 바뀌어 새로 그려졌을 경우 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("gridRefresh", function(e) {
+
+});</template>
+
+<template name="gridScroll" description="[EVENT] 가로, 세로 스크롤이 움직일 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("gridScroll", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var row = evObj.row;
+	var column = evObj.column;
+	var rowScrollEnd = evObj.rowScrollEnd;
+	var columnScrollEnd = evObj.columnScrollEnd;
+});</template>
+
+<template name="headerDragDrop" description="[EVENT] 컬럼을 드롭한 직후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("headerDragDrop", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dropColumn = evObj.dropColumn;
+	var dropColumnMapping = evObj.dropColumnMapping;
+	var leftColumn = evObj.leftColumn;
+	var leftColumnMapping = evObj.leftColumnMapping;
+	var rightColumnMapping = evObj.rightColumnMapping;
+	var toHiddenColumnArea = evObj.toHiddenColumnArea;
+});</template>
+
+<template name="headerDragDropEnd" description="[EVENT] 컬럼을 드래그 앤 드롭이 완료된 후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("headerDragDropEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dropColumn = evObj.dropColumn;
+	var dropColumnMapping = evObj.dropColumnMapping;
+	var leftColumn = evObj.leftColumn;
+	var leftColumnMapping = evObj.leftColumnMapping;
+	var rightColumnMapping = evObj.rightColumnMapping;
+	var toHiddenColumnArea = evObj.toHiddenColumnArea;
+});</template>
+
+<template name="headerDragOver" description="[EVENT] 컬럼이 드래그 앤 드롭 가능한 상태일때 컬럼 드래그 중 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("headerDragOver", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dropColumn = evObj.dropColumn;
+	var dropColumnMapping = evObj.dropColumnMapping;
+	var leftColumn = evObj.leftColumn;
+	var leftColumnMapping = evObj.leftColumnMapping;
+	var rightColumnMapping = evObj.rightColumnMapping;
+	var toHiddenColumnArea = evObj.toHiddenColumnArea;
+	var targetHiddenColumn = evObj.targetHiddenColumn;
+	var targetHiddenColumnMapping = evObj.targetHiddenColumnMapping;
+});</template>
+
+<template name="hiddenHeaderDragDrop" description="[EVENT] hiddenColumnArea에 있는 컬럼을 드롭한 직후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("hiddenHeaderDragDrop", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dropColumn = evObj.dropColumn;
+	var dropColumnMapping = evObj.dropColumnMapping;
+	var leftColumn = evObj.leftColumn;
+	var leftColumnMapping = evObj.leftColumnMapping;
+	var rightColumnMapping = evObj.rightColumnMapping;
+	var toHiddenColumnArea = evObj.toHiddenColumnArea;
+});</template>
+
+<template name="hiddenHeaderDragDropEnd" description="[EVENT] 컬럼을 드래그 앤 드롭이 완료된 후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("hiddenHeaderDragDropEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dropColumn = evObj.dropColumn;
+	var dropColumnMapping = evObj.dropColumnMapping;
+	var leftColumn = evObj.leftColumn;
+	var leftColumnMapping = evObj.leftColumnMapping;
+	var rightColumnMapping = evObj.rightColumnMapping;
+	var toHiddenColumnArea = evObj.toHiddenColumnArea;
+});</template>
+
+<template name="hiddenHeaderDragOver" description="[EVENT] 컬럼이 드래그 앤 드롭이 가능한 상태일때 컬럼 드래그 중 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("hiddenHeaderDragOver", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dropColumn = evObj.dropColumn;
+	var dropColumnMapping = evObj.dropColumnMapping;
+	var leftColumn = evObj.leftColumn;
+	var leftColumnMapping = evObj.leftColumnMapping;
+	var rightColumnMapping = evObj.rightColumnMapping;
+	var toHiddenColumnArea = evObj.toHiddenColumnArea;
+	var targetHiddenColumn = evObj.targetHiddenColumn;
+	var targetHiddenColumnMapping = evObj.targetHiddenColumnMapping;
+});</template>
+
+<template name="pageSet" description="[EVENT] 페이징 기능이 활성화 되어 있을 때 사용자가 페이지 버튼을 눌러 페이지 위치를 옮기거나 pageSet API를 호출 할 떄 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("pageSet", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var page = evObj.page;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="pageSetEnd" description="[EVENT] 페이지 선택 후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("pageSetEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var page = evObj.page;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="perPageChange" description="[EVENT] 한 페이지당 그리는 데이터 개수가 바뀔 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("perPageChange", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var page = evObj.page;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="perPageChangeEnd" description="[EVENT] 페이지당 데이터 개수를 선택하고 난 후 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("perPageChangeEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var page = evObj.page;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="rowDragDrop" description="[EVENT] columnMapping.dragdropColumn 을 이용한 행 드래그가 완료되어 포인터가 행을 놓았을 때 발생하는 이벤트 입니다. return false; 를 하여 드래그드랍을 허용하지 않을 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("rowDragDrop", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dragDataList = evObj.dragDataList;
+	var data = evObj.data;
+	var aboveData = evObj.aboveData;
+	var belowData = evObj.belowData;
+	var insertAbove = evObj.insertAbove;
+	var insertBelow = evObj.insertBelow;
+	var childOf = evObj.childOf;
+	var barVisible = evObj.barVisible;
+	var $grid = evObj.$grid;
+	var toAnotherGrid = evObj.toAnotherGrid;
+	var cancelled = evObj.cancelled;
+});</template>
+
+<template name="rowDragDropEnd" description="[EVENT] columnMapping.dragdropColumn 을 이용한 행 드래그가 완료되어 데이터가 지정된 위치에 들어간 이후에 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("rowDragDropEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dragDataList = evObj.dragDataList;
+	var data = evObj.data;
+	var aboveData = evObj.aboveData;
+	var belowData = evObj.belowData;
+	var insertAbove = evObj.insertAbove;
+	var insertBelow = evObj.insertBelow;
+	var childOf = evObj.childOf;
+	var barVisible = evObj.barVisible;
+	var $grid = evObj.$grid;
+	var toAnotherGrid = evObj.toAnotherGrid;
+	var cancelled = evObj.cancelled;
+});</template>
+
+<template name="rowDragOver" description="[EVENT] columnMapping.dragdropColumn 을 이용한 행 드래그 중 발생하는 이벤트 입니다. return false; 를 하여 드래그드랍을 허용하지 않을 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("rowDragOver", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var dragDataList = evObj.dragDataList;
+	var data = evObj.data;
+	var aboveData = evObj.aboveData;
+	var belowData = evObj.belowData;
+	var insertAbove = evObj.insertAbove;
+	var insertBelow = evObj.insertBelow;
+	var childOf = evObj.childOf;
+	var barVisible = evObj.barVisible;
+	var $grid = evObj.$grid;
+	var toAnotherGrid = evObj.toAnotherGrid;
+	var cancelled = evObj.cancelled;
+});</template>
+
+<template name="rowInlineEditEnd" description="[EVENT] rowInlineEdit=true 일 때 해당 기능에 의해 편집이 종료된 행에 대해 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("rowInlineEditEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+});</template>
+
+<template name="rowInlineEditStart" description="[EVENT] rowInlineEdit=true 일 때 해당 기능에 의해 편집이 시작된 행에 대해 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("rowInlineEditStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var data = evObj.data;
+});</template>
+
+<template name="scrollBottom" description="[EVENT] 세로 스크롤이 맨 아래쪽에 닿으면 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("scrollBottom", function(e) {
+
+});</template>
+
+<template name="startSearch" description="[EVENT] searchStart API 호출에 의해 검색이 시작되었을 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchStart", function(e) {
+
+});</template>
+
+<template name="startSearchEnd" description="[EVENT] searchStart API 호출에 의해 검색할 데이터 준비가 완료되었을 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var keyword = evObj.keyword;
+	var matchCount = evObj.matchCount;
+	var highlightPointer = evObj.highlightPointer;
+	var matchDataList = evObj.matchDataList;
+	var matchMappingList = evObj.matchMappingList;
+	var highlightAtMatchDataList = evObj.highlightAtMatchDataList;
+	var highlightAtMatchMappingList = evObj.highlightAtMatchMappingList;
+	var highlightedData = evObj.highlightedData;
+	var highlightedMappingList = evObj.highlightedMappingList;
+	var byColumn = evObj.byColumn;
+	var useRegex = evObj.useRegex;
+	var caseSensitive = evObj.caseSensitive;
+	var ignoreWhiteSpace = evObj.ignoreWhiteSpace;
+	var timeStamp = evObj.timeStamp;
+});</template>
+
+<template name="searchEnd" description="[EVENT] endSearch API 호출에 의해 검색이 종료되었을 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchEnd", function(e) {
+
+});</template>
+
+<template name="searchHighlighted" description="[EVENT] searchNext, searchPrevious API 호출에 의해 다음/이전 검색결과로 하이라이트가 이동할 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchHighlighted", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var keyword = evObj.keyword;
+	var matchCount = evObj.matchCount;
+	var highlightPointer = evObj.highlightPointer;
+	var matchDataList = evObj.matchDataList;
+	var matchMappingList = evObj.matchMappingList;
+	var highlightAtMatchDataList = evObj.highlightAtMatchDataList;
+	var highlightAtMatchMappingList = evObj.highlightAtMatchMappingList;
+	var highlightedData = evObj.highlightedData;
+	var highlightedMappingList = evObj.highlightedMappingList;
+	var byColumn = evObj.byColumn;
+	var useRegex = evObj.useRegex;
+	var caseSensitive = evObj.caseSensitive;
+	var ignoreWhiteSpace = evObj.ignoreWhiteSpace;
+	var timeStamp = evObj.timeStamp;
+});</template>
+
+<template name="searchNext" description="[EVENT] searchNext API 호출에 의해 다음 검색결과로 하이라이트가 이동할 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchNext", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var keyword = evObj.keyword;
+	var matchCount = evObj.matchCount;
+	var highlightPointer = evObj.highlightPointer;
+	var matchDataList = evObj.matchDataList;
+	var matchMappingList = evObj.matchMappingList;
+	var highlightAtMatchDataList = evObj.highlightAtMatchDataList;
+	var highlightAtMatchMappingList = evObj.highlightAtMatchMappingList;
+	var highlightedData = evObj.highlightedData;
+	var highlightedMappingList = evObj.highlightedMappingList;
+	var byColumn = evObj.byColumn;
+	var useRegex = evObj.useRegex;
+	var caseSensitive = evObj.caseSensitive;
+	var ignoreWhiteSpace = evObj.ignoreWhiteSpace;
+	var timeStamp = evObj.timeStamp;
+});</template>
+
+<template name="searchPrevious" description="[EVENT] searchPrevious API 호출에 의해 이전 검색결과로 하이라이트가 이동할 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchPrevious", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var keyword = evObj.keyword;
+	var matchCount = evObj.matchCount;
+	var highlightPointer = evObj.highlightPointer;
+	var matchDataList = evObj.matchDataList;
+	var matchMappingList = evObj.matchMappingList;
+	var highlightAtMatchDataList = evObj.highlightAtMatchDataList;
+	var highlightAtMatchMappingList = evObj.highlightAtMatchMappingList;
+	var highlightedData = evObj.highlightedData;
+	var highlightedMappingList = evObj.highlightedMappingList;
+	var byColumn = evObj.byColumn;
+	var useRegex = evObj.useRegex;
+	var caseSensitive = evObj.caseSensitive;
+	var ignoreWhiteSpace = evObj.ignoreWhiteSpace;
+	var timeStamp = evObj.timeStamp;
+});</template>
+
+<template name="searchStart" description="[EVENT] searchStart API 호출에 의해 검색이 시작될 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("searchStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var keyword = evObj.keyword;
+	var matchCount = evObj.matchCount;
+	var highlightPointer = evObj.highlightPointer;
+	var matchDataList = evObj.matchDataList;
+	var matchMappingList = evObj.matchMappingList;
+	var highlightAtMatchDataList = evObj.highlightAtMatchDataList;
+	var highlightAtMatchMappingList = evObj.highlightAtMatchMappingList;
+	var highlightedData = evObj.highlightedData;
+	var highlightedMappingList = evObj.highlightedMappingList;
+	var byColumn = evObj.byColumn;
+	var useRegex = evObj.useRegex;
+	var caseSensitive = evObj.caseSensitive;
+	var ignoreWhiteSpace = evObj.ignoreWhiteSpace;
+	var timeStamp = evObj.timeStamp;
+});</template>
+
+<template name="sortClear" description="[EVENT] columnMapping.sorting=true 옵션이 설정되어 있을 때 sortClear API 호출에 의해 정렬 상태가 해지되는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("sortClear", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="sortToggle" description="[EVENT] columnMapping.sorting=true 옵션이 설정되어 있을 때 사용자가 column header의 정렬 버튼을 클릭하여 정렬상태를 오름차순과 내림차순으로 서로 toggle될 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("sortToggle", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var sortingKey = evObj.sortingKey;
+	var sortingColumn = evObj.sortingColumn;
+	var sortingDirection = evObj.sortingDirection;
+	var mapping = evObj.mapping;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="sortToggleEnd" description="[EVENT] sortToggle 동작이 완료되면 호출됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("sortToggleEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var sortingKey = evObj.sortingKey;
+	var sortingColumn = evObj.sortingColumn;
+	var sortingDirection = evObj.sortingDirection;
+	var mapping = evObj.mapping;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="toggleTreeNode" description="[EVENT] tree 접기/펼치기 동작시 호출됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("sortToggleEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+});</template>
+
+<template name="UIColumnResizeEnd" description="[EVENT] 리사이징 기능이 활성화 된 헤더에서 마우스 드래그로 컬럼의 크기를 바꾸었을 때 발생하는 이벤트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("UIColumnResizeEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var mapping = evObj.mapping;
+	var width = evObj.width;
+	var fitWidth = evObj.fitWidth;
+});</template>
+
+<template name="UIColumnResizeStart" description="[EVENT] 리사이징 기능이 활성화 된 헤더에서 마우스 드래그로 컬럼의 크기를 바꾸기 시작했을 때, 즉 리사이징 핸들을 마우스로 잡았을 떄 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("UIColumnResizeStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var mapping = evObj.mapping;
+	var width = evObj.width;
+	var fitWidth = evObj.fitWidth;
+});</template>
+
+<template name="UIRowResizeEnd" description="[EVENT] rowIndexColumn, rowResizing 기능이 활성화되어있는 경우 마우스 드래그로 행 높이를 바꾼 후 마우스를 놓았을 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("UIRowResizeEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var row = evObj.row;
+	var height = evObj.height;
+});</template>
+
+<template name="UIRowResizeStart" description="[EVENT] rowIndexColumn, rowResizing 기능이 활성화되어있는 경우 마우스 드래그로 행 리사이징 핸들을 마우스로 잡았을 때 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("UIRowResizeStart", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var row = evObj.row;
+	var height = evObj.height;
+});</template>
+
+<template name="UISortToggle" description="[EVENT] columnMappin sorting option이 존재할 때, 헤더 옆에 나타나는 정렬 버튼을 클릭할 때 마다 발생하는 이벤트입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("UISortToggle", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var sortingKey = evObj.sortingKey;
+	var sortingColumn = evObj.sortingColumn;
+	var sortingDirection = evObj.sortingDirection;
+	var mapping = evObj.mapping;
+	var pageinfo = evObj.pageinfo;
+});</template>
+
+<template name="UIToggleTreeNode" description="[EVENT] tree 접기/펼치기 동작시 호출됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").on("sortToggleEnd", function(e) {
+	var evObj = AlopexGrid.parseEvent(e);
+	var toggleTreeNode = evObj.toggleTreeNode;
+	var headercell = evObj.headercell;
+	var bodycell = evObj.bodycell;
+	var expanded = evObj.expanded;
+});</template>
+
+<!-- === -->
+<!-- API -->
+<!-- === -->
+<template name="addPin" description="[API] dataPin API호출과 다르게, 호출될 때 마다 이미 고정된 데이터 목록에 query에 의해 선택된 데이터까지 추가 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "addPin", query );</template>
+
+<template name="cancelCellEdit" description="[API] 편집상태인 셀의 편집모드가 취소되고, 사용자가 화면에 입력한 데이터를 무시한채 기존의 데이터로 돌려놓습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "cancelCellEdit"[, query[, column ]] );</template>
+
+<template name="cancelEdit" description="[API] 편집상태인 행의 편집모드가 취소되고, 사용자가 화면에 입력한 데이터를 무시한채 기존의 데이터로 돌려놓습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "cancelEdit"[, query] );</template>
+
+<template name="cellEdit" description="[API] 셀의 데이터를 새로운 값으로 대체하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "cellEdit", value[, query[, column]] );</template>
+
+<template name="cellElementGet" description="[API] 데이터를 표현하는 행의 셀(&lt;div&gt;태그) 엘리먼트를 jQuery object로 묶어서 리턴하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "cellElementGet", query[, columnIndexKey] );</template>
+
+<template name="clearFilter" description="[API] 그리드에 설정된 모든 필터를 해제합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "clearFilter" );</template>
+
+<template name="collapseGroup" description="[API] 그룹 범위를 접는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "collapseGroup"[, query][, key]] )</template>
+
+<template name="collapseTreeNode" description="[API] 그리드를 tree로 사용 할 때 트리의 펼쳐져 있는 child 요소를 접습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "collapseTreeNode"[, query] );</template>
+
+<template name="columnDataGet" description="[API] 그리드의 특정 column index 혹은 column key 값을 가지는 column의 데이터를 조회할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "columnDataGet", columnIndexKey[, query] );</template>
+
+<template name="columnFix" description="[API] 그리드에서 가로 스크롤 위치와 상관없이 컬럼을 왼쪽에 고정 시킨 채로 보고자 할때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "columnFix",  columnIndex );</template>
+
+<template name="columnGet" description="[API] columnMapping object에 사용된 key-value를 이용하여 조건에 맞는 컬럼의 목록을 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "columnGet", columnQuery1[, columnQuery2[, ...[, columnQueryN]]] );</template>
+
+<template name="columnInfo" description="[API] 단건의 컬럼의 매핑 오브젝트 정보를 읽어옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "columnInfo", columnIndexKey );</template>
+
+<template name="columnUnfix" description="[API] 고정된 컬럼을 해지할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "columnUnfix" );</template>
+
+<template name="dataAdd" description="[API] 그리드에 새로운 데이터를 추가합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataAdd", data[, query] );</template>
+
+<template name="dataCopy" description="[API] 그리드 내에 원하는 데이터를 선택하여 원하는 형태로 복제하고 특정 위치에 붙여넣습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataCopy", query[, cloneOption])</template>
+
+<template name="dataDelete" description="[API] query 조건에 해당되는 데이터 혹은 여러 데이터들을 삭제하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataDelete"[, query] );</template>
+
+<template name="dataEdit" description="[API] 데이터를 수정할 때 사용하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataEdit", data[, query] );</template>
+
+<template name="dataEmpty" description="[API] 그리드를 초기화하여 추가되거나 설정된 데이터 값이 모두 사라집니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataEmpty" );</template>
+
+<template name="dataFlush" description="[API] 수정되거나 삭제된 데이터의 목록을 받아서 처리하고, 그리드 내에서 수정기록과 삭제기록을 모두 제거합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataFlush", handler , flushOption );</template>
+
+<template name="dataGet" description="[API] 지정된 조건에 따라 데이터를 가져오고자 할 때 사용하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataGet", query1[, query2[, ...[, queryN]] );</template>
+
+<template name="dataGetByIndex" description="[API] dataGet의 축약 버젼으로, Query object에서 _index에 해당하는 object만 넣어서 바로 데이터를 조회할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataGetByIndex", index );</template>
+
+<template name="dataGetByIndexRef" description="[API] dataGetRef의 축약 버젼으로 dataGetByIndex와 같으나 deepCopyOnDataGet option의 값과 상관없이 무조건 reference 형식으로 원하는 데이터를 조회하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataGetByIndexRef", index );</template>
+
+<template name="dataGetRef" description="[API] dataGet API와 같으나 deepCopyOnDataGet option의 값과 상관없이 무조건 reference 형식으로 원하는 데이터를 조회하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataGetRef", query1[, query2[, ...[, queryN]] );</template>
+
+<template name="dataMove" description="[API] fromQuery에 해당되는 데이터를 toQuery에 해당되는 데이터 위치의 앞으로 이동합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataMove", fromQuery, toQuery[, after] );</template>
+
+<template name="dataPin" description="[API] 선택된 데이터를 헤더영역에 고정합니다. 호출될 때 마다 query에 의해 선택된 데이터만 헤더에 고정되어 표시됩니다. 고정된 데이터는 편집상태 등이 바디의 데이터와 연동됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataPin", query );</template>
+
+<template name="dataRestore" description="[API] 편집된 데이터를 최초에 dataSet 또는 dataAdd되었을 때의 데이터로 복원합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataRestore"[, query] );</template>
+
+<template name="dataScroll" description="[API] 지정된 데이터 위치로 그리드의 스크롤을 이동합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataScroll", position[, callback] );</template>
+
+<template name="dataSet" description="[API] 그리드의 데이터를 초기화하고, 새로운 데이터를 입력합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataSet", dataList[, dynamicOption] );</template>
+
+<template name="dataSort" description="[API] ColumnMapping.sorting에 값이 존재할 때 마우스 클릭 외에 해당 API호출을 통해 sorting 옵션이 존재하는 컬럼 정렬 상태를 조절할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataSort", columnIndex, direction );</template>
+
+<template name="dataUndelete" description="[API] 그리드 데이터 삭제를 취소하는 api입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataUndelete", query );</template>
+
+<template name="dataUnpin" description="[API] 헤더영역에 고정된 데이터를 전부 또는 조건에 따라 고정을 해제합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "dataUnpin"[, query] );</template>
+
+<template name="deleteFilter" description="[API] setFilter API에서 설정한 필터값을 해제합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "deleteFilter", filterName );</template>
+
+<template name="endCellEdit" description="[API] 편집상태인 셀의 편집을 종료하고, 사용자가 화면에 입력해둔 데이터를 그리드에 저장합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "endCellEdit"[, query [, column]] );</template>
+
+<template name="endCellInlineEdit" description="[API] cellInlineEdit 옵션 적용 후 더블클릭으로 편집에 진입하거나 startCellInlineEdit API로 편집에 진입한 셀들의 편집상태를 종료하고자 할 때 사용하는 API 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "endCellInlineEdit" );</template>
+
+<template name="endEdit" description="[API] 편집상태인 행의 편집을 종료하고, 사용자가 화면에 입력해둔 데이터를 그리드에 저장합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "endEdit"[, query] );</template>
+
+<template name="endRowInlineEdit" description="[API] rowInlineEdit 옵션 적용 후 더블클릭으로 편집에 진입하거나 startRowInlineEdit API로 편집에 진입한 행들의 편집상태를 종료하고자 할 때 사용하는 API 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "endRowInlineEdit" );</template>
+
+<template name="endSearch" description="[API] startSearch API에 의해 시작된 검색을 종료하는 API 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "endSearch" );</template>
+
+<template name="enlargeExit" description="[API] 전체보기 기능 활성화 상태에서 이를 API로 닫고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "enlargeExit" );</template>
+
+<template name="enlargeStart" description="[API] defaultContextMenu 에 표시되는 전체보기 기능을 API로 호출하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "enlargeStart" );</template>
+
+<template name="expandGroup" description="[API] 그룹 범위를 펼치는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "expandGroup"[, query][, key]] )</template>
+
+<template name="expandTreeNode" description="[API] 그리드를 tree로 사용 할 때 트리의 child 요소를 펼쳐 보이게 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "expandTreeNode"[, query] );</template>
+
+<template name="filterInfo" description="[API] 그리드에 설정된 모든 필터 정보를 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "filterInfo" );</template>
+
+<template name="focusCell" description="[API] cellSelectable=true일 때 클릭 된 셀이 화면 포커스를 주어 그리드 보이는 영역에 표시 되게 있게 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "focusCell", query , column );</template>
+
+<template name="focusInfo" description="[API] 그리드에 적용되어 있는 cellSelectable 옵션에 의한 포커스와, input 컨트롤들이 가지는 포커스 정보를 저장합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "focusInfo" );</template>
+
+<template name="focusRestore" description="[API] focusInfo API가 리턴한 값을 다시 받아서 적용되어 있던 포커스 정보를 다시 복원합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+var info = $$("#grid").alopexGrid( "focusInfo" );
+//user operation
+$$("#grid").alopexGrid( "focusRestore", info );</template>
+
+<template name="footerData : get" description="[API] 그리드에서 footer기능을 사용할 때 footer의 데이터를 가져오기 위해 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "footerData"[, dataKey] );</template>
+
+<template name="footerData : set" description="[API] 그리드에서 footer기능을 사용할 때 footer의 data를 설정합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "footerData", dataObject);</template>
+
+<template name="getGeometry" description="[API] 그리드에 관련된 크기, 위치 정보를 얻을 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "getGeometry" );</template>
+
+<template name="groupDataGet" description="[API] 선택된 데이터중 첫번째 데이터가 속한 특정 그룹 범위에 함께 포함되는 데이터의 목록을 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "groupDataGet", query, key );</template>
+
+<template name="groupRangeGet" description="[API] 선택된 데이터중 첫번째 데이터가 속한 특정 그룹 범위에 대한 정보를 담은 그룹범위 오브젝트를 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "groupRangeGet", query, key );</template>
+
+<template name="headerGroupGet" description="[API] headerGroup에 사용된 key-value를 이용하여 조건에 맞는 헤더 그룹 목록을 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "headerGroupGet", query1[, query2[, ...[, queryN]]] );</template>
+
+<template name="headerGroupInfo" description="[API] 지정된 헤더 그룹 정보를 읽어 옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "headerGroupInfo", headerGroupIdKey );</template>
+
+<template name="hideCol" description="[API] 특정 컬럼을 그리드에서 숨기고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "hideCol", columnIndexKey [, hiddenType] );</template>
+
+<template name="hideProgress" description="[API] showProgress API로 그리드 화면에 표시한 프로그레스 다이얼로그를 숨깁니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "hideProgress" [, forceToHide ]  [, progressOption] );</template>
+
+<template name="isColumnHidden" description="[API] 지정된 컬럼이 현재 그리드에서 숨겨진 상태인지 보이는 상태인지 확인합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "isColumnHidden", columnIndexKey );</template>
+
+<template name="isFilteredColumn" description="[API] 지정된 컬럼이 그리드 정의/필터링된 상태인지 확인 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "isFilteredColumn", columnIndexKey );</template>
+
+<template name="isGroupCollapsed" description="[API] Query object로 명시한 데이터중 첫번째 데이터가 속하는 그룹이 접혀져 있는 상태인지를 확인하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "isGroupCollapsed", query [, key [, excludeParent ]] );</template>
+
+<template name="pageInfo" description="[API] 현재 그리드의 페이징 관련 정보를 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "pageInfo" );</template>
+
+<template name="pageSet" description="[API] 그리드의 페이징 기능이 활성화 되어 있을 때, pageSet API를 이용하여 원하는 페이지로 이동할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "pageSet", page );</template>
+
+<template name="readOption" description="[API] 그리드에 현재 설정된 옵션을 읽을 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "readOption" );</template>
+
+<template name="refreshCell" description="[API] 그리드의 랜더링을 셀에서만 새로 하고자 할 때 사용하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "refreshCell", query, columnIndex );</template>
+
+<template name="refreshProgress" description="[API] showProgress API의 호출로 프로그레스가 표시되어 있을 때 프로그레스 창을 갱신합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "refreshProgress" [, progressOption ] );</template>
+
+<template name="removeCellEditPopup" description="[API] 셀 편집 팝업을 동적으로 닫을 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$('#grid').alopexGrid('removeCellEditPopup');</template>
+
+<template name="removeFilterDropdown" description="[API] filteringHeader 가 true로 설정되어 있어 마우스 클릭으로 인해 그리드 정의/필터링 박스가 나타나거나 showFilterDropdown API에 의해서 그리드 정의/필터링 박스가 나타났을 때 본 API를 이용하여 닫을 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "removeFilterDropdown" );</template>
+
+<template name="rowElementGet" description="[API] 데이터를 표현하는 행(&lt;div&gt;태그) 엘리먼트를 jQuery object의 array 형태로 묶어서 리턴하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "rowElementGet", query );</template>
+
+<template name="rowFix" description="[API] 데이터를 틀고정 상태로 유지하여 상단에 고정시키고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "rowFix", count );</template>
+
+<template name="rowSelect" description="[API] 특정 데이터를 선택 상태로 만들거나, 또는 선택 상태를 해제합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "rowSelect", query, select );</template>
+
+<template name="rowUnfix" description="[API] rowFix에 의해 틀고정된 상태를 해제합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "rowUnfix" );</template>
+
+<template name="saveCellEdit" description="[API] endCellEidt API와 유샤하나 셀의 편집 모드를 종료하지는 않은 채 사용자가 변경한 중간 값만 데이터 셋에 저장합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "saveCellEdit"[, query [, column]] );</template>
+
+<template name="saveEdit" description="[API] endEidt API와 유샤하나 행의 편집 모드를 종료하지는 않은 채 사용자가 변경한 중간 값만 데이터 셋에 저장합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "saveEdit"[, query] );</template>
+
+<template name="scrollOffset" description="[API] 현재 그리드 내부에서의 스크롤 위치를 감지하여 오브젝트 형태로 리턴합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "scrollOffset" );</template>
+
+<template name="searchInfo" description="[API] startSearch API에 의한 현재 검색결과 및 하이라이트 상태에 대한 정보를 얻어올 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "searchInfo" );</template>
+
+<template name="searchNext" description="[API] startSearch API에 의해 검색이 시작된 후 다음 검색결과로 하이라이트/스크롤 을 이동하고자 할 때 사용하는 API 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "searchNext" );</template>
+
+<template name="searchPrevious" description="[API] startSearch API에 의해 검색이 시작된 후 이전 검색결과로 하이라이트/스크롤 을 이동하고자 할 때 사용하는 API 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "searchPrevious" );</template>
+
+<template name="setFilter" description="[API] 그리드에 데이터를 파라미터로 받는 커스텀 함수 필터를 설정하여 조건에 맞는 데이터만 보여줍니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "setFilter"[, filterName], filter[, norender] );</template>
+
+<template name="setRowHeight" description="[API] 행의 높이를 정하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "setRowHeight"[, query], height );</template>
+
+<template name="setScroll" description="[API] 스크롤의 위치를 설정하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "setScroll", scrollOffset );</template>
+
+<template name="showCellEditPopup" description="[API] Option.cellPopupEdit 옵션에서 설정된 컬럼에 대해서 셀 편집 팝업을 동적으로 열 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$('#grid').alopexGrid('showCellEditPopup', rowIndex, columnIndexKey);</template>
+
+<template name="showCol" description="[API] 숨겨진 상태의 특정 컬럼을 다시 보이게 하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "showCol", columnIndexKey );</template>
+
+<template name="showFilterDropdown" description="[API] 지정된 컬럼이 그리드 정의/필터링 박스를 동적으로 열수있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "showFilterDropdown", columnIndexKey );</template>
+
+<template name="showProgress" description="[API] 그리드에 프로그레스 다이얼로그를 띄웁니다. 이때 그리드 배경이 클릭할 수 없도록 셀 위에 modal 창이 뜨게 됩니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "showProgress" [, callback] [, progressOption] );</template>
+
+<template name="sortClear" description="[API] 데이터의 정렬을 해제하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "sortClear" );</template>
+
+<template name="sortingInfo" description="[API] 현재 그리드가 데이터를 정렬한 순서, 정렬 기준 컬럼, 정렬 기준 키 정보를 얻을 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "sortingInfo" );</template>
+
+<template name="startCellEdit" description="[API] Query object와 컬럼 지시값으로 명시된 셀을 편집상태로 전환할 때 사용하는 API 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "startCellEdit"[, query [, column]] );</template>
+
+<template name="startCellInlineEdit" description="[API] cellInlineEdit 옵션을 적용하여 더블클릭으로 셀을 편집으로 전환하는 과정을 API적으로 호출하고자 할 때 사용합니다. " autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "startCellInlineEdit", query , column );</template>
+
+<template name="startEdit" description="[API] 그리드에 표시된 데이터를 편집상태로 전환합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "startEdit"[, query] );</template>
+
+<template name="startRowInlineEdit" description="[API] rowInlineEdit 옵션을 적용하여 더블클릭으로 행을 편집으로 전환하는 과정을 API적으로 호출하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "startRowInlineEdit", query );</template>
+
+<template name="startSearch" description="[API] 현재 화면에 그려진 스크롤 범위 내에서 사용자가 제시한 단어를 포함하고 있는 행 또는 개별 컬럼을 찾습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "startSearch", keyword, searchOption );</template>
+
+<template name="toggleGroup" description="[API] 접혀있는 그룹 범위는 펼치고, 펼쳐져 있는 그룹범위는 접는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "toggleGroup"[, query][, key]] )</template>
+
+<template name="toggleTreeNode" description="[API] 트리그리드를 사용 할 때 트리의 child의 펼쳐집과 접힘을 번갈아 수행하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "toggleTreeNode"[, query] );</template>
+
+<template name="treeDataMove" description="[API] 트리그리드를 사용시 데이터의 이동은 단순히 데이터의 순서 변경뿐만 아니라 parent 지정을 변경하는 기능도 필요로 합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "treeDataMove", query [, parentQuery] [, indexQuery]);</template>
+
+<template name="treeGetChild" description="[API] 트리그리드를 사용하면서 특정 노드의 하위 노드 정보를 가져와야 하는 상황에서 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "treeGetChild", query [, option]);</template>
+
+<template name="treeGetParent" description="[API] 트리그리드를 사용하면서 특정 노드의 상위 노드 정보를 가져와야 하는 상황에서 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "treeGetParent", query [, option]);</template>
+
+<template name="updateColumn" description="[API] 이미 설정된 컬럼의 부분 옵션을 변경하고자 할때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "updateColumn", mapping [, colunmIndexKey] );</template>
+
+<template name="updateOption" description="[API] 그리드의 옵션을 변경하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "updateOption", options );</template>
+
+<template name="viewUpdate" description="[API] 그리드의 마크업을 구성하는 요소들의 크기 계산 및 고정컬럼을 생성하도록 하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$("#grid").alopexGrid( "viewUpdate" );</template>
+
+
+<!-- ========== -->
+<!-- Global API -->
+<!-- ========== -->
+<template name="AlopexGrid.addPlugin" description="[Global API] updateOption 혹은 updateColumn 함수 호출이나 사용자의 의한 직접적인 옵션 변경이 발생했을 때 플러그인을 등록하는 함수입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.addPlugin( plugin );</template>
+
+<template name="AlopexGrid.clearSetup" description="[Global API] AlopexGrid.setup API로 설정된 공통 설정을 지울 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.clearSetup();</template>
+
+<template name="AlopexGrid.currentData" description="[Global API] Data Object에서 현재 편집 중인 데이터를 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.currentData( data );</template>
+
+<template name="AlopexGrid.currentValue" description="[Global API] Data Object에서 현재 편집 중인 데이터에서 지정된 key의 값만 가져옵니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.currentValue( data, key );</template>
+
+<template name="AlopexGrid.define" description="[Global API] 그리드 생성에 앞서 개별 그리드에 공통요소를 설정하고자 할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.define( key, value );</template>
+
+<template name="AlopexGrid.escapeHTML" description="[Global API]  값에 포함된 &lt;, &gt;, &amp; 와 같은 문자를 escape하여 &lt;, &gt;, &amp; 형식의 escape character로 치환합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.escapeHTML( value );</template>
+
+<template name="AlopexGrid.generateKey" description="[Global API] 현재 페이지에서 unique한 값을 생성하고자 할 때 호출합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.generateKey();</template>
+
+<template name="AlopexGrid.i18nLocaleSet" description="[Global API] 그리드 정의/필터링과 컨텍스트 메뉴 등의 팝업 메뉴의 언어를 사용자가 원하는 대로 지정할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.i18nLocaleSet.키워드 = { "메뉴명": "해당 언어" };</template>
+
+<template name="AlopexGrid.locale" description="[Global API] AlopexGrid.i18nLocaleSet에서 설정한 언어로 그리드 정의/필터링과 컨텍스트 메뉴의 언어를 변경하여 사용할 수 있습니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.locale = "키워드";</template>
+
+<template name="AlopexGrid.parseEvent" description="[Global API] 이벤트 오브젝트를 파싱해서 정형된 jQuery object와 Object를 제공합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.parseEvent( event );</template>
+
+<template name="AlopexGrid.setup" description="[Global API] 그리드 생성에 앞서 모든 그리드에 공통설정을 하기 위해 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.setup( commonOption );</template>
+
+<template name="AlopexGrid.trimData" description="[Global API] 데이터에 포함된 _index 또는 _state 와 같은 값을 제거할 때 사용합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+AlopexGrid.trimData( data [, preserveState ] );</template>
+
+<!-- ========= -->
+<!-- Excel 기능 -->
+<!-- ========= -->
+<template name="ExcelWorker" description="[Excel] 엑셀 내보내기를 사용하기 위해서는 먼저 worker를 정의 해야 합니다. worker는 그리드 인스턴스와 내보낼 엑셀 파일명, palette 등을 등록합니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+var worker = new ExcelWorker({
+	excelFileName: '', // 로컬에 저장할 엑셀 파일명을 설정합니다.
+	defaultPalette: {}, // 내보내진 엑셀의 그리드 영역 전체 셀에 적용할 글씨 관련 스타일 정보를 설정합니다.
+	palette: [ // 웹페이지에서 보이는 그리드의 셀스타일, 헤더 스타일정보(배경색, 폰트색상)를 내보낼 떄 사용하는 palette 정보 설정합니다.
+		className: '',
+		backgroundcolor: '',
+		color: '',
+		font: '',
+		fontsize: ,
+		fontbold: false,
+		align: ''
+	],
+	sheetList: [{
+		sheetName: '', // 엑셀 파일의 개별 시트명을 설정합니다.
+		$$grid: , // 데이터를 내보낼 그리드 인스턴스를 입력합니다.
+		placement: 'horizontal' // $$grid를 array로 입력했을 경우 여러 개의 그리드의 배치를 설정합니다.
+	}]
+});</template>
+
+<template name="export" description="[Excel] 설정한 worker를 이용해 실제로 그리드 데이터를 엑셀 파일로 내보내는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+worker.export({
+	merge : false, //병합 해제된 채로 그리드를 내보냅니다.
+	exportHidden: false, //hidden 컬럼은 내보내지 않습니다.
+	exportNumberingColumn: false, //numbering 컬럼을 내보내지 않습니다.
+	useGridColumnWidth: true, //그리드의 컬럼 너비가 엑셀에 반영됩니다.
+	border: true //엑셀의 셀 테두리를 그립니다.
+});</template>
+
+<template name="import" description="[Excel] 가져온 엑셀파일의 데이터를 처리하는 API입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+var worker = new ExcelWorker();
+worker.import($$gridArr, file, function(dataList, $$grid, i){
+
+});</template>
+
+<!-- === -->
+<!-- 기타 -->
+<!-- === -->
+<template name="alopexgrid" description="[Template] AlopexGrid 기본 옵션이 설정된 스크립트 입니다." autoinsert="false" context="javaScript" deleted="false" enabled="true">
+$$('#grid').alopexGrid({
+	autoColumnIndex: true,
+	defaultColumnMapping : {
+		align : 'center',
+		resizing : true,
+		sorting : true
+	},
+	columnMapping:[
+		{
+			width : '30px',
+			selectorColumn : true,
+			resizing: false
+		}, {
+			width:'50px',
+			numberingColumn:true,
+			resizing: false
+		}, {
+			key : 'column1',
+			title : 'column1',
+			width : '100px'
+		}, {
+			key : 'column2',
+			title : 'column2',
+			width : '100px'
+		}, {
+			key : 'column3',
+			title : 'column3',
+			width : '100px'
+		}, {
+			key : 'column4',
+			title : 'column4',
+			width : '100px'
+		}, {
+			key : 'column5',
+			title : 'column5',
+			width : '100px'
+		}, {
+			key : 'column6',
+			title : 'column6',
+			width : '100px'
+		}, {
+			key : 'column7',
+			title : 'column7',
+			width : '100px'
+		}
+	]
+});</template>
+
+</templates>

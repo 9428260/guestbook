@@ -1,0 +1,753 @@
+/* Dashboard Custom Styles */
+/* Bootstrap 유틸리티 클래스로 대체 불가능한 커스텀 스타일만 유지 */
+/* 네임스페이스를 사용하여 다른 CSS와의 충돌 방지 */
+
+/* 벡터 아이콘 스타일 (Bootstrap으로 대체 불가) */
+.dashboard .vector {
+  width: 22.25px;
+  height: 6.86px;
+  left: 4.57px;
+  top: 23.43px;
+  position: absolute;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%), var(--Secondary-state, #434159);
+}
+
+.dashboard .vector_01 {
+  width: 26.29px;
+  height: 32px;
+  left: 2.86px;
+  top: 0px;
+  position: absolute;
+  background: linear-gradient(0deg, rgba(255, 254.57, 254.57, 0.40) 0%, rgba(255, 254.57, 254.57, 0.40) 100%), var(--Sub-color-info, #54B9D1);
+}
+
+.dashboard .vector_02 {
+  width: 9.71px;
+  height: 16.74px;
+  left: 11.14px;
+  top: 3.57px;
+  position: absolute;
+  background: linear-gradient(0deg, rgba(255, 254.54, 254.54, 0.10) 0%, rgba(255, 254.54, 254.54, 0.10) 100%), var(--Secondary-teal, #009F95);
+}
+
+/* 상태 아이콘 스타일 (SVG background-image 사용) */
+.dashboard .status-icon {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background: #FAEDE2;
+  overflow: hidden;
+  border-radius: 3px;
+  background-size: 24px 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  min-width: 50px;
+  max-width: 50px;
+}
+
+.dashboard .status-icon[data-status="Warning"] {
+  background-color: #FAEDE2;
+  background-image: url("../images/alert-triangle.svg");
+}
+
+.dashboard .status-icon[data-status="Error"] {
+  background-color: var(--Pastel-color-danger, #F8E3E3);
+  background-image: url("../images/alert-circle.svg");
+}
+
+.dashboard .status-icon[data-status="Normal"] {
+  background-color: var(--Pastel-color-success, #E0F2E9);
+  background-image: url("../images/circle-check.svg");
+}
+
+/* 실행 정보 없음 (연한 회색) */
+.dashboard .status-icon[data-status="NoExec"] {
+  background-color: #F1F1F1;
+  background-image: none;
+}
+
+/* 상태 숫자 컨테이너 */
+.dashboard .status-num {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+  height: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 상태 숫자 배경 */
+.dashboard .status-dot {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  border-radius: 100px;
+}
+
+.dashboard .status-num[data-status="error"] .status-dot {
+  background: var(--Sub-color-danger, #E15241);
+}
+
+.dashboard .status-num[data-status="warning"] .status-dot {
+  background: var(--Sub-color-warning, #EE7950);
+}
+
+.dashboard .status-num[data-status="normal"] .status-dot {
+  background: var(--Sub-color-success, #67AD5B);
+}
+
+/* 상태 숫자 텍스트 */
+.dashboard .status-text {
+  width: 40px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-primary, #333333);
+  font-size: 16px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 500;
+  word-wrap: break-word;
+  line-height: 1.2;
+  align-self: center;
+  text-align: left;
+  vertical-align: middle;
+  /*padding-top: 4px;*/
+  padding-bottom: 1px;
+}
+
+/* 구분선 */
+.dashboard .status-divider {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: hidden;
+  background-image: url("../images/line.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 액션 타입 배지 스타일 */
+.dashboard .action-type {
+  width: 96px;
+}
+
+.dashboard .action-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 24px;
+  padding: 4px 8px 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 500;
+  line-height: 1;
+  word-wrap: break-word;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dashboard .action-badge[data-type="Manual"] {
+  background: var(--Pastel-color-success, #E0F2E9);
+  color: var(--Secondary-teal, #009F95);
+}
+
+.dashboard .action-badge[data-type="Schedule"] {
+  background: var(--Pastel-color-primary, #DFEDFB);
+  color: var(--Sub-color-primary, #4994EC);
+}
+
+.dashboard .action-badge[data-type="Task"] {
+  background: var(--Pastel-color-secondary, #E1E8EC);
+  color: var(--Sub-color-secondary, #507388);
+}
+
+/* 실행 정보 없음 (연한 회색) */
+.dashboard .action-badge[data-type="NoExec"] {
+  background: #F1F1F1;
+  color: #9E9E9E;
+}
+
+/* 기타 벡터 아이콘들 (필요한 것만 유지) */
+.dashboard .vector_03, .dashboard .vector_04, .dashboard .vector_05, .dashboard .vector_07, .dashboard .vector_08,
+.dashboard .vector_15, .dashboard .vector_16, .dashboard .vector_20, .dashboard .vector_21, .dashboard .vector_22,
+.dashboard .vector_27, .dashboard .vector_28, .dashboard .vector_32, .dashboard .vector_33, .dashboard .vector_34,
+.dashboard .vector_39, .dashboard .vector_40, .dashboard .vector_44, .dashboard .vector_45, .dashboard .vector_46,
+.dashboard .vector_51, .dashboard .vector_52, .dashboard .vector_56, .dashboard .vector_57, .dashboard .vector_58,
+.dashboard .vector_63, .dashboard .vector_64, .dashboard .vector_68, .dashboard .vector_69, .dashboard .vector_70 {
+  position: absolute;
+  background: var(--text-primary, #333333);
+}
+
+.dashboard .calendar-event-1 {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  overflow: hidden;
+  background-image: url("../images/ico-calendar-event.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0) saturate(100%) invert(27%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0.27) contrast(100%);
+}
+
+.dashboard .chevron-right-2 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard .arrow-right-1 {
+  width: 16px;
+  height: 16px;
+  left: 7px;
+  top: 7px;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* 스트림라인 아이콘 */
+.dashboard .streamline-colormanual-book-flat,
+.dashboard .streamline-colortag-flat {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 레이아웃 관련 (Bootstrap으로 대체 가능하지만 디자인 유지를 위해 유지) */
+.dashboard .task-row {
+  align-self: stretch;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  display: inline-flex;
+}
+
+.dashboard .status-container {
+  width: 240px;
+  flex-shrink: 0;
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.dashboard .datetime-container {
+  width: 184px;
+  flex-shrink: 0;
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.dashboard .action-container {
+  width: 80px;
+  flex-shrink: 0;
+  align-self: stretch;
+  padding-left: 2px;
+  padding-right: 2px;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.dashboard .linked-button {
+  width: 100%;
+  height: 100%;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  border-radius: 3px;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dashboard .linked-button-text {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-primary, #333333);
+  font-size: 13px;
+  font-family: Pretendard;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.dashboard .linked-button:hover .linked-button-text {
+  color: #1958CD;
+}
+
+.dashboard .linked-button-icon {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: hidden;
+  background-image: url("../images/ico-chevron-right.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0.2) contrast(100%);
+}
+
+.dashboard .linked-button:hover .linked-button-icon {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(100%) saturate(1000%) hue-rotate(200deg) brightness(0.6) contrast(100%);
+}
+
+.dashboard .resource-cards {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+/* 헤더 스타일 */
+.dashboard .header {
+  width: 100%;
+  padding: 8px 24px;
+  background: #F9F9F9;
+  border-bottom: 1px var(--border-default, #DDDDDD) solid;
+  gap: 20px;
+}
+
+.dashboard .header-item {
+  padding: 5px 12px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard .header-text {
+  color: var(--Primary-black, #222222);
+  font-size: 14px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.dashboard .header-divider {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: hidden;
+  background-image: url("../images/line.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 카드 스타일 */
+.dashboard .card {
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  background: var(--Background-Default-Default, white);
+  border-radius: 3px;
+  outline: 1px var(--Border-Default-Default, #D9D9D9) solid;
+  outline-offset: -1px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.dashboard .card-image {
+  width: 64px;
+  height: 64px;
+  background: var(--Pastel-color-info, #E1F3F6);
+  overflow: hidden;
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
+.dashboard .card-image[data-name="Manual"] {
+  background: var(--Pastel-color-info, #E1F3F6);
+}
+
+.dashboard .card-image[data-name="Tag"] {
+  background: var(--Pastel-color-primary, #DFEDFB);
+}
+
+.dashboard .card-image[data-name="Home"] {
+  background: var(--Pastel-color-primary, #EBEBFD);
+}
+
+.dashboard .card-icon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard .card-icon[data-name="Manual"] {
+  background-image: url("../images/manual-book-flat.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dashboard .card-icon[data-name="Tag"] {
+  background-image: url("../images/tag-flat.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dashboard .card-icon[data-name="Home"] {
+  background-image: url("../images/home-flat.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dashboard .card-body {
+  flex: 1 1 0;
+  min-width: 160px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+  padding: 0px;
+}
+
+.dashboard .card-content {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  display: flex;
+}
+
+.dashboard .card-title {
+  align-self: stretch;
+  color: var(--Text-Default-Default, #1E1E1E);
+  font-size: 16px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 700;
+  line-height: 22.40px;
+  word-wrap: break-word;
+  margin-bottom:0px;
+}
+
+.dashboard .card-description {
+  align-self: stretch;
+  color: var(--Text-Default-Secondary, #757575);
+  font-size: 16px;
+  /*font-family: Inter;*/
+  font-weight: 400;
+  line-height: 22.40px;
+  word-wrap: break-word;
+}
+
+/* 태스크 아이템 */
+.dashboard .task_item {
+  width: 100%;
+  height: 102px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background: var(--bg-white, white);
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  display: flex;
+  transition: background-color 0.2s ease;
+}
+
+.dashboard .task_item:hover {
+  background-color: #F9F9F9;
+}
+
+/* 데이터가 없을 때 표시되는 nodata 스타일 */
+.dashboard .nodata-container {
+  width: 100%;
+  height: 100%;
+  padding: 48px 24px;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  flex: 1 1 auto;
+}
+
+.dashboard .nodata-image {
+  width: 220px;
+  height: 146px;
+  background-image: url("../images/nodata.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  display: block;
+}
+
+.dashboard .nodata-text {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: var(--Text-Default-Secondary, #757575);
+  font-size: 16px;
+  line-height: 1.5;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.dashboard .task_list {
+  width: 100%;
+  height: 667px;
+  min-height: 667px;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.dashboard .details {
+  align-self: stretch;
+  height: 660px;
+  background: white;
+  overflow: hidden;
+  border-radius: 3px;
+  outline: 1px #DDDDDD solid;
+  outline-offset: -1px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+/* 섹션 제목 */
+.dashboard .con_title {
+  align-self: stretch;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  margin-bottom: 0px;
+}
+
+.dashboard .sub-title {
+  flex: 1 1 0;
+  align-self: stretch;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard .task-name-link {
+  color: #1958CD;
+  font-size: 16px;
+  /*font-family: Noto Sans;*/
+  font-weight: 500;
+  line-height: 20px;
+  word-wrap: break-word;
+  text-decoration: none;
+}
+
+.dashboard .task-name-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0f3a8f;
+}
+
+.dashboard .f098_span, .dashboard .f09_span, .dashboard .f09_01_span {
+  color: var(--text-primary, #333333);
+  font-size: 16px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.dashboard .fspan_01 {
+  color: var(--Secondary-teal, #009F95);
+  font-size: 12px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 500;
+  line-height: 18px;
+  word-wrap: break-word;
+}
+
+.dashboard .f025-08-17110112_span {
+  color: var(--text-secondary, #444444);
+  font-size: 16px;
+  /*font-family: Noto Sans KR;*/
+  font-weight: 400;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* 태스크 이름 */
+.dashboard .task-name {
+  flex: 1 1 0;
+  align-self: stretch;
+  padding-left: 5px;
+  padding-right: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  display: inline-flex;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dashboard .task-name-container {
+  align-self: stretch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* 날짜/시간 텍스트 컨테이너 */
+.dashboard .datetime-text {
+  width: 152px;
+  padding-top: 2px;
+}
+
+/* 버튼 */
+.dashboard .button-more {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  outline: 1px var(--border-default, #DDDDDD) solid;
+  outline-offset: -1px;
+}
+
+/* 툴박스 */
+.dashboard .toolbox_right {
+  align-self: stretch;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+/* 섹션 */
+.dashboard .my-task {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.dashboard .resources {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: inline-flex;
+}
+
+/* 텍스트 컨테이너 */
+.dashboard .text {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  display: flex;
+}
+
+.dashboard .frame-7320 {
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  display: flex;
+}
+
+/* 인스턴스 버튼 */
+.dashboard .instance- {
+  height: 36px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #FAFAFA;
+  overflow: hidden;
+  border-radius: 3px;
+  outline: 1px #DDDDDD solid;
+  outline-offset: -0.50px;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+/* 태그 */
+.dashboard .tag- {
+  align-self: stretch;
+}
+
+.dashboard .opmate-tag-key-value- {
+  align-self: stretch;
+}
+
+/* 라인 */
+.dashboard .line {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 페이지 제목 */
+.dashboard .page-title {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+}

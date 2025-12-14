@@ -1,0 +1,81 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/task/popup/popup_task_schedule.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">태스크 스케줄 추가 팝업 입니다.</p>
+
+    <div class="con_title">
+        <h3 class="sub-title">스케줄 정보</h3>
+    </div>
+
+    <table class="Table Form-type">
+        <colgroup>
+            <col class="w120px">
+            <col class="wAuto">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>유형</th>
+                <td>
+                    <div id="mode" class="time_input_wrap">
+                        <select id="schedule_mode" name="schedule_mode" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>스케줄</th>
+                <td>
+                    <span id="year">
+                        <div class="time_input_wrap w80px">
+                            <select id="schedule_year" name="schedule_year" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="time_unit_label">년</div>
+                    </span>
+                    <span id="month">
+                        <div class="time_input_wrap">
+                            <select id="schedule_month" name="schedule_month" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="time_unit_label">월</div>
+                    </span>
+                    <span id="date">
+                        <div class="time_input_wrap">
+                            <select id="schedule_date" name="schedule_date" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="time_unit_label">일</div>
+                    </span>
+                    <span id="day">
+                        <div class="time_input_wrap">
+                            <select id="schedule_day" name="schedule_day" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="time_unit_label"></div>
+                    </span>
+                    <span id="hour">
+                        <div class="time_input_wrap">
+                            <select id="schedule_hour" name="schedule_hour" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="time_unit_label">시</div>
+                    </span>
+                    <span id="minute">
+                        <div class="time_input_wrap">
+                            <select id="schedule_minute" name="schedule_minute" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                        </div>
+                        <div class="time_unit_label">분</div>
+                    </span>
+                    <div class="time_input_wrap">
+                        <select id="schedule_timezone" name="schedule_timezone" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_add"   name="btn_add"   class="Button btn bg-red">추가</button>
+        <button id="btn_close" name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

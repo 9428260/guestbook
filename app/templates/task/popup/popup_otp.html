@@ -1,0 +1,44 @@
+<!--
+   OPMM TCS 활성화 추가
+-->
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script type="text/javascript">
+var mfa_key_yn = '{{ mfa_key_yn | safe }}';
+var user_id = '{{ user_id | safe }}';
+</script>
+<script src="{{ url_for('static', filename='js/task/popup/popup_otp.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <div id="token">
+        <div class="con_title" style="border:1px">
+            <!--h3 class="sub-title">인증코드</h3-->
+            <div class="title-txt">Google Authenticator App. 의 인증코드를 입력해주세요.</div>
+        </div>
+        <table class="Table Form-type">
+            <colgroup>
+                <col class="w130px">
+                <col class="wAuto">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>인증코드</th>
+                <td>
+                    <!--input type="text" id="input_password" name="input_password" class="Textinput textinput_c w150px validation_tgt" placeholder="Input Password."/-->
+                    <input type="text" class="Textinput" placeholder="000000" id="verification_code" name="verification_code" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <span id="error_txt" class="error_txt"></span>
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_certify" name="btn_certify"  class="Button btn bg-red">인증</button>
+        <button id="btn_close"  name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/file/popup/popup_file_upload.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="popup-contents">
+        <p class="popup-text">파일 업로드 팝업 입니다.</p>
+
+        <div id="base_info" class="table_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">업로드 위치</h3>
+                <div class="title-txt">경로를 입력하고 파일을 업로드하면, 디렉토리가 자동 생성됩니다.</div>
+            </div>
+            <table class="Table Form-type">
+                <colgroup>
+                    <col class="w150px">
+                    <col class="wAuto">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>파일허브 ID</th>
+                    <td><input type="text" id="filehub_id" name="filehub_id" class="Textinput textinput_c w120px" placeholder="SubStr." readonly/></td>
+                </tr>
+                <tr>
+                    <th>경로</th>
+                    <td><input type="text" id="path" name="path" class="Textinput" placeholder="Exact"/></td>
+                </tr>
+                <tr>
+                    <th>덮어쓰기 여부</th>
+                    <td>
+                        <label class="label_radio"><input type="radio" id="overwrite_yn" name="overwrite_yn" class="Radio radio_c" value="yes"/>Y</label>
+                        <label class="label_radio"><input type="radio" name="overwrite_yn" class="Radio radio_c" value="no" checked/>N</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>대상파일</th>
+                    <td>
+                        <!-- alopex fileupload 사용 -->
+                        <div class="info-text">(총합 300MB 이하, 최대 5개 등록 가능)</div>
+                        <div id="file_upload" class="Fileupload" data-selectType="advance" data-select-type="advance"></div><!-- advance, basic -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--button-->
+        <div class="popup-btn_wrap">
+            <button id="btn_upload" name="btn_upload" class="Button btn bg-red">추가</button>
+            <button id="btn_close"  name="btn_close"  class="Button btn">닫기</button>
+        </div>
+        <!--//button-->
+    </div>
+{% endblock %}

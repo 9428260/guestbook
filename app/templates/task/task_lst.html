@@ -1,0 +1,100 @@
+{% extends "common.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/task/task_lst.js') }}"></script>
+<script type="text/javascript">
+{% if response is defined %}
+var response = JSON.parse('{{ response | tojson }}');
+{% endif %}
+</script>
+{% endblock %}
+
+{% block page_content %}
+<!-- contents -->
+<div class="contents-area">
+    <!-- top area -->
+    <div class="cont_head">
+        <h2 class="title">태스크 목록</h2>
+        <div class="title-txt">태스크를 조회합니다. 조회 결과는 가장 최근에 발행된 버전을 표시합니다.</div>
+    </div>
+
+    <div class="cont_body">
+        <div class="search_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">조회 조건</h3>
+            </div>
+            <div class="search_table_wrap">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="search_area_title w80px">태스크 ID</div>
+                    <div class="search_area_input">
+                        <input type="text" id="task_id" name="task_id" class="Textinput textinput_c w180px" placeholder="SubStr."/>
+                    </div>
+                    <div class="search_area_title w80px">소유자 ID</div>
+                    <div class="search_area_input">
+                        <input type="text" id="owner_id" name="owner_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                        <button id="btn_sel_owner_id" name="btn_sel_owner_id" class='Button input'><span class='icon_search_input'></span></button>
+                    </div>
+                    <!--
+                    <div class="search_area_title w80px">발행자 ID</div>
+                    <div class="search_area_input">
+                        <input type="text" id="publish_id" name="publish_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                        <button id="btn_sel_publish_id" name="btn_sel_publish_id" class='Button input'><span class='icon_search_input'></span></button>
+                    </div>
+                    <div class="search_area_title">미발행버전 조회</div>
+                    <div class="search_area_input">
+                        <label class="ImageCheckbox">
+                            <input class="Checkbox" type="checkbox" id="rev_zero" name="rev_zero" value="0"/>
+                        </label>
+                    </div>
+                    <div class="search_area_title w105px">미발행 여부</div>
+                    <div class="search_area_input">
+                        <label class="ImageCheckbox w180px">
+                            <input class="Checkbox" type="checkbox" id="rev_zero" name="rev_zero" value="0">미발행 버전만 보기</input>
+                        </label>
+                    </div>
+                    -->
+                    <div class="search_area_init_btn">
+                        <button id="btn_init" name="btn_sel" class='Button btn sm'>초기화</button>
+                    </div>
+                </div>
+
+                <div class="search_area_sel_btn" style="top: 0px;">
+                    <div class="search_area_title w120px">내 태스크만 보기</div>
+                    <div class="tip_btn">
+                        <button class="Button btn-ico sx borderless btn-help">도움말</button>
+                        <div class="Tooltip help" data-position="bottom">
+                            권한을 보유한 태스크만 조회합니다.
+                        </div>
+                    </div>
+                    <span style="margin-right: 20px; position: relative; top: 4px;">
+                        <label class="form-check-label pt-1">
+                            <input type="checkbox" id="taskChecker" class="form-check-input-switchery" data-size="small" checked>
+                        </label>
+                    </span>
+                    <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                </div>
+                <!--div style="display: block;"></div--><!-- divide line -->
+            </div>
+        </div>
+
+        <div class="table_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">조회 결과</h3>
+                <div class="btn-right">
+                    <div class="tip_btn">
+                        <button class="Button btn-ico btn-add" id="btn_add">추가/등록</button>
+                        <div class="Tooltip">추가/등록</div>
+                    </div>
+                    <div class="tip_btn">
+                        <button class="Button btn-ico btn-del" id="btn_del">폐기/삭제</button>
+                        <div class="Tooltip">폐기/삭제</div>
+                    </div>
+                </div>
+            </div>
+            <div class="list" id="task_grid"></div>
+        </div>
+    </div>
+</div>
+<!-- //contents wrap-->
+{% endblock %}

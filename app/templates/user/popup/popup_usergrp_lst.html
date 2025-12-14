@@ -1,0 +1,49 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/user/popup/popup_usergrp_lst.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">사용자그룹 조회 팝업 입니다.</p>
+
+    <div class="search_wrap">
+        <div class="con_title">
+            <h3 class="sub-title">조회 조건</h3>
+        </div>
+
+        <div class="search_table_wrap">
+            <div class="search_area_title">ID</div>
+            <div class="search_area_input">
+                <input type="text" id="id" name="id" class="Textinput textinput_c w120px" placeholder="SubStr."/>
+            </div>
+            <div class="search_area_title">소유자 ID</div>
+            <div class="search_area_input">
+                <input type="text" id="owner_id" name="owner_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                <button id="btn_sel_owner_id" name="btn_sel_owner_id" class='Button input'><span class='icon_search_input'></span></button>
+            </div>
+            <div class="search_area_init_btn">
+                <button id="btn_init" name="btn_init" class='Button btn sm'>초기화</button>
+            </div>
+            <div class="search_area_sel_btn">
+                <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- list :s-->
+    <div class="table_wrap">
+        <div class="con_title">
+            <h3 class="sub-title">조회 결과</h3>
+        </div>
+        <div class="list" id="usergrp_grid"></div>
+    </div>
+    <!-- list :e-->
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_add"   name="btn_add"   class="Button btn bg-red">추가</button>
+        <button id="btn_close" name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

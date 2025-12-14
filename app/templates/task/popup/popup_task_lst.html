@@ -1,0 +1,71 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/task/popup/popup_task_lst.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">태스크 조회 팝업 입니다.</p>
+
+    <div class="search_wrap">
+        <div class="con_title">
+            <h3 class="sub-title">조회 조건</h3>
+        </div>
+
+        <div class="search_table_wrap">
+            <div class="d-flex align-items-center">
+                <div class="search_area_title w80px">태스크 ID</div>
+                <div class="search_area_input">
+                    <input type="text" id="task_id" name="task_id" class="Textinput textinput_c w180px" placeholder="SubStr."/>
+                </div>
+                <div class="search_area_title w80px">소유자 ID</div>
+                <div class="search_area_input">
+                    <input type="text" id="owner_id" name="owner_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                    <button id="btn_sel_owner_id" name="btn_sel_owner_id" class='Button input'><span class='icon_search_input'></span></button>
+                </div>
+                <div class="search_area_init_btn">
+                    <button id="btn_init" name="btn_sel" class='Button btn sm'>초기화</button>
+                </div>
+
+                <div class="search_area_title w120px" style="margin-left: 100px">내 태스크만 보기</div>
+                <div class="tip_btn">
+                    <button class="Button btn-ico sx borderless btn-help">도움말</button>
+                    <div class="Tooltip help" data-position="right">
+                        권한이 부여된 태스크만 목록에 표시됩니다.
+                    </div>
+                </div>
+                <span>
+                    <label class="form-check-label pt-1">
+                        <input type="checkbox" id="taskChecker" class="form-check-input-switchery" data-size="small" checked>
+                    </label>
+                </span>
+
+                <div class="search_area_sel_btn">
+                    <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                </div>
+            </div>
+            <div style="display: block;"></div><!-- divide line -->
+<!--            <div class="search_area_title w80px">발행자 ID</div>
+            <div class="search_area_input">
+                <input type="text" id="publisher_id" name="publisher_id" class="Textinput textinput_c w180px-search" placeholder="Exact"/>
+                <button id="btn_sel_publisher_id" name="btn_sel_publisher_id" class='Button input'><span class='icon_search_input'></span></button>
+            </div>-->
+        </div>
+    </div>
+
+    <!-- list :s-->
+    <div class="table_wrap">
+        <div class="con_title">
+            <h3 class="sub-title">조회 결과</h3>
+        </div>
+        <div class="list" id="task_grid"></div>
+    </div>
+    <!-- list :e-->
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_add"   name="btn_add"   class="Button btn bg-red">추가</button>
+        <button id="btn_close" name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

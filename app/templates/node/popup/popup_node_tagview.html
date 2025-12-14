@@ -1,0 +1,40 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/node/popup/popup_node_tagview.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">연동 완료된 노드에 적용 되어 있는 Tag 중 조회 대상 Key에 부여된 Value 전체를 조회 한다.</p>
+
+    <div class="table_wrap">
+
+        <div class="three-layout table_wrap">
+            <div class="three-contents-mid-button">
+                <div class="table_wrap">
+                    <div class="con_title">
+                        <h5 class="sub-title">태그 키(Key) 선택</h5>
+                    </div>
+                    <div class="list" id="key_grid"></div>
+                </div>
+            </div>
+            <div class="three-contents-mid-button">
+
+             </div>
+            <div class="three-contents-mid-button">
+                <div class="table_wrap">
+                    <div class="con_title">
+                        <h5 class="sub-title">태그 값(Value) 조회 결과</h5>
+                    </div>
+                    <div class="list" id="value_grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_close"   name="btn_close"   class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

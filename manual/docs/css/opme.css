@@ -1,0 +1,70 @@
+/******************************/
+/***         Button         ***/
+/******************************/
+.btn-gray {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0px 2px 1px 1px #bcbcbc !important;
+}
+
+.btn-red {
+    color: #ffffff !important;
+    background-color: #ea0530 !important;
+    box-shadow: 0px 2px 1px 1px #ea9999 !important;
+}
+
+.btn-blue {
+    color: #ffffff !important;
+    background-color: #4180bb !important;
+    box-shadow: 0px 2px 1px 1px #025099 !important;
+}
+
+.btn-green {
+    color: #ffffff !important;
+    background-color: #0C8E45 !important;
+    box-shadow: 0px 2px 1px 1px #0D7A3D !important;
+}
+
+/******************************/
+/***       Icon Image       ***/
+/******************************/
+.ico-gray {
+    background-color: #bcbcbc;
+    padding: 5px;
+}
+
+.ico-white {
+    background-color: #ffffff;
+    padding: 5px;
+}
+
+/******************************/
+/***       Float Menu       ***/
+/******************************/
+.ico-menu-float {
+    position: fixed;
+    top: 90vh;
+    left: calc(50vw - 20px);
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    /* background-image: url('../img/icon/ico-menu.png'); */
+}
+
+.ico-prev-float {
+    position: fixed;
+    top: 90vh;
+    left: calc(50vw - 20px - 10px - 40px);
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+}
+
+.ico-next-float {
+    position: fixed;
+    top: 90vh;
+    left: calc(50vw - 20px + 40px + 10px);
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+}

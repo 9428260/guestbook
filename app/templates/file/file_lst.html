@@ -1,0 +1,91 @@
+{% extends "common.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/file/file_lst.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<!-- contents -->
+<div class="contents-area">
+    <!-- top area -->
+    <div class="cont_head">
+        <h2 class="title">파일 목록</h2>
+        <div class="title-txt">파일허브의 파일 조회/업로드/다운로드 수행 가능합니다.</div>
+    </div>
+
+    <div class="cont_body">
+        <div class="search_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">조회 조건</h3>
+            </div>
+
+            <div class="search_table_wrap">
+                <div class="search_area_title">파일허브 ID</div>
+                <div class="search_area_input">
+                    <input type="text" id="filehub_id" name="filehub_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                    <button id="btn_sel_filehub_id" name="btn_sel_filehub_id" class='Button input'><span class='icon_search_input'></span></button>
+                </div>
+                <!--div class="search_area_title">경로</div>
+                <div class="search_area_input">
+                    <input type="text" id="path" name="path" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                </div-->
+                <div class="search_area_init_btn">
+                    <button id="btn_init" name="btn_init" class='Button btn sm'>초기화</button>
+                </div>
+                <div class="search_area_sel_btn">
+                    <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table_wrap">
+            <div class="con_title">
+                <h3 class="sub-title">파일 목록</h3>
+                <div class="title-txt">경로를 입력하고 파일을 업로드하면, 디렉토리가 자동 생성됩니다.</div>
+            </div>
+            <div class="file_path_wrap">
+                <div class="search_area_title">파일경로</div>
+                <span class="tip_btn">
+                    <button class="Button btn-ico sx borderless btn-help" id="btn_help">도움말</button>
+                    <div class="Tooltip help">
+                        파일허브의 경로를 의미합니다.<br/>
+                        해당 경로의 파일과 디렉토리를 아래 Grid 에 보여줍니다.<br/>
+                        Grid 에서 더블클릭으로 디렉토리 이동 시에는 해당 경로도 그에 맞게 표시됩니다.<br/>
+                        신규 디렉토리에 파일을 업로드 하려는 경우에는 디렉토리를 명시한 후,<br/>
+                        파일을 업로드하면 그에 맞게 디렉토리가 자동 생성됩니다.
+                    </div>
+                </span>
+                <div class="search_area_input w400px">
+                    <input type="text" id="current_path" name="current_path" class="Textinput textinput_c" placeholder=""/>
+                    <button id="btn_sel_path" name="btn_sel_path" class='Button input'><span class='icon_search_input'></span></button>
+                </div>
+                <div class="btn-right">
+                    <div class="tip_btn">
+                        <button class="Button btn-ico btn-add" id="btn_upload">업로드</button>
+                        <div class="Tooltip">업로드</div>
+                    </div>
+                    <div class="tip_btn">
+                        <button class="Button btn-ico btn-save" id="btn_download">다운로드</button>
+                        <div class="Tooltip">다운로드</div>
+                    </div>
+                    <div class="tip_btn">
+                        <button class="Button btn-ico btn-del" id="btn_del_file">삭제</button>
+                        <div class="Tooltip">삭제</div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div style="display: inline; height: 100%;">/mywork/hello/</div>
+            <div class="search_table_wrap">
+                <div class="search_area_title">대상 파일</div>
+                <div class="search_area_sel_btn">
+                    <button id="btn_sel_file" name="btn_sel_file" class='Button btn sm'>업로드</button>
+                </div>
+            </div>
+            -->
+            <input type="file" id="upload_file" name="upload_file" style="display: none"/>
+            <div class="list" id="file_grid"></div>
+        </div>
+    </div>
+</div>
+<!-- //contents wrap-->
+{% endblock %}

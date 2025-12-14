@@ -1,0 +1,81 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/task/popup/popup_task_hst_lst.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">태스크 비교를 위한 비교대상 조회 팝업 입니다. (태스크를 더블클릭하여 선택한 후, 우측 Grid 에서 Revision 을 선택합니다.)</p>
+
+    <div class="search_wrap">
+        <div class="con_title">
+            <h3 class="sub-title">조회 조건</h3>
+        </div>
+
+        <div class="search_table_wrap">
+            <div class="d-flex align-items-center">
+                <div class="search_area_title">태스크 ID</div>
+                <div class="search_area_input">
+                    <input type="text" id="task_id" name="task_id" class="Textinput textinput_c w180px" placeholder="SubStr."/>
+                </div>
+                <div class="search_area_title">소유자 ID</div>
+                <div class="search_area_input">
+                    <input type="text" id="owner_id" name="owner_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                    <button id="btn_sel_owner_id" name="btn_sel_owner_id" class='Button input'><span class='icon_search_input'></span></button>
+                </div>
+                <!--
+                <div class="search_area_title">발행자 ID</div>
+                <div class="search_area_input">
+                    <input type="text" id="publisher_id" name="publisher_id" class="Textinput textinput_c w120px" placeholder="Exact"/>
+                    <button id="btn_sel_publisher_id" name="btn_sel_publisher_id" class='Button input'><span class='icon_search_input'></span></button>
+                </div>
+                -->
+                <div class="search_area_init_btn">
+                    <button id="btn_init" name="btn_sel" class='Button btn sm'>초기화</button>
+                </div>
+
+                <div class="search_area_title w120px" style="margin-left: 200px">내 태스크만 보기</div>
+                <div class="tip_btn">
+                    <button class="Button btn-ico sx borderless btn-help">도움말</button>
+                    <div class="Tooltip help" data-position="right">
+                        권한을 보유한 태스크만 조회됩니다.
+                    </div>
+                </div>
+                <span>
+                    <label class="form-check-label pt-1">
+                        <input type="checkbox" id="taskChecker" class="form-check-input-switchery" data-size="small" checked>
+                    </label>
+                </span>
+
+                <div class="search_area_sel_btn">
+                    <button id="btn_sel" name="btn_sel" class='Button btn sm bg-red'><span class='icon_search'></span>조회</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="table_wrap">
+        <div class="half-layout">
+            <div class="half-contents"><!-- col1: start -->
+                <div class="con_title">
+                    <h3 class="sub-title">태스크</h3>
+                </div>
+                <div class="list" id="task_grid"></div>
+            </div><!-- col1: end -->
+            <div class="half-contents"><!-- col2: start -->
+                <div class="con_title">
+                    <h3 id="hst_title" class="sub-title">발행이력</h3>
+                </div>
+                <div class="list" id="hst_grid"></div>
+            </div><!-- col2: end -->
+        </div>
+    </div>
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_diff"  name="btn_diff"  class="Button btn bg-red">태스크비교</button>
+        <button id="btn_close" name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

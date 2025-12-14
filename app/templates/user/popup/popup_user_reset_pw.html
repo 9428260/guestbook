@@ -1,0 +1,38 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/user/popup/popup_user_reset_pw.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">패스워드 리셋 팝업 입니다.</p>
+
+    <div class="con_title">
+        <h3 class="sub-title">패스워드 리셋 정보</h3>
+        <div class="title-txt">패스워드 리셋 요청자에게 리셋 후 발급되는 패스워드를 전달하여, 패스워드 변경을 진행하도록 안내해야 합니다.</div>
+    </div>
+    <table class="Table Form-type">
+        <colgroup>
+            <col class="w130px">
+            <col class="wAuto">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>패스워드 발급</th>
+                <td>
+                    <select id="password_mode" name="password_mode" class="Select Select_c" data-bind-option="value:text" data-bind="options:data, selectedOptions: option_selected"></select>
+                    <input type="text" id="input_password" name="input_password" class="Textinput textinput_c w150px validation_tgt" placeholder="Input Password."/>
+                    <span id="btn_eye" class="icon_eye" title="보이기"></span>
+                    <p class="validation_msg"></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_reset" name="btn_reset"  class="Button btn bg-red">리셋</button>
+        <button id="btn_close"  name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

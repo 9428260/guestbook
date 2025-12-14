@@ -1,0 +1,835 @@
+/* ------------------------------------------------------------------------------
+ *
+ *  # Bootstrap multiselect styles for OPME Console
+ *
+ *  Extracted from ui-guide-dev/ui/css/components.css (lines 1567-1760)
+ *
+ * ---------------------------------------------------------------------------- */
+
+.multiselect-native-select {
+  position: relative; }
+  .multiselect-native-select select {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 0 !important;
+    left: 0;
+    top: 0; }
+
+.multiselect {
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  text-align: left;
+  padding-left: 0.875rem;
+  padding-right: 2.375rem;
+  text-transform: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "NotoSans", "Noto Sans KR", sans-serif;
+  display: flex;
+  align-items: center; }
+  .multiselect:after {
+    position: absolute;
+    top: 50%;
+    right: 0.875rem;
+    margin-top: -0.34375rem;
+    text-align: right; }
+  .multiselect:not([class*=font-weight-]) {
+    font-weight: 400; }
+  .multiselect.btn-light {
+    background-color: #fff;
+    border-color: #ddd; }
+    .multiselect.btn-light:hover, .multiselect.btn-light:focus, .multiselect.btn-light:not([disabled]):not(.disabled):active,
+    .btn-group.show .multiselect.btn-light {
+      background-color: #fff;
+      box-shadow: 0 0 0 62.5rem rgba(0, 0, 0, 0.01) inset; }
+    .multiselect.btn-light.disabled {
+      background-color: #fafafa; }
+  .multiselect.btn-lg {
+    height: 34px;
+    line-height: 34px;
+    padding-left: 1rem;
+    padding-right: 2.5rem; }
+    .multiselect.btn-lg:after {
+      right: 1rem; }
+  .multiselect.btn-sm {
+    height: 34px;
+    line-height: 34px;
+    padding-left: 0.75rem;
+    padding-right: 2.25rem; }
+    .multiselect.btn-sm:after {
+      right: 0.75rem; }
+
+.multiselect-container {
+  max-height: 280px;
+  overflow-y: auto;
+  width: 100%; }
+
+.multiselect-item input[type=checkbox],
+.multiselect-item input[type=radio] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  margin-top: -0.625rem;
+  opacity: 0;
+  z-index: 2;
+  width: 1.25rem;
+  height: 1.25rem; }
+  .multiselect-item input[type=checkbox]:disabled,
+  .multiselect-item input[type=radio]:disabled {
+    cursor: default; }
+
+.multiselect-item input[type=checkbox] ~ .form-check-control-indicator,
+.multiselect-item input[type=radio] ~ .form-check-control-indicator {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  margin-top: -0.625rem;
+  border: 2px solid #455A64;
+  width: 1.25rem;
+  height: 1.25rem; }
+
+.multiselect-item input[type=checkbox] ~ .form-check-control-indicator {
+  color: #455A64;
+  border-radius: 0.125rem;
+  transition: border-color ease-in-out 0.15s, color ease-in-out 0.15s; }
+  @media (prefers-reduced-motion: reduce) {
+    .multiselect-item input[type=checkbox] ~ .form-check-control-indicator {
+      transition: none; } }
+
+
+.multiselect-item input[type=radio] ~ .form-check-control-indicator {
+  border-radius: 100px;
+  transition: border-color ease-in-out 0.15s; }
+  @media (prefers-reduced-motion: reduce) {
+    .multiselect-item input[type=radio] ~ .form-check-control-indicator {
+      transition: none; } }
+  .multiselect-item input[type=radio] ~ .form-check-control-indicator:after {
+    content: "";
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    border: 0.3125rem solid;
+    border-color: inherit;
+    width: 0;
+    height: 0;
+    border-radius: 100px;
+    opacity: 0;
+    transition: all ease-in-out 0.15s; }
+    @media (prefers-reduced-motion: reduce) {
+      .multiselect-item input[type=radio] ~ .form-check-control-indicator:after {
+        transition: none; } }
+
+.multiselect-item input[type=checkbox]:checked ~ .form-check-control-indicator:after,
+.multiselect-item input[type=radio]:checked ~ .form-check-control-indicator:after {
+  opacity: 1; }
+
+/* 선택된 체크박스 스타일 강화 */
+.multiselect-item input[type=checkbox]:checked ~ .form-check-control-indicator {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.multiselect-item.active input[type=checkbox]:checked ~ .form-check-control-indicator {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.multiselect-item.active:not(.disabled) input[type=checkbox] ~ .form-check-control-indicator {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: #fff; }
+
+.multiselect-item.active:not(.disabled) input[type=radio] ~ .form-check-control-indicator {
+  border-color: #fff; }
+
+.multiselect-item.disabled .form-check-control-indicator {
+  opacity: 0.5; }
+
+.dropdown-menu[class*=bg-] .multiselect-item .form-check-control-indicator {
+  border-color: #fff;
+  color: #fff; }
+
+.multiselect-group {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; }
+  .multiselect-group:first-child {
+    margin-top: 0; }
+  .multiselect-group label {
+    margin-bottom: 0; }
+  .multiselect-group.disabled {
+    color: #999;
+    cursor: default; }
+
+.multiselect-all {
+  font-weight: 500; }
+
+.multiselect-group-clickable label {
+  cursor: pointer; }
+
+.multiselect-filter {
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem; }
+  .multiselect-filter .input-group > i {
+    font-size: 13px;
+    position: absolute;
+    left: 0.9375rem;
+    top: 50%;
+    margin-top: -0.40625rem;
+    opacity: 0.5;
+    z-index: 4; }
+  .multiselect-filter .form-control {
+    padding-left: 2.5625rem; }
+
+.input-group .multiselect-native-select {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto; }
+  .input-group .multiselect-native-select:not(:first-child) .multiselect {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+  .input-group .multiselect-native-select:not(:last-child) .multiselect {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0; }
+
+/* OPME Console specific customizations */
+.opme-multiselect-menu {
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.opme-multiselect-menu .multiselect-item {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.opme-multiselect-menu .multiselect-item:last-child {
+  border-bottom: none;
+}
+
+.opme-multiselect-menu .multiselect-item:hover {
+  background-color: #f8f9fa;
+}
+
+.opme-multiselect-menu .multiselect-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Responsive adjustments for OPME Console */
+@media (max-width: 768px) {
+  .multiselect-container {
+    max-height: 200px;
+  }
+  
+  .multiselect {
+    padding-left: 0.75rem;
+    padding-right: 2rem;
+  }
+  
+  .multiselect.btn-lg {
+    padding-left: 0.875rem;
+    padding-right: 2.25rem;
+  }
+  
+  .multiselect.btn-sm {
+    padding-left: 0.625rem;
+    padding-right: 1.875rem;
+  }
+}
+
+/* Dark theme support for OPME Console */
+.opme-dark-theme .multiselect {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #fff;
+}
+
+.opme-dark-theme .multiselect:hover,
+.opme-dark-theme .multiselect:focus {
+  background-color: #495057;
+  border-color: #6c757d;
+}
+
+.opme-dark-theme .multiselect-container {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+.opme-dark-theme .multiselect-item {
+  color: #fff;
+}
+
+.opme-dark-theme .multiselect-item:hover {
+  background-color: #495057;
+}
+
+.opme-dark-theme .multiselect-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Animation improvements for OPME Console */
+.multiselect-container {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility improvements */
+.multiselect-item:focus {
+  outline: 1px solid #fff;
+  outline-offset: -2px;
+}
+
+.multiselect:focus {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .multiselect {
+    border-width: 2px;
+  }
+  
+  .multiselect-item input[type=checkbox] ~ .form-check-control-indicator,
+  .multiselect-item input[type=radio] ~ .form-check-control-indicator {
+    border-width: 2px;
+  }
+}
+
+
+/* ========================================
+   Multi-Select & Checkbox Styles
+   Extracted from guide.css
+   ======================================== */
+
+/* ========================================
+   체크박스 관련 스타일
+   ======================================== */
+
+/* 기본 체크박스/라디오 버튼 스타일 */
+[type="checkbox"],
+[type="radio"] {
+  padding: 0;
+}
+
+/* 테이블 내 체크박스 셀 스타일 */
+table.type-vertical tbody tr td.checkbox {
+  padding-left: 2px; 
+  padding-right: 8px;
+}
+
+/* 서브타이틀 영역 체크박스 */
+.subtitle-btnarea .form-check {
+  display: inline-block;
+}
+
+.subtitle-btnarea .form-check + .btn {
+  margin-left: 20px;
+}
+
+/* ========================================
+   Multi-Select 관련 스타일
+   ======================================== */
+
+
+
+/* select */
+.dropdown-item.active,
+.select2-results__option[aria-selected=true] {
+  background-color: #495963;
+}
+
+.sub-sorting .multiselect-native-select {
+  display: inline-block;
+  min-width: 200px;
+}
+
+.sub-sorting .multiselect-native-select .btn-group {
+  display: flex;
+}
+
+.sub-sorting .multiselect-native-select .btn-group .multiselect.on-selected {
+  background-color: #eee;
+}
+
+.multiselect-native-select .on-allnot-selected,
+.multiselect-native-select .on-allnot-selected:not([disabled]):not(.disabled):active {
+  background-color: #fde1df;
+  border-color: #495963;
+  color: #495963;
+}
+
+.select2-container {
+  font-size: 13px;
+}
+
+.select2-results__option[aria-selected=true] {
+  background-color: #495963;
+}
+
+.select2-results__option+.select2-results__option>p {
+  position: relative;
+}
+
+.select2-results__option+.select2-results__option>p .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btn-group .multiselect {
+  margin-right: 0;
+}
+
+.multiselect-container .dropdown-item {
+  white-space: pre-line;
+}
+
+.multiselect-container .dropdown-item.form-check.multiselect-all {
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.multiselect-container .dropdown-item.form-check.multiselect-all .form-check-label,
+.multiselect-container .dropdown-item.form-check.multiselect-group .form-check-label {
+  padding-left: 2.5rem;
+}
+
+.multiselect-container .dropdown-item.form-check.multiselect-all input[type=checkbox],
+.multiselect-container .dropdown-item.multiselect-group input[type=checkbox] {
+  left: 0.5rem;
+}
+
+.multiselect-container .dropdown-item.multiselect-all input[type=checkbox]~.form-check-control-indicator,
+.multiselect-container .dropdown-item.multiselect-group input[type=checkbox]~.form-check-control-indicator {
+  left: 0.5rem;
+}
+
+.select2-container--open {
+  z-index: 9999;
+}
+
+.input-group-text-w-1 {
+  width: 130px;
+}
+
+.input-group .select2-container {
+  flex: 1;
+}
+
+.input-group .input-group-prepend~.select2-container .select2-selection--multiple {
+  border-radius: 0 .1875rem .1875rem 0;
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-0,
+.select2-selection--multiple .select2-selection__choice {
+	color:var(--neutral);
+  background-color:var(--light);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-1,
+.select2-selection--multiple.custom-color-1 .select2-selection__choice {
+	color:var(--danger);
+  background-color:var(--danger-light);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-2,
+.select2-selection--multiple.custom-color-2 .select2-selection__choice {
+	color:var(--warning);
+	background-color:var(--warning-light);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-3,
+.select2-selection--multiple.custom-color-3 .select2-selection__choice {
+	color:var(--success);
+	background-color:var(--success-light);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-4,
+.select2-selection--multiple.custom-color-4 .select2-selection__choice {
+	color:var(--secondary);
+	background-color:var(--secondary-light);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-5,
+.select2-selection--multiple.custom-color-5 .select2-selection__choice {
+	color:var(--purple);
+	background-color:var(--purple-light-1);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body):hover,
+.select2-selection--multiple .select2-selection__choice:hover {
+	color:#fff;
+	background-color:var(--neutral);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-1:hover,
+.select2-selection--multiple.custom-color-1 .select2-selection__choice:hover {
+	background-color:var(--danger);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-2:hover,
+.select2-selection--multiple.custom-color-2 .select2-selection__choice:hover {
+	background-color:var(--warning);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-3:hover,
+.select2-selection--multiple.custom-color-3 .select2-selection__choice:hover {
+	background-color:var(--success);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-4:hover,
+.select2-selection--multiple.custom-color-4 .select2-selection__choice:hover {
+	background-color:var(--secondary);
+}
+
+.bootstrap-tagsinput [class*="bg-"]:not(.bg-transparent):not(.bg-light):not(.bg-white):not(.btn-outline):not(body).bg-custom-color-5:hover,
+.select2-selection--multiple.custom-color-5 .select2-selection__choice:hover {
+	background-color:var(--purple);
+}
+
+.select2-selection--multiple .select2-search--inline .select2-search__field::placeholder {
+  color: #aaa;
+}
+
+.select2-selection--multiple .select2-search--inline .select2-search__field {
+  height: 100%;
+}
+
+.select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+  line-height: 0.8;
+}
+
+.tag-add-box-1 .select2-selection--multiple .select2-search--inline .select2-search__field {
+  height: auto;
+}
+
+/* ========================================
+   Multi-Select 기본 스타일 (정리된 버전)
+   ======================================== */
+
+/* Multi-Select 기본 컨테이너 */
+.multiselect-native-select {
+  position: relative;
+}
+
+/* Multi-Select 숨겨진 select 요소 */
+.multiselect-native-select select {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 0 !important;
+  left: 0;
+  top: 0;
+}
+
+/* Multi-Select 메인 버튼 */
+.multiselect {
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  text-align: left;
+  padding-left: 0.875rem;
+  padding-right: 2.375rem;
+  text-transform: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "NotoSans", "Noto Sans KR", sans-serif;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+/* Multi-Select 화살표 */
+.multiselect:after {
+  position: absolute;
+  top: 50%;
+  right: 0.875rem;
+  margin-top: -0.34375rem;
+  text-align: right;
+}
+
+/* Multi-Select 폰트 웨이트 */
+.multiselect:not([class*=font-weight-]) {
+  font-weight: 400;
+}
+
+/* Multi-Select 라이트 스타일 */
+.multiselect.btn-light {
+  background-color: #fff;
+  border-color: #ddd;
+}
+
+/* Multi-Select 호버/포커스 상태 */
+.multiselect.btn-light:hover,
+.multiselect.btn-light:focus,
+.multiselect.btn-light:not([disabled]):not(.disabled):active,
+.btn-group.show .multiselect.btn-light {
+  background-color: #fff;
+  box-shadow: 0 0 0 62.5rem rgba(0, 0, 0, 0.01) inset;
+}
+
+/* Multi-Select 비활성화 상태 */
+.multiselect.btn-light.disabled {
+  background-color: #fafafa;
+}
+
+/* Multi-Select 크기 변형 */
+.multiselect.btn-lg {
+  height: 34px;
+  line-height: 34px;
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+}
+
+.multiselect.btn-lg:after {
+  right: 1rem;
+}
+
+.multiselect.btn-sm {
+  height: 34px;
+  line-height: 34px;
+  padding-left: 0.75rem;
+  padding-right: 2.25rem;
+}
+
+.multiselect.btn-sm:after {
+  right: 0.75rem;
+}
+
+/* Multi-Select 드롭다운 컨테이너 */
+.multiselect-container {
+  max-height: 280px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* Multi-Select 아이템 내 체크박스/라디오 버튼 */
+.multiselect-item input[type=checkbox],
+.multiselect-item input[type=radio] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  margin-top: -0.625rem;
+  opacity: 0;
+  z-index: 2;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Multi-Select 아이템 비활성화 체크박스 */
+.multiselect-item input[type=checkbox]:disabled,
+.multiselect-item input[type=radio]:disabled {
+  cursor: default;
+}
+
+/* Multi-Select 체크박스 표시기 */
+.multiselect-item input[type=checkbox] ~ .form-check-control-indicator,
+.multiselect-item input[type=radio] ~ .form-check-control-indicator {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  margin-top: -0.625rem;
+  border: 2px solid #455a64;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Multi-Select 체크박스 스타일 */
+.multiselect-item input[type=checkbox] ~ .form-check-control-indicator {
+  color: #455a64;
+  border-radius: 0.125rem;
+  transition: border-color ease-in-out 0.15s, color ease-in-out 0.15s;
+}
+
+/* Multi-Select 체크박스 체크 표시 */
+.multiselect-item input[type=checkbox] ~ .form-check-control-indicator:after {
+  content: "\ed6e";
+  font-family: "icomoon";
+  font-size: 11px;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  line-height: 1;
+  opacity: 0;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: opacity ease-in-out 0.15s;
+}
+
+/* Multi-Select 라디오 버튼 스타일 */
+.multiselect-item input[type=radio] ~ .form-check-control-indicator {
+  border-radius: 100px;
+  transition: border-color ease-in-out 0.15s;
+}
+
+/* Multi-Select 라디오 버튼 체크 표시 */
+.multiselect-item input[type=radio] ~ .form-check-control-indicator:after {
+  content: "";
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  border: 0.3125rem solid;
+  border-color: inherit;
+  width: 0;
+  height: 0;
+  border-radius: 100px;
+  opacity: 0;
+  transition: all ease-in-out 0.15s;
+}
+
+/* Multi-Select 체크된 상태 */
+.multiselect-item input[type=checkbox]:checked ~ .form-check-control-indicator:after,
+.multiselect-item input[type=radio]:checked ~ .form-check-control-indicator:after {
+  opacity: 1;
+}
+
+/* 선택된 체크박스 배경색 */
+.multiselect-item input[type=checkbox]:checked ~ .form-check-control-indicator {
+  background-color: #fff;
+  border-color: #455a64;
+}
+
+/* Multi-Select 활성화 상태 */
+.multiselect-item.active:not(.disabled) input[type=checkbox] ~ .form-check-control-indicator {
+  border-color: #fff;
+  background-color: #455a64;
+  color: #fff;
+}
+
+.multiselect-item.active:not(.disabled) input[type=radio] ~ .form-check-control-indicator {
+  border-color: #fff;
+}
+
+/* Multi-Select 비활성화 상태 */
+.multiselect-item.disabled .form-check-control-indicator {
+  opacity: 0.5;
+}
+
+/* Multi-Select 드롭다운 메뉴 내 스타일 */
+.dropdown-menu[class*=bg-] .multiselect-item .form-check-control-indicator {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Multi-Select 그룹 헤더 */
+.multiselect-group {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.multiselect-group:first-child {
+  margin-top: 0;
+}
+
+.multiselect-group label {
+  margin-bottom: 0;
+}
+
+.multiselect-group.disabled {
+  color: #999;
+  cursor: default;
+}
+
+/* Multi-Select 전체 선택 */
+.multiselect-all {
+  font-weight: 500;
+}
+
+/* Multi-Select 클릭 가능한 그룹 */
+.multiselect-group-clickable label {
+  cursor: pointer;
+}
+
+/* Multi-Select 라벨 폰트 사이즈 */
+.multiselect-container .form-check-label {
+  font-size: 13px;
+}
+
+/* Multi-Select 선택된 텍스트 폰트 사이즈 */
+.multiselect .multiselect-selected-text {
+  font-size: 13px;
+}
+
+/* Multi-Select 필터 */
+.multiselect-filter {
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.multiselect-filter .input-group > i {
+  font-size: 13px;
+  position: absolute;
+  left: 0.9375rem;
+  top: 50%;
+  margin-top: -0.40625rem;
+  opacity: 0.5;
+  z-index: 4;
+}
+
+.multiselect-filter .form-control {
+  padding-left: 2.5625rem;
+}
+
+/* Multi-Select 입력 그룹 */
+.input-group .multiselect-native-select {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.input-group .multiselect-native-select:not(:first-child) .multiselect {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group .multiselect-native-select:not(:last-child) .multiselect {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}

@@ -1,0 +1,70 @@
+/**
+ * Alopex UI v3.0.16
+ * https://ui.alopex.io
+ *
+ * Copyright (c) 2020 SK Holdings C&C. All rights reserved.
+ * 
+ * This software is the confidential and proprietary information of SK Holdings C&C
+ * You shall not disclose such confidential information and shall use it only in
+ * accordance with the terms of the license agreement you entered into with SK Holdings C&C.
+ *
+ * Date : 2020-11-12 15:01:33 GMT+0900 (대한민국 표준시)
+ **/
+/* CSS for the traditional context menu */
+.Wf-contextMenu {
+  z-index: 300;
+  position: absolute;
+  left: 5px;
+  border: 1px solid #444;
+  background-color: #F5F5F5;
+  display: none;
+  box-shadow: 0 0 10px rgba( 0, 0, 0, .4 );
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.Wf-contextMenu ul {
+  list-style: none;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+.Wf-contextMenu li a {
+  position: relative;
+  min-width: 60px;
+  color: #444;
+  display: inline-block;
+  padding: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.Wf-contextMenu li:hover {
+  background: #CEDFF2;
+  color: #EEE;
+}
+.Wf-contextMenu li ul li {
+  display: none;
+}
+.Wf-contextMenu li ul li a {
+  position: relative;
+  min-width: 60px;
+  padding: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.Wf-contextMenu li:hover ul li {
+  display: block;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+.Wf-overview {
+  position: absolute;
+  width:200px;
+  height:100px;
+  top: 10px;
+  left: 10px;
+  background-color: aliceblue;
+  z-index: 300; /* make sure its in front */
+  border: solid 1px blue;
+}

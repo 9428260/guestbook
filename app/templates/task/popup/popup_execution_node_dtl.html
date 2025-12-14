@@ -1,0 +1,70 @@
+{% extends "common_popup.html" %}
+{% block page_resource %}
+<script src="{{ url_for('static', filename='js/task/popup/popup_execution_node_dtl.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="popup-contents">
+    <p class="popup-text">노드별 태스크 실행의 상세 정보를 확인할 수 있습니다.</p>
+    <div id="base_info" class="table_wrap">
+        <div class="btn-right">
+            <div class="tip_btn">
+                <button id="btn_refresh" class="Button btn-ico btn-refresh"></button>
+                <div class="Tooltip" data-position="left">결과 재조회</div>
+            </div>
+        </div>
+        <div class="con_title">
+            <h3 class="sub-title">노드 실행 정보</h3>
+        </div>
+        <table class="Table Form-type">
+            <colgroup>
+                <col class="w150px">
+                <col class="wAuto">
+                <col class="w150px">
+                <col class="wAuto">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>노드세션 ID</th>
+                <td></td>
+                <th>상태</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Hostname</th>
+                <td></td>
+                <th>결과</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>IP 주소</th>
+                <td></td>
+                <th>시작일시</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>실행계정</th>
+                <td></td>
+                <th>종료일시</th>
+                <td>-</td>
+            </tr>
+            <tr>
+                <th>표준출력</th>
+                <td colspan='3'><textarea id="stdout" name="stdout" class='Textarea font-ngc' rows='14' style="resize: none;" readonly>
+                </textarea></td>
+            </tr>
+            <tr>
+                <th>표준에러</th>
+                <td colspan='3'><textarea id="stderr" name="stderr" class='Textarea font-ngc' rows='14' style="resize: none;" readonly>
+                </textarea></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--button-->
+    <div class="popup-btn_wrap">
+        <button id="btn_close" name="btn_close" class="Button btn">닫기</button>
+    </div>
+    <!--//button-->
+</div>
+{% endblock %}

@@ -1,0 +1,2753 @@
+/**
+ * Alopex Grid v3.12.19
+ * http://grid.alopex.io
+ *
+ * Copyright (c) 2020 SK Holdings C&C. All rights reserved.
+ * 
+ * This software is the confidential and proprietary information of SK Holdings C&C.
+ * You shall not disclose such confidential information and shall use it only in
+ * accordance with the terms of the license agreement you entered into with SK Holdings C&C.
+ *
+ * Date : 2020-10-15 10:20:34 GMT+0900 (대한민국 표준시)
+ **/
+@charset "UTF-8";
+/* 외부에서 vertical-align을 재 정의하거나 특정 값으로 reset하려 하는 경우 default value로 복원.
+상황에 따라 제거 가능. */
+.alopexgrid,
+.alopexgrid * {
+	/* vertical-align:baseline; */
+	box-sizing: border-box;
+	font-size: 12px;
+	font-family: Arial, "돋움", "돋움체", dotum, sans-serif;
+}
+
+/* 그리드의 내부 요소는 그리드 루트 div태그로부터 position relative로 사용.
+필요에 따라 border 정의 */
+.alopexgrid {
+	position: relative;
+	/* border-top:1px solid #edecf1;
+	border-bottom:1px solid #edecf1; */
+	cursor: default;
+}
+
+/* wrapCellContent 사용시 width, height를 잡아줘야 rowDragDrop 핸들이 보이게 된다.*/
+.alopexgrid .cell-content {
+	width: 100%;
+	height: 100%;
+}
+
+/* 옵션 설정에 따라 텍스트 선택을 막아야 하는 상황(셀을 드래그하여 블락선택)에서 추가되는 클래스 */
+.alopexgrid .text-selection-disabled,
+.alopexgrid .wrapper.text-selection-disabled {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* option.title을 사용할 때 사용되는 최 상단 클래스. 그리드 상단에 위치한다. */
+.alopexgrid .title {
+	position: relative;
+	overflow: hidden;
+	height: 45px;
+}
+
+/* option.title에 정의된 텍스트 타이틀의 스타일링. */
+.alopexgrid .title .title-label {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 24px;
+	line-height: 33px;
+}
+
+/* option.title에 의한 커스텀 마크업 영역. .title 내에 위치할 수 있도록 함. */
+.alopexgrid .title .title-markuparea {
+	float: right;
+	height: 100%;
+	margin-top: 10px;
+	margin-left: 10px;
+	line-height: 38px;
+}
+
+/* fold 가능한 그리드를 위한 fold 토글 버튼. fold되면 타이틀만 남고 나머지 영역이 사라진다. */
+.alopexgrid .title .table-toggle {
+	float: right;
+	cursor: pointer;
+	width: 19px;
+	height: 100%;
+	background: url("grid/grid_white.png") no-repeat -83px -368px;
+}
+
+/* 그리드가 타이틀 버튼에 의해 접힌 상태에서는 안의 내용을 보일 필요가 없다 */
+.alopexgrid.folded {
+	overflow: hidden;
+}
+
+/* fold된 상태에서의 버튼 */
+.alopexgrid.folded .title .table-toggle {
+	background: url("grid/grid_white.png") no-repeat -155px -368px;
+}
+
+/* option.hiddenColumnArea를 사용할 때 사용되는 최상단 클래스. 그리드 타이틀 아래 위치한다. */
+.alopexgrid .columnhiddenarea {
+	position: relative;
+	overflow-x: auto;
+	overflow-y: hidden;
+	margin-bottom: 4px;
+	height: 48px;
+	background: #e5f7fe;
+	border: 1px solid #e5f7fe;
+}
+
+/* hiddenColumnArea에 헤더를 올려놨을때 적용되는 스타일 v3.9.0+ */
+.alopexgrid .columnhiddenarea.focused {
+	border: 1px dotted #00aef0;
+	background: #e5f7fe;
+}
+
+/* option.columnHideByDragdrop에 정의된 텍스트 타이틀의 스타일링. */
+.alopexgrid .columnhiddenarea .columnhiddenarea-label {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 13px;
+	line-height: 13px;
+}
+
+.alopexgrid .columnhiddenarea .headercell {
+	position: absolute;
+	min-width: 100px;
+	height: 28px;
+	line-height: 32px;
+	margin: 10px 6px;
+	/* v3.7.5- deprecated 그라데이션 제거 */
+	/*background: -ms-linear-gradient(#61676b, #61676b);
+	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#61676b', endColorstr='#61676b',GradientType=0);*/
+	background: #ffffff;
+	border: 1px solid #999999;
+}
+
+.alopexgrid .columnhiddenarea .headercell .alopexgrid-input-checkbox-wrapper:after {
+	top: 0px;
+	/*bottom: 0;*/
+}
+
+.alopexgrid .columnhiddenarea .headercell .header-dragdrop-handle {
+	position: absolute;
+	cursor: move;
+	top: 4px;
+	left: 4px;
+	/* v3.8.0- deprecated */
+	/*cursor:url("grid/drag.cur"), url("grid/drag.png"), move;*/
+	width: 10px;
+	height: 25px;
+	background: url("grid/draghandler_white.png") no-repeat;
+}
+
+.alopexgrid .columnhiddenarea .headercell .column-title {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 5px;
+	margin-top: 0;
+	line-height: 120%;
+}
+
+/* hiddenColumnArea에서 드래그할 때는 border가 나타나지 않게 함 v3.9.0+ */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .columnhiddenarea {
+	border: none;
+}
+
+/* hiddenColumnArea에서 드래그드롭 중인 헤더에 대한 별도 디자인이 필요한 경우 사용 */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .columnhiddenarea.wrapper {
+	background: transparent;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .columnhiddenarea.wrapper .headercell {
+	margin: 0;
+	color: #333333;
+	background: #ffffff;
+	border: 1px solid #999999;
+	-webkit-box-shadow: 3px 3px 0 #cccccc;
+	-moz-box-shadow: 3px 3px 0 #cccccc;
+	box-shadow: 3px 3px 0 #cccccc;
+}
+
+/* 드래그드랍으로 넣을 수 없는 컬럼인 경우 디자인 */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .columnhiddenarea.wrapper .headercell {
+	background: #e0e0e0;
+	border-color: #acacac;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .columnhiddenarea.wrapper .headercell:before {
+	display: block;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 18px;
+	height: 18px;
+	margin-top: -9px;
+	margin-left: -9px;
+	background: url("grid/nodrop.png") no-repeat;
+}
+
+/* 그리드를 구성하는 모든 셀과 스크롤 요소는 .wrapper 클래스 내에 위치하게 된다. 
+외부 색상의 영향을 받지 않도록 기본 색성을 #FFFFFF로 지정 */
+.alopexgrid .wrapper {
+	position: relative;
+	overflow: hidden;
+	background: #ffffff;
+	border-collapse: collapse;
+	border: 0;
+}
+
+/* 클릭에 의한 데이터 정렬과 같이 작업시간이 길어지는 작업이 발생하게 되면 progress를 띄워주게 됨. 그때 사용 한다. 단 로딩바가 텍스트인 경우*/
+.alopexgrid .progress {
+	position: absolute;
+	top: 50%;
+	left: 43%;
+	width: 160px;
+	height: 22px;
+	margin: 0;
+	vertical-align: middle;
+	text-align: center;
+	color: #ffffff;
+	line-height: 20px;
+	background: #424644;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	border-radius: 20px;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-khtml-opacity: 0.8;
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+}
+
+/* 필터링 그리드의 프로그래스바 위치 조정 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .progress {
+	left: 10%;
+}
+
+/* 클릭에 의한 데이터 정렬과 같이 작업시간이 길어지는 작업이 발생하게 되면 progress를 띄워주게 됨. 그때 사용 */
+.alopexgrid .progress.image {
+	position: absolute;
+	width: 92px;
+	height: 92px;
+	top: 40%;
+	left: 46%;
+	margin: 0;
+	text-align: center;
+	vertical-align: middle;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-khtml-opacity: 0.8;
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+	background: url("grid/loading.png") no-repeat;
+}
+
+/* 필터링 그리드의 프로그래스바(이미지) 위치 조정 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .progress.image {
+	left: 10%;
+}
+
+/* 프로그레스 엘리먼트를 띄운 상태에서는 셀 영역이 리프레시 될 때 까지 셀에 대한 interaction이 
+차단되어야 한다. .modal클래스를 가지는 div태그가 그 역할을 하게 된다. */
+.alopexgrid .modal {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+/**
+ * 셀 디자인 영역
+ */
+/* 모든 그리드 셀은 이 클래스를 가짐. columnMapping.styleclass 와 같은 기능에 의해
+적용되는 단일 클래스 셀렉터가 정상 적용될 수 있도록 셀의 기본 색상은 여기에 지정한다.
+기본색상이 없을 경우 고정컬럼 등 사용시 뒤에 겹쳐진 셀이 보이게 된다. */
+.alopexgrid .alopexgrid-cell {
+	background-color: transparent;
+}
+
+.alopexgrid .bodycell.alopexgrid-cell {
+	/* none */
+}
+
+/* 우하단 border 생성을 기본으로 한다. 전체 border를 생성하고자 할 경우
+위아래 또는 좌우셀이 함께 보이면서 보더가 2px로 보이거나 할 수 있으므로
+상하좌우 모두 보더를 사용하고자 할 경우 색상배합에 주의.
+여기에 명시된 height 값은 그리드의 행갯수 기반 높이정의 등에서 사용되는 높이가 됨. */
+.alopexgrid .cell {
+	position: absolute;
+	overflow: hidden;
+	padding: 0px 3px;
+	white-space: nowrap;
+	height: 25px;
+	border-right: 1px solid #ecebf0;
+	border-bottom: 1px solid #ecebf0;
+	border-left: 0;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+/*bodycell의 첫번째 cell에 추가되는 클래스 */
+.alopexgrid .cell.bodycell.cell-firstcolumn {
+	/* none */
+}
+
+/*bodycell의 마지막 cell에 추가되는 클래스 */
+.alopexgrid .cell.bodycell.cell-lastcolumn {
+	border-right: 0;
+}
+
+/* 필터링 기능이 없는 셀에서 border가 보이지 않게 할 경우 */
+.alopexgrid .cell.filtercell {
+	border: none;
+}
+
+/* body cell과 기타 공통 */
+/* 한줄 텍스트가 세로 가운데 정렬이 되도록 조정한다. */
+.alopexgrid .bodycell {
+	line-height: 25px;
+	color: #454545;
+}
+
+/*nodatacell*/
+.alopexgrid .nodatacell .emptycell-message {
+	display: block;
+	margin-top: 4px;
+	text-align: center;
+}
+
+/*nodatacell의 오른쪽 border에 대한 스타일 */
+.alopexgrid .nodatacell {
+	border-right: 0;
+}
+
+/* columnMapping.align에 의한 좌우 정렬표현 */
+.alopexgrid .cell.align-left {
+	text-align: left;
+}
+
+.alopexgrid .cell.align-center {
+	text-align: center;
+}
+
+.alopexgrid .cell.align-right {
+	text-align: right;
+}
+
+.alopexgrid .multicell.align-left {
+	text-align: left;
+}
+
+.alopexgrid .multicell.align-center {
+	text-align: center;
+}
+
+.alopexgrid .multicell.align-right {
+	text-align: right;
+}
+
+/* option.ellipsisText=true 일 때 바디셀에는 이 클래스가 적용된다. */
+.alopexgrid .cell-ellipsis-text {
+	text-overflow: ellipsis;
+}
+
+/* 홀수행 짝수행을 의미하는 클래스가 존재한다. */
+.alopexgrid .row-even {
+	background: rgba(200, 200, 200, 0.1);
+}
+
+.alopexgrid .row-odd {
+	/* none */
+}
+
+.alopexgrid .cell-hoveringrow {
+	background-color: #e3e3e3;
+}
+
+/* dataPin(), rowFix(), option.rowFixCount에 의해 고정된 셀의 디자인 */
+.alopexgrid .cell.bodycell.cell-fixrow {
+	background-color: #f2f2f3;
+	border: 0;
+}
+
+/* grouping 된 셀의 디자인 */
+.alopexgrid .cell.bodycell.cell-grouping {
+	background-color: #f3f3f3;
+}
+
+/* 가장 마지막 고정행은 필요에 따라 일반 스크롤가능 바디부분과 구분을 위한 디자인이 필요할 수 있다. */
+.alopexgrid .bodycell.cell-fixrow.cell-fixrow-lastrow {
+	border-bottom: 1px solid #d4d6da;
+}
+
+/* selectorColumn 또는 rowSelect()에 의해 선택된 데이터에 대한 스타일링 */
+.alopexgrid .cell.bodycell.selected {
+	color: #454545;
+	background-color: #caeefb;
+	/* selected 시 line이 있기를 요청한 경우 사용한다.
+	border-bottom: 1px solid #bfaaa9;
+	border-top: 1px solid #bfaaa9;
+	margin-top: -1px !important; */
+}
+
+/* 선택된 행 바로 위에 있는 행 스타일링 */
+.alopexgrid .cell.bodycell.selected.nextrow-selected {
+	/* selected 시 line이 있기를 요청한 경우 사용한다.
+	border-bottom: 1px solid #bfaaa9; */
+	background-color: #caeefb;
+}
+
+/* 선택된 행 바로 아래에 있는 행 스타일링 */
+.alopexgrid .cell.bodycell.selected.prevrow-selected {
+	/* selected 시 line이 있기를 요청한 경우 사용한다.
+	border-top:0px;
+	line-height: 27px; */
+	background-color: #caeefb;
+}
+
+/* 현재 데이터의 다음 행이 선택된 상태인 경우 추가되는 클래스. 보더를 이용한 선택상태 표현시 사용한다. */
+.alopexgrid .nextrow-selected {
+	/* none */
+}
+
+.alopexgrid .nextrow-selected.selected {
+	/* none */
+}
+
+/* 현재 데이터의 이전 행이 선택된 상태인 경우 추가되는 클래스. 보더를 이용한 선택상태 표현시 사용한다. */
+.alopexgrid .prevrow-selected {
+	/* none */
+}
+
+.alopexgrid .prevrow-selected.selected {
+	/* none */
+}
+
+/* 삭제된 데이터를 의미하는 셀은 다른 색상보다 우선하여 어두운 색상을 표현하게 된다. */
+.alopexgrid .cell.bodycell.deleted {
+	text-decoration: line-through;
+	color: #ababac;
+	background-color: #ecebf0;
+}
+
+/* 데이터 삭제시 selected 가 우선 된다. 삭제의 의미인 line-throuth를 남겨두고 selected의 스타일을 적용한다. */
+.alopexgrid .cell.bodycell.deleted.selected {
+	background-color: #caeefb;
+}
+
+/* option.cellSelectable 옵션에 의해 개별 셀 선택이 활성화 되었을 때 선택된 셀의 디자인 */
+.alopexgrid .cell-selected {
+	color: #454545;
+	background-color: #cceffb;
+	border: 0;
+}
+
+.alopexgrid .cell-selected.cell-selected-topline {
+	border: 0;
+}
+
+.alopexgrid .cell-selected.cell-selected-bottomline {
+	border-bottom: 1px solid #e1e2e5;
+}
+
+.alopexgrid .cell-selected.cell-selected-leftline {
+	border: 0;
+}
+
+.alopexgrid .cell-selected.cell-selected-leftline.cell-selected-bottomline {
+	border-bottom: 1px solid #e1e2e5;
+	box-sizing: border-box;
+}
+
+.alopexgrid .cell-selected.cell-selected-rightline {
+	border-right: 1px solid #e1e2e5;
+}
+
+/* option.cellSelectable 옵션에 의해 개별 셀 선택이 활성화 되었을 때 메인 포커스가 가있는 셀의 디자인 */
+.alopexgrid .cell-selected-focus {
+	background-color: #cceffb;
+}
+
+.alopexgrid .cell-selected-focus.cell-selected-topline, .alopexgrid .cell-selected-focus.cell-selected-bottomline, .alopexgrid .cell-selected-focus.cell-selected-rightline, .alopexgrid .cell-selected-focus.cell-selected-leftline {
+	/*none*/
+}
+
+.alopexgrid .cell-selected-focus.cell-selected-topline {
+	line-height: 25px;
+}
+
+.alopexgrid .cell-selected-topline {
+	line-height: 23px;
+	box-sizing: border-box;
+}
+
+.alopexgrid .cell-selected-bottomline {
+	box-sizing: border-box;
+}
+
+.alopexgrid .cell-selected-rightline {
+	box-sizing: border-box;
+}
+
+.alopexgrid .cell-selected-leftline {
+	box-sizing: border-box;
+}
+
+/* editable이 아닌 컬럼에 선택 포커스가 갔을 때의 색상 */
+.alopexgrid .cell-selected-focus.cell-ui-noneditable {
+	background-color: #e1e2e6;
+	color: #aaabaf;
+}
+
+.alopexgrid .cell.bodycell.added {
+	/* none */
+}
+
+/* 행에서 하나 이상의 셀에 편집이 걸려있으면 editing 클래스를 가진다. */
+.alopexgrid .cell.bodycell.editing {
+	/* none */
+}
+
+.alopexgrid .cell.bodycell.edited {
+	/* none */
+}
+
+.alopexgrid .cell.bodycell.added {
+	/* none */
+}
+
+.alopexgrid .cell.bodycell.focused {
+	/* none */
+}
+
+/* startCellEdit API 또는 cellInlinEdit 옵션에 의해
+셀단위 편집이 걸리게 되면 해당 셀은 editingcell의 클래스를 가지게 된다. */
+.alopexgrid .editingcell {
+	/* none */
+}
+
+/**
+ * 편집/비편집에 따른 셀의 컨텐츠 디자인. 편집 컴포넌트라도 readonly로 읽기전용 값을 그리는데 사용될 수 있다.
+ */
+/* columnMapping editable이 적용되는 셀에 추가되는 클래스. */
+.alopexgrid .cell-ui-editable {
+	/* none */
+}
+
+/* columnMapping editable이 적용되지 않는 셀에 추가되는 클래스 */
+.alopexgrid .cell-ui-noneditable {
+	/* none */
+}
+
+/*multisel에 대한 디자인 */
+.alopexgrid .cell-multi-column .multicell {
+	border-bottom: 1px solid #ecebf0;
+}
+
+.alopexgrid .cell-multi-column .multicell.multicell-lastrow {
+	border-bottom: 0;
+}
+
+/**
+ * {columnIndex:0, render:{type:"text"}, editable:{type:"select",...}} 와 같은 유형에 대한
+ * default 디자인 영역.
+ */
+/* {type:"text"} 형태로 렌더링된 편집셀의 input 엘리먼트 디자인 */
+.alopexgrid input[type="text"].alopexgrid-default-renderer {
+	border: 1px solid #a9a9a9;
+}
+
+.alopexgrid input[type="text"].alopexgrid-default-renderer:hover,
+.alopexgrid input[type="text"].alopexgrid-default-renderer:focus {
+	border: 1px solid #00aef0;
+	background: #ffffff;
+}
+
+.alopexgrid input[type="text"].alopexgrid-default-renderer.disabled {
+	color: #727272;
+}
+
+/* {type:"checkbox"} 형태로 렌더링된 편집셀의 input 엘리먼트 디자인 */
+.alopexgrid input[type="checkbox"].alopexgrid-default-renderer {
+	/* none */
+}
+
+/* {type:"radio"} 형태로 렌더링된 편집셀의 input 엘리먼트 디자인 */
+.alopexgrid input[type="radio"].alopexgrid-default-renderer {
+	/* none */
+}
+
+/* {type:"textarea"} 형태로 렌더링된 편집셀의 textarea 엘리먼트 디자인 */
+.alopexgrid textarea.alopexgrid-default-renderer {
+	width: 100%;
+	height: 99%;
+	resize: none;
+}
+
+.alopexgrid textarea.alopexgrid-default-renderer.disabled {
+	color: #727272;
+}
+
+/* {type:"string"} 형태로 렌더링된 셀의 span 엘리먼트 디자인 */
+.alopexgrid span.alopexgrid-default-renderer {
+	/* none */
+}
+
+/* {type:"select"} 형태로 렌더링된 셀의 selectbox 엘리먼트 디자인 */
+.alopexgrid select.alopexgrid-default-renderer {
+	/* none */
+}
+
+/* {type:"href"} 형태로 렌더링된 셀의 a 엘리먼트 디자인 */
+.alopexgrid a.alopexgrid-default-renderer {
+	position: relative;
+}
+
+/* 또는 아래와 같이 .cell-type-"type" 형태의 클래스를 이용하여 내부에 그려지는 엘리먼트의 디자인을 정의할 수 있다
+커스텀 렌더링도 {type:"customtype"} 형태로 mapping.render/editable을 정의하면 아래의 형식으로
+셀렉터를 명시하여 내부 디자인을 수행할 수 있다. */
+.alopexgrid .cell-type-text input[type="text"] {
+	max-width: 100%;
+	width: 100%;
+}
+
+.alopexgrid .cell-type-checkbox .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper {
+	color: #666666;
+}
+
+.alopexgrid .cell-type-checkbox .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:after {
+	left: 2px;
+	bottom: 1px;
+}
+
+.alopexgrid .cell-type-checkbox .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper .alopexgrid-default-renderer {
+	margin-left: 0;
+}
+
+.alopexgrid .cell-type-radio input {
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+
+.alopexgrid .cell-type-textarea textarea {
+	/* none */
+}
+
+.alopexgrid .cell-type-string span {
+	/* none */
+}
+
+.alopexgrid .cell-type-newcheckbox .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper {
+	color: #666666;
+}
+
+.alopexgrid .cell-type-newcheckbox .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:after {
+	left: 2px;
+	bottom: 1px;
+}
+
+.alopexgrid .cell-type-newcheckbox .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper .alopexgrid-default-renderer {
+	margin-left: 0;
+}
+
+/* columnMapping.highlight 옵션을 사용하게 되면 아래의 클래스가 기본으로 추가된다. */
+.alopexgrid .cell.cell-highlight {
+	background-color: #e0ffff;
+}
+
+/**
+ * 헤더 셀을 위한 디자인
+ */
+/* 헤더셀 기본 디자인 */
+.alopexgrid .headercell {
+	text-align: center;
+}
+
+.alopexgrid .headercell,
+.alopexgrid .headercell.cell-header-lastrow.cell-header-firstrow {
+	height: 30px;
+	line-height: 26px;
+	font-weight: normal;
+	color: #333333;
+	background: #ffffff;
+	border-top: 1px solid #d4d6da;
+	border-right: 1px solid #f1f1f3;
+	border-bottom: 2px solid #d4d6da;
+}
+
+/* 헤더셀 마지막 cell의 스타일 */
+.alopexgrid .headercell.cell-lastcolumn,
+.alopexgrid .headercell.cell-header-lastrow.cell-header-firstrow.cell-lastcolumn {
+	border-right: 0;
+}
+
+.alopexgrid .column-title {
+	display: inline-block;
+	line-height: 100%;
+	margin: 5px;
+	vertical-align: middle;
+	font-size: 12px;
+}
+
+/* Header Group colspan별 디자인*/
+.alopexgrid .header-group[data-alopexgrid-columndepth="0"] {
+	color: #333333;
+	background: #ffffff;
+	border-bottom: 1px solid #d4d6da;
+}
+
+.alopexgrid [data-alopexgrid-columndepth="1"],
+.alopexgrid .header-group[data-alopexgrid-columndepth="1"],
+.alopexgrid .header-group.cell-header-lastrow[data-alopexgrid-columndepth="1"] {
+	color: #333333;
+	border-top: 0;
+	border-bottom: 1px solid #d4d6da;
+	background: #ffffff;
+}
+
+.alopexgrid [data-alopexgrid-columndepth="2"],
+.alopexgrid .header-group[data-alopexgrid-columndepth="2"],
+.alopexgrid .header-group.cell-header-lastrow[data-alopexgrid-columndepth="2"] {
+	color: #333333;
+	border-top: 0;
+	border-bottom: 1px solid #d4d6da;
+	background: #ffffff;
+}
+
+.alopexgrid [data-alopexgrid-columndepth="3"],
+.alopexgrid .header-group[data-alopexgrid-columndepth="3"],
+.alopexgrid .header-group.cell-header-lastrow[data-alopexgrid-columndepth="3"] {
+	color: #333333;
+	border-top: 0;
+	border-bottom: 1px solid #d4d6da;
+	background: #ffffff;
+}
+
+.alopexgrid .cell-header-lastrow[data-alopexgrid-columndepth="1"],
+.alopexgrid .cell-header-lastrow[data-alopexgrid-columndepth="2"],
+.alopexgrid .cell-header-lastrow[data-alopexgrid-columndepth="3"] {
+	border-bottom: 2px solid #d4d6da;
+}
+
+/* option.enableHeaderSelect 옵션에 의해 선택된 헤더셀 디자인 */
+.alopexgrid .header-selected {
+	background-color: #cceffb;
+}
+
+/* header-select 디자인 */
+.alopexgrid .cell.headercell.header-selected {
+	background: #cceffb;
+	color: #333333;
+}
+
+/* 정렬가능 헤더셀은 sorting 클래스를 가진다 */
+.alopexgrid .click-sortable {
+	cursor: pointer;
+}
+
+/* 정렬 방향을 표시하기 위한 요소는 셀 내부에 sorting-handle클래스를 가지는 div 태그로 표현된다. */
+.alopexgrid .sorting .sorting-handle {
+	position: absolute;
+	right: 10px;
+	/* bottom:35%; */
+	width: 5px;
+	height: 10px;
+	background: url("grid/grid_sorting_white.png") no-repeat 0 0;
+}
+
+/* 정렬 방향이 오름차순일 때의 표현 */
+.alopexgrid .sorting.asc .sorting-handle {
+	background: url("grid/grid_sorting_asc_white.png") no-repeat 0 0;
+}
+
+/* 정렬 방향이 내림차순일 때의 표현 */
+.alopexgrid .sorting.desc .sorting-handle {
+	background: url("grid/grid_sorting_desc_white.png") no-repeat 0 0;
+}
+
+/* 다중 정렬 순서를 표현 */
+.alopexgrid .sorting .sorting-handle .multi-sorting-order {
+	position: absolute;
+	bottom: -3px;
+	left: 7px;
+	font-size: 9px;
+	font-weight: normal;
+	color: #0099ff;
+}
+
+/* 헤더 드래그 앤 드롭 핸들 */
+.alopexgrid .headerdragdrop .header-dragdrop-handle {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	cursor: move;
+	/* v3.8.0- deprecated */
+	/*cursor: url("grid/drag.cur"), url("grid/drag.png"), move;*/
+	width: 6px;
+	height: 100%;
+	background: url("grid/draghandler_white.png") no-repeat;
+}
+
+.alopexgrid .selector-column.headerdragdrop .header-dragdrop-handle {
+	background: url("grid/draghandler_white.png") no-repeat 0 0;
+}
+
+/* 헤더 드래그 앤 드롭으로 위치가 바뀌는 셀들이 어디에 들어갈 것인가를 표현하기 위한 선 */
+.alopexgrid .alopexgrid-dragdrop-header-indicator {
+	position: absolute;
+	height: 200%;
+	left: -1px;
+	top: 0px;
+	border-left: 1px dotted #00afed;
+}
+
+/* 헤더 드래그 앤 드롭 불가능한 컬럼에 대한 스타일 */
+.alopexgrid .alopexgrid-dragdrop-header-indicator.disabled {
+	background: #ecebf0;
+	border-color: #acacac;
+}
+
+.alopexgrid.alopexgrid-proxy {
+	/*opacity:0.9;*/
+}
+
+/* 헤더 드래그 앤 드롭되는 헤더의 디자인. 마크업은 기본적으로 그리드 밖에 위치하게 된다. */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header {
+	cursor: move;
+	position: absolute;
+	-webkit-transform: translate(5px, 10px);
+	-moz-transform: translate(5px, 10px);
+	-ms-transform: translate(5px, 10px);
+	-o-transform: translate(5px, 10px);
+	transform: translate(5px, 10px);
+}
+
+/* 헤더 드래그 앤 드롭 중인 헤더에 대한 별도 디자인이 필요한 경우 사용 */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .cell {
+	padding: 0 2px;
+	background-color: #ffffff;
+	border-top: 1px solid #dddddd;
+	border-right: 1px solid #999999;
+	border-bottom: 0;
+	border-left: 1px solid #999999;
+	-webkit-box-shadow: 3px 3px 0 #cccccc;
+	-moz-box-shadow: 3px 3px 0 #cccccc;
+	box-shadow: 3px 3px 0 #cccccc;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .cell.headercell {
+	color: #333333;
+	background: #ffffff;
+	border-top: 1px solid #999999;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #d4d6da;
+	border-left: 1px solid #999999;
+	-webkit-box-shadow: 3px 0 0 #cccccc;
+	-moz-box-shadow: 3px 0 0 #cccccc;
+	box-shadow: 3px 0 0 #cccccc;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .cell:first-child {
+	border-top: 0;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header .cell:last-child {
+	border-bottom: 1px solid #999999;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .cell {
+	background: #ecebf0;
+	border-color: #acacac;
+}
+
+/* 헤더 드래그 앤 드롭으로 넣을 수 없는 컬럼인 경우 디자인 */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .cell.headercell {
+	color: #525252;
+	border: 1px solid #acacac;
+	background: #ecebf0 url("grid/nodrop.png") center center no-repeat;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .cell.headercell:before {
+	display: block;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 18px;
+	height: 18px;
+	margin-top: -9px;
+	margin-left: -9px;
+	background: url("grid/nodrop.png") no-repeat;
+}
+
+/* 컬럼 너비를 리사이징 할 때 사용하는 핸들 디자인 */
+.alopexgrid .column-resizing-handle {
+	cursor: col-resize;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	/* v3.8.0- deprecated */
+	/*cursor:url("grid/coldrag.cur"), url("grid/coldrag.png"), col-resize;*/
+	width: 8px;
+	height: 16px;
+	background: url("grid/grid_resizing_white.png") no-repeat 2px 10px;
+}
+
+/*선택 colume일 경우 */
+.alopexgrid .cell-header-firstrow.selector-column .column-resizing-handle {
+	cursor: col-resize;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	/* v3.8.0- deprecated */
+	/*cursor:url("grid/coldrag.cur"), url("grid/coldrag.png"), col-resize;*/
+	width: 8px;
+	height: 16px;
+	background: url("grid/grid_resizing_white.png") no-repeat 2px 10px;
+}
+
+/* 컬럼 너비를 리사이징 할 때 띄워주는 컬럼너비 표시 점선에 대한 디자인 */
+.alopexgrid .column-resize-align {
+	position: absolute;
+	border-left: 1px solid #00aef0;
+}
+
+.alopexgrid .column-resize-align.disabled {
+	border-left: 1px solid #acacac;
+}
+
+/* 행의 원래 높이를 표현하기 위한 기준선 */
+.alopexgrid .column-resize-align.resize-align-reference {
+	border: 1px dashed #afafaf;
+}
+
+/* 헤더에 표시되는 필터링 셀 디자인 */
+.alopexgrid .headercell.filtercell {
+	text-align: center;
+	background: #ffffff;
+	border-right: 1px solid #f1f1f3;
+	border-bottom: 1px solid #f1f1f3;
+	border-left: 0;
+}
+
+/* 헤더에 표시되는 필터링 마지막 셀 디자인 */
+.alopexgrid .headercell.cell-header-firstrow.cell-lastcolumn + .headercell.cell-header-lastrow.filtercell {
+	border-right: 0;
+}
+
+/* 헤더에 표시되는 필터링 셀의 아이콘과 드롭다운 메뉴에 대한 디자인 */
+.alopexgrid .filter-cell-unit {
+	line-height: 32px;
+}
+
+/* option.filteringHeader 기능을 사용할 때 그리드 헤더 아래에 생기는 필터링 버튼에 대한 스타일 (필터링 되지 않은 상태) */
+.alopexgrid .filter-cell-unit .alopexgrid-filter-dropdownbutton {
+	cursor: pointer;
+	width: 14px;
+	height: 14px;
+	max-width: 20px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: url("grid/grid_white.png") no-repeat 1px -246px;
+}
+
+.alopexgrid .filter-cell-unit .alopexgrid-filter-dropdownbutton:hover {
+	border: 0;
+	width: 14px;
+	height: 14px;
+	background: url("grid/grid_white.png") no-repeat -30px -246px;
+}
+
+/* option.filteringHeader 기능을 사용할 때 그리드 헤더 아래에 생기는 필터링 버튼에 대한 스타일 (필터링 된 상태) */
+.alopexgrid .filter-cell-unit .alopexgrid-filter-dropdownbutton.filtered {
+	width: 14px;
+	height: 14px;
+	border: 0;
+	background: url("grid/grid_white.png") no-repeat -30px -246px;
+}
+
+/* 헤더에 표시되는 컬럼 그룹접기(그룹 showCol/hideCol)용 아이콘에 대한 디자인. 기본상태는 펼쳐진 상태이다. */
+.alopexgrid .header-columnfolding-icon {
+	cursor: pointer;
+}
+
+.alopexgrid .header-columnfolding-icon:after {
+	content: "";
+	display: block;
+	position: relative;
+	top: 1px;
+	width: 15px;
+	height: 15px;
+	background: url("grid/grid_white.png") no-repeat 0 -460px;
+}
+
+/* 컬럼 그룹이 접혔을 때 펼쳐야 함을 표현하는 아이콘 */
+.alopexgrid .header-columnfolding-icon.folded:after {
+	background: url("grid/grid_white.png") no-repeat 0 -531px;
+}
+
+/**
+ * 푸터 셀을 위한 디자인 
+ */
+.alopexgrid .footercell {
+	background-color: #ffefaf;
+}
+
+/* option.footer.position="top" 일 때 셀의 보더 위치가 조절되어야 함. */
+.alopexgrid .footercell.footercell-top {
+	color: #434749;
+	line-height: 25px;
+	font-weight: normal;
+	background: #cceffb;
+	/* border 추가 디자인을 원할 경우
+	border-bottom:1px solid #d58a77;
+	border-top:1px solid #d58a77;
+	border-right:1px solid #d58a77; */
+}
+
+/* option.footer.position="bottom" 일 때 */
+.alopexgrid .footercell.footercell-bottom {
+	color: #434749;
+	line-height: 25px;
+	font-weight: normal;
+	background: #cceffb;
+	/* border 추가 디자인을 원할 경우
+	border-bottom:1px solid #d58a77;
+	border-top:1px solid #d58a77;
+	border-right:1px solid #d58a77; */
+}
+
+/**
+ * 특정 기능을 하는 컬럼에 대한 디자인
+ */
+/* selectorColumn은 기본적으로 가운데 정렬이 필요하다. */
+.alopexgrid .headercell.selector-column,
+.alopexgrid .bodycell.selector-column {
+	text-align: center;
+}
+
+.alopexgrid .headercell.selector-column {
+	padding-top: 4px;
+	padding-top: 6px \0/IE89;
+}
+
+.alopexgrid .bodycell.selector-column {
+	padding-top: 2px;
+	padding-top: 4px \0/IE89;
+}
+
+/* 행번호를 표시하는 컬럼에서 행의 높이 조정을 위한 리사이징 핸들의 디자인. */
+.alopexgrid .rowindex-column-resizing-handle {
+	position: absolute;
+	cursor: row-resize;
+	right: 0;
+	bottom: 0;
+	/* v3.8.0- deprecated */
+	/*cursor:url("grid/rowdrag.cur"), url("grid/rowdrag.png"), row-resize;*/
+	width: 16px;
+	height: 16px;
+	background: url("grid/grid_resizing_white.png") no-repeat 10px 10px;
+}
+
+/* 행 높이 리사이징을 위해 핸들을 드래그하기 시작할 때 변경되는 행의 높이를 표현하기 위한 기준선 */
+.alopexgrid .row-resize-align {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 150%;
+	border-bottom: 1px solid #00aef0;
+}
+
+/* 행의 원래 높이를 표현하기 위한 기준선 */
+.alopexgrid .row-resize-align.resize-align-reference {
+	border: 1px dashed #afafaf;
+}
+
+/* 트리 노드의 상태(펼쳐짐/닫힘/말단노드)를 표현하는 아이콘 */
+.alopexgrid .relative-wrap .alopexgrid-treecolumn-icon {
+	display: inline-block;
+	cursor: pointer;
+	width: 13px;
+	height: 13px;
+	margin-top: 5px;
+	margin-left: 5px;
+	background: url("grid/grid_white.png") no-repeat -140px -460px;
+}
+
+.alopexgrid .alopexgrid-cell .alopexgrid-treecolumn-icon {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	width: 13px;
+	height: 13px;
+	margin: -1px 5px 0px 5px;
+	vertical-align: middle;
+	background: url("grid/grid_white.png") no-repeat -140px -518px;
+}
+
+/* 헤더셀에 그려진 트리 노드 전체 펼침/닫음 아이콘을 위한 디자인 */
+.alopexgrid .headercell .alopexgrid-treecolumn-icon {
+	float: left;
+	margin-top: 9px;
+}
+
+.alopexgrid .alopexgrid-treecolumn-icon.expanded {
+	background: url("grid/grid_white.png") no-repeat -140px -578px;
+}
+
+.alopexgrid .alopexgrid-treecolumn-icon.leaf {
+	/* background: url("grid/grid.png") no-repeat -140px -518px; */
+	background: none;
+	cursor: default;
+}
+
+/* 트리 컬럼의 depth(level)을 표현하기 위한 들여쓰기용 엘리먼트 */
+.alopexgrid .alopexgrid-treecolumn-indent {
+	display: inline-block;
+	width: 13px;
+}
+
+/* 그룹 소계셀 option.grouping.useGroupHeader에 대한 스타일링 */
+.alopexgrid .cell.bodycell.cell-groupmeta {
+	font-weight: normal;
+	text-align: left;
+	background-color: #f7f7f4;
+}
+
+/* 그룹 소계 헤더 셀에 selected 클래스 적용 안되게 수정 */
+.alopexgrid .cell.bodycell.cell-groupmeta.selected {
+	background-color: #f7f7f4;
+}
+
+.alopexgrid .bodycell.cell-groupmeta.groupmeta-align-left {
+	text-align: left;
+}
+
+.alopexgrid .bodycell.cell-groupmeta.groupmeta-align-center {
+	text-align: center;
+}
+
+.alopexgrid .bodycell.cell-groupmeta.groupmeta-align-right {
+	text-align: right;
+}
+
+/* 그룹 소계셀 option.grouping.useGroupHeader에 대한 스타일링  */
+.alopexgrid .bodycell.cell-groupmeta.cell-groupheader {
+	color: #494949;
+	background-color: #ffffff;
+	border-bottom: 1px solid #d4d6da;
+}
+
+.alopexgrid .bodycell.cell-groupmeta.cell-groupheader.cell-rowspan-column {
+	background-color: #ffffff;
+}
+
+/* 그룹 소계셀 option.grouping.useGroupFooter에 대한 스타일링  */
+.alopexgrid .bodycell.cell-groupmeta.cell-groupfooter {
+	padding-right: 4px;
+	font-size: 11px;
+	font-weight: normal;
+	color: #333333;
+	background-color: #fffbd4;
+	border-bottom: 0;
+}
+
+.alopexgrid .bodycell.cell-groupmeta.cell-groupfooter.cell-rowspan-column {
+	background-color: #fffbd4;
+}
+
+.alopexgrid .bodycell.cell-groupmeta.cell-groupfooter.cell-groupheader-depth-0 {
+	background-color: #cceffb;
+	border-top: 1px solid #cceffb;
+	border-bottom: 1px solid #cceffb;
+}
+
+/* 그룹 소계 푸터셀에 selected 클래스 적용 안되게 수정  */
+.alopexgrid .cell.bodycell.cell-groupmeta.cell-groupfooter.selected {
+	background-color: #d4f2e1;
+}
+
+/* 소계 헤더/푸터 기능과 연계된 그룹접기/펼치기(foldIcon) 기능을 위한 CSS. 기본은 펼쳐진 상태이다. */
+.alopexgrid .alopexgrid-groupfolding-icon {
+	cursor: pointer;
+	position: relative;
+	top: 4px;
+	margin-right: 5px;
+}
+
+.alopexgrid .alopexgrid-groupfolding-icon:before {
+	display: inline-block;
+	content: "";
+	width: 15px;
+	height: 15px;
+	background: url("grid/grid_white.png") no-repeat -280px -645px;
+}
+
+/* 그룹이 접히게 되면 group-collapsed 클래스가 추가된다. */
+.alopexgrid .alopexgrid-groupfolding-icon.group-collapsed:before {
+	display: inline-block;
+	content: "";
+	width: 15px;
+	height: 15px;
+	background: url("grid/grid_white.png") no-repeat -420px -645px;
+}
+
+/* 헤더에 표시되는 전체 접기 펼치기 아이콘에 대한 디자인이 별도로 필요하거나 바디/헤더 디자인이 다를 경우는 
+   .headercell .bodycell 등의 클래스를 이용하여 디자인을 별도록 적용하도록 합니다. */
+.alopexgrid .headercell .alopexgrid-groupfolding-icon {
+	cursor: pointer;
+	position: relative;
+	top: 4px;
+	margin-right: 5px;
+}
+
+.alopexgrid .headercell .alopexgrid-groupfolding-icon.group-collapsed:before {
+	display: inline-block;
+	content: "";
+	width: 15px;
+	height: 15px;
+	background: url("grid/grid_white.png") no-repeat -140px -645px;
+}
+
+.alopexgrid .headercell .alopexgrid-groupfolding-icon:before {
+	display: inline-block;
+	content: "";
+	width: 15px;
+	height: 15px;
+	background: url("grid/grid_white.png") no-repeat 0px -645px;
+}
+
+/* dragdropColumn 헤더와 바디셀에 적용되는 스타일 */
+.alopexgrid .dragdrop-column {
+	/* none */
+}
+
+/* dragdropColumn 셀에 표현되는 드래그 가능 핸들을 표현하는 아이콘 */
+.alopexgrid .row-dragdrop-handle {
+	margin: 0 auto;
+	cursor: move;
+	width: 100%;
+	height: 100%;
+	/* v3.8.0- deprecated */
+	/*cursor:url("grid/drag.cur"), url("grid/drag.png"), move;*/
+	/* v3.7.4- deprecated */
+	/*width:6px;
+	background:url("grid/grid.png") no-repeat -495px -452px;*/
+	background: url("grid/rowdraghandler.png") no-repeat 50% 50%;
+}
+
+/* v3.12.0+ 일반 셀에 표현되는 드래그 기능 핸들 표현하는 아이콘 */
+.alopexgrid .row-dragdrop-cell-handle {
+	cursor: move;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 100%;
+	height: 100%;
+	background: url("grid/celldraghandler.png") no-repeat;
+	/* cell DragDrop type b */
+	/* background: url("grid/celldraghandler_typeb.png") no-repeat;*/
+}
+
+/* drag&drop 으로 위치가 바뀌는 행이 어디에 들어갈 것인가를 표현하기 위한 선 */
+.alopexgrid .alopexgrid-dragdrop-row-indicator {
+	position: absolute;
+	width: 200%;
+	left: 0px;
+	top: -1px;
+	border-bottom: 1px dotted #00afed;
+}
+
+/* 드래그 앤 드롭 불가능한 행에 대한 스타일 v3.8.0+ */
+.alopexgrid .alopexgrid-dragdrop-row-indicator.disabled {
+	border-color: #acacac;
+}
+
+/* tree grid 사용시 행 중간에 마우스가 위치하게 되면 이 행의 child로 이동 데이터를 위치시킬 것임을 의미. */
+.alopexgrid .alopexgrid-dragdrop-parentrow-indicator {
+	width: 100%;
+	border-top: 1px dotted #cf0000;
+	border-right: 1px dotted #cf0000;
+	border-bottom: 1px dotted #cf0000;
+	border-left: 1px dotted #cf0000;
+}
+
+/* deprecated v3.7.5- */
+/* tree grid의 경우 자기 자신의 child로는 이동할 수 없는데 이때 not-allowed 클래스가 적용된다.*/
+/*.alopexgrid .alopexgrid-dragdrop-row-indicator.alopexgrid-dragdrop-not-allowed {
+	border-style:hidden;
+}*/
+/* drag&drop 되는 행의 디자인. 마크업은 기본적으로 그리드 밖에 위치하게 된다.*/
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row {
+	position: absolute;
+	cursor: move;
+	-webkit-transform: translate(5px, 10px);
+	-moz-transform: translate(5px, 10px);
+	-ms-transform: translate(5px, 10px);
+	-o-transform: translate(5px, 10px);
+	transform: translate(5px, 10px);
+}
+
+/* 드래그드랍 중인 행에 대한 별도 디자인이 필요한 경우 사용 */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row .cell {
+	color: #333333;
+	background-color: #cbeffc;
+	border-top: 1px solid #00aef0;
+	border-right: 1px solid #00aef0;
+	border-bottom: 1px solid #00aef0;
+	-webkit-box-shadow: 4px 4px 0 #c6c6c6;
+	-moz-box-shadow: 4px 4px 0 #c6c6c6;
+	box-shadow: 4px 4px 0 #c6c6c6;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row .cell:first-child {
+	border-left: 1px solid #00aef0;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row .cell:last-child {
+	border-right: 1px solid #00aef0;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row .cell:not(.selector-column) {
+	padding: 0 3px;
+}
+
+/* 행 드래그 앤 드롭 불가상태 스타일 v3.8.0+ */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row.disabled .cell {
+	color: #555555;
+	background: #ecebf0;
+	border-top: 1px solid #999999;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	-webkit-box-shadow: 4px 4px 0 #c6c6c6;
+	-moz-box-shadow: 4px 4px 0 #c6c6c6;
+	box-shadow: 4px 4px 0 #c6c6c6;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row.disabled .cell:first-child {
+	background: #ecebf0 url("grid/nodrop.png") center no-repeat;
+	border-left: 1px solid #999999;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row.disabled .cell:first-child:before {
+	display: block;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 18px;
+	height: 18px;
+	margin-top: -9px;
+	margin-left: -9px;
+	background: url("grid/nodrop.png") no-repeat;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row.disabled .cell:last-child {
+	border-right: 1px solid #999999;
+}
+
+/* proxy selected일때 스타일 */
+.alopexgrid.alopexgrid-proxy .alopexgrid .cell.bodycell.selected {
+	background-color: #caeefb;
+}
+
+/**
+ * 페이지네이션/페이저를 위한 디자인 
+ */
+.alopexgrid .pager {
+	width: 100%;
+	height: 60px;
+	text-align: center;
+}
+
+/* 첫페이지, 전페이지, 페이지번호, 다음페이지, 끝페이지를 표현하는 요소들 */
+.alopexgrid .pager .page-button {
+	display: inline-block;
+	width: 22px;
+	height: 23px;
+	background: #ffffff;
+}
+
+/* 페이지 버튼들은 a태그를 가진다. */
+.alopexgrid .pager .page-button a {
+	display: inline-block;
+	width: 22px;
+	height: 23px;
+	padding-top: 4px;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	color: #666666;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+}
+
+/* 현재 페이지를 의미하는 페이지 버튼은 current 클래스를 가진다. */
+.alopexgrid .pager .page-button.current a,
+.alopexgrid .pager .page-button.hovering a {
+	font-weight: bold;
+	color: #00adef;
+	background: #ffffff;
+}
+
+/* 클래스 명칭 그대로 버튼들이 역할을 함. */
+.alopexgrid .pager .page-button.first-page a {
+	background: url("grid/grid_white.png") no-repeat 3px -50px #ffffff;
+}
+
+.alopexgrid .pager .page-button.first-page.hovering a {
+	background: url("grid/grid_white.png") no-repeat 3px -110px #00aef0;
+	border-color: #00aef0;
+}
+
+.alopexgrid .pager .page-button.prev-page a {
+	background: url("grid/grid_white.png") no-repeat -77px -50px #ffffff;
+}
+
+.alopexgrid .pager .page-button.prev-page.hovering a {
+	background: url("grid/grid_white.png") no-repeat -77px -110px #00aef0;
+	border-color: #00aef0;
+}
+
+.alopexgrid .pager .page-button.next-page a {
+	background: url("grid/grid_white.png") no-repeat -154px -50px #ffffff;
+}
+
+.alopexgrid .pager .page-button.next-page.hovering a {
+	background: url("grid/grid_white.png") no-repeat -154px -110px #00aef0;
+	border-color: #00aef0;
+}
+
+.alopexgrid .pager .page-button.last-page a {
+	border-right: 1px solid #dddddd;
+	background: url("grid/grid_white.png") no-repeat -228px -50px #ffffff;
+}
+
+.alopexgrid .pager .page-button.last-page.hovering a {
+	background: url("grid/grid_white.png") no-repeat -228px -110px #00aef0;
+	border-color: #00aef0;
+}
+
+/* 첫페이지/전페이지/다음페이지/끝페이지를 제외한 페이지 번호를 담는 컨테이너 */
+.alopexgrid .pager .page-list {
+	display: inline-block;
+	margin-top: 15px;
+	padding: 0;
+	list-style: none;
+}
+
+.alopexgrid .pager .page-list a {
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+}
+
+/* 페이저 좌측 영역 option.paging.pagerTotal */
+.alopexgrid .pager .pager-left {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+}
+
+/* 페이저 우측 영역 option.paging.pagerSelect */
+.alopexgrid .pager .pager-right {
+	position: absolute;
+	top: 20px;
+	right: 0px;
+}
+
+/**
+ * 스크롤바 디자인
+ */
+.alopexgrid .scrollbar {
+	position: absolute;
+	background-color: #f1f1f3;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* x축 스크롤바 베이스 */
+.alopexgrid .scrollbar.x {
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	height: 10px;
+}
+
+/* y축 스크롤바 베이스 */
+.alopexgrid .scrollbar.y {
+	height: 100%;
+	top: 0;
+	right: 0;
+	width: 10px;
+}
+
+/* 스크롤바영역 내의 실제 스크롤바 */
+.alopexgrid .scrollbar .scrollhandle {
+	position: absolute;
+	background-color: #d1d2d6;
+}
+
+.alopexgrid .scrollbar.x .scrollhandle {
+	bottom: 0;
+	left: 10px;
+	/* min-width:10px; */
+	height: 10px;
+}
+
+.alopexgrid .scrollbar.y .scrollhandle {
+	right: 0;
+	top: 10px;
+	/* min-height:10px; */
+	width: 10px;
+}
+
+/* 스크롤바의 끝에 위치하여 상/하/좌/우 이동을 의미하는 버튼 */
+.alopexgrid .scrollbar .scrollbutton {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+}
+
+.alopexgrid .scrollbar .scrollbutton.upbutton {
+	top: 0;
+	right: 0;
+	background: url("grid/grid_scroll_white.png") no-repeat 3px -40px #f1f1f3;
+}
+
+.alopexgrid .scrollbar .scrollbutton.downbutton {
+	bottom: 10px;
+	right: 0;
+	background: url("grid/grid_scroll_white.png") no-repeat 3px -26px #f1f1f3;
+}
+
+.alopexgrid .scrollbar .scrollbutton.leftbutton {
+	left: 0;
+	bottom: 0;
+	background: url("grid/grid_scroll_white.png") no-repeat 3px 3px #f1f1f3;
+}
+
+.alopexgrid .scrollbar .scrollbutton.rightbutton {
+	right: 10px;
+	bottom: 0;
+	background: url("grid/grid_scroll_white.png") no-repeat 4px -12px #f1f1f3;
+}
+
+.alopexgrid .scrollbar .preview {
+	position: absolute;
+	padding: 6px 12px;
+	min-width: 1em;
+	min-height: 1em;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	word-break: keep-all;
+	color: #ffffff;
+	text-align: center;
+	background-color: #2d2d2d;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 4px 4px 0 #cccccc;
+	-moz-box-shadow: 4px 4px 0 #cccccc;
+	box-shadow: 4px 4px 0 #cccccc;
+}
+
+.alopexgrid .scrollbar .preview:after {
+	content: '';
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	top: 8px;
+	right: -9px;
+	border-top: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #2d2d2d;
+}
+
+/**
+ * 헤더의 필터 아이콘을 클릭하였을 때 표시되는 필터링 드롭다운에 대한 디자인.
+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper {
+	/* float: left; */
+	margin: 2px 0 0;
+	min-width: 200px;
+	font-size: 12px;
+	background: #ffffff;
+	border: 1px solid #999999;
+	-webkit-box-shadow: 4px 4px 0 #b2b2b2;
+	-moz-box-shadow: 4px 4px 0 #b2b2b2;
+	box-shadow: 4px 4px 0 #b2b2b2;
+}
+
+/* 필터링 드롭다운 매뉴의 타이틀 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .titlearea {
+	margin-bottom: 10px;
+	height: 40px;
+	line-height: 41px;
+	text-align: center;
+	background: #d1d2d6;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .titlearea .title {
+	text-indent: 20px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #333333;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .titlearea .filterclose {
+	position: absolute;
+	cursor: pointer;
+	top: 12px;
+	right: 10px;
+	text-indent: -9999px;
+	width: 18px;
+	height: 16px;
+	background: url("grid/filter_icon.png") no-repeat 0 -183px;
+	border: 0;
+}
+
+/* 필터링 드롭다운 movable 상태 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .titlearea.movable {
+	cursor: move;
+	border-bottom: 1px solid #e1e2e6;
+	background: #f7f7f7 url("grid/draghandler_white.png") no-repeat 2px 2px;
+}
+
+/* 필터링 드롭다운 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+/* 필터링 드롭다운 매뉴의 헤더 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .header {
+	padding: 3px 3px 0 3px;
+	margin-bottom: 4px;
+	text-indent: 20px;
+	font-weight: bold;
+	color: #333333;
+	background: #dfdfe2;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .header:first-child {
+	border-top: 0;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .datafilter .headercell.cell-header-lastrow.cell-header-firstrow {
+	border-top: 1px solid #d4d6da;
+	border-bottom: 1px solid #d4d6da;
+	border-right: 1px solid #f1f1f3;
+	border-top: 1px solid #d4d6da;
+	border-bottom: 2px solid #d4d6da;
+	border-right: 1px solid #f1f1f3;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .datafilter .headercell.cell-header-lastrow.cell-header-firstrow.cell-lastcolumn {
+	border-right: 0;
+}
+
+/* 내부에서 위치를 별도 지정하는 엘리먼트를 가지는 경우 position:relative 를 가지는 엘리먼트를 이용하여
+위치를 새로 잡게 됩니다. */
+.alopexgrid .alopexgrid-filterdropdown .relative-wrap {
+	position: relative;
+	height: 100%;
+	background: #ffffff;
+}
+
+.alopexgrid .alopexgrid-filterdropdown .relative-wrap .column-title {
+	color: #333333;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.alopexgrid .alopexgrid-filterdropdown .cell.headercell.cell-header-firstrow {
+	background: #ffffff;
+}
+
+/* 필터링 드롭다운에서 선택된 행 바탕색 표시 안되게 하기 */
+/*.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .cell.bodycell.selected {
+	background: #ffffff;
+}*/
+/* 필터링 드롭다운 매뉴 아이템들의 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu {
+	margin: 0 24px 3px;
+}
+
+/* 필터링 제거 버튼에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .remove {
+	cursor: pointer;
+	padding: 2px 4px 2px 20px;
+	margin-left: 24px;
+	color: #666666;
+	background: #f9f9f9 url("grid/filter_icon.png") no-repeat 0 0;
+	border: 1px solid #a9a9a9;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* 필터링 제거 버튼의 diabled 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .remove.disabled {
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+
+/* 필터링 드롭다운 매뉴의 정렬 버튼 스타일 v3.11.0+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .sortingarea {
+	padding-bottom: 4px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .sortingarea .sorting-asc {
+	cursor: pointer;
+	padding: 2px 4px 2px 24px;
+	margin-left: 24px;
+	color: #666666;
+	background: #f9f9f9 url("grid/filter_icon.png") no-repeat 0 -35px;
+	border: 1px solid #a9a9a9;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .sortingarea .sorting-desc {
+	cursor: pointer;
+	padding: 2px 4px 2px 24px;
+	margin-left: 3px;
+	color: #666666;
+	background: #f9f9f9 url("grid/filter_icon.png") no-repeat 0 -74px;
+	border: 1px solid #a9a9a9;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* 텍스트 필터링과 데이터필터링 header에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .textfilter {
+	margin: 4px 0;
+	border-top: 1px solid #dfdfe2;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .textfilter .header {
+	padding: 3px 3px 0 3px;
+	margin: 4px 0;
+	text-indent: 32px;
+	font-weight: bold;
+	color: #333333;
+	background: url("grid/filter_icon.png") no-repeat 26px -131px;
+}
+
+/* 텍스트 필터링 메뉴의 텍스트 박스에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtertext,
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtertextbottom,
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtersearchtext {
+	width: 108px;
+	height: 18px;
+	border: 1px solid #a9a9a9;
+	vertical-align: middle;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtertext::-ms-clear,
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtertextbottom::-ms-clear,
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtersearchtext::-ms-clear {
+	display: none;
+}
+
+/* 데이터 필터 영역의 검색input에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtersearchtext {
+	width: 100%;
+	padding: 0 10px 0 20px;
+	margin-bottom: 4px;
+	background: url("grid/filter_icon.png") no-repeat 4px -286px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtersearchtext:hover, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filtersearchtext:focus {
+	border-color: #333333;
+}
+
+/* 텍스트 필터링 메뉴의 셀렉트 박스에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filterselect,
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .filterselectbottom {
+	width: 120px;
+	padding: 0;
+	margin: 0 0 0 5px;
+	vertical-align: middle;
+}
+
+/* 필터링 텍스트 영역에서 아래쪽 텍스트 검색 영역을 show/hide하는 아이콘 스타일 3.8.0+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon {
+	position: relative;
+	cursor: pointer;
+	/* 텍스트 필터 접기 버튼 마크업 수정으로 스타일 추가 3.10.10+ */
+	padding: 0 0 1px 0;
+	top: 2px;
+	left: 4px;
+	border: 0;
+	background: none;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon:after {
+	content: "";
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	width: 15px;
+	height: 15px;
+	background: url("grid/grid_white.png") no-repeat -140px -724px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon:hover:after, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon:focus:after {
+	background: url("grid/grid_white.png") no-repeat -140px -761px;
+}
+
+/* 필터링 텍스트 영역이 접혔을 때 펼쳐야 함을 표현하는 아이콘 3.8.0+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon.folded:after {
+	background: url("grid/grid_white.png") no-repeat -280px -724px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon.folded:hover:after, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .menu .textfolding-icon.folded:focus:after {
+	background: url("grid/grid_white.png") no-repeat -280px -761px;
+}
+
+/* 텍스트 필터 조건을 선택하는 radio 스타일 3.8.0+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper {
+	position: relative;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 14px;
+	background: transparent url("grid/grid_white.png") no-repeat -34px -346px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.focused:after, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper:focus:after, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper:hover:after {
+	background-position: -34px -304px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked:after {
+	background-position: 2px -346px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked.focused:after, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked:focus:after, .alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked:hover:after {
+	background-position: 2px -304px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper .filter-radio {
+	margin-left: 0;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	-khtml-opacity: 0;
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+/* 필터링 드롭다운의 데이터 필터 관련 스타일 v3.11.0+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .datafilter {
+	position: relative;
+	margin-top: 6px;
+	border-top: 1px solid #dfdfe2;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .datafilter .header {
+	display: inline-block;
+	padding: 3px 3px 0 3px;
+	text-indent: 32px;
+	font-weight: bold;
+	color: #333333;
+	background: url("grid/filter_icon.png") no-repeat 26px -131px;
+}
+
+/*테이터 필터링 header의 resizing-handle에 대한 스타일링 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .datafilter .column-resizing-handle {
+	right: -3px;
+}
+
+.alopexgrid.alopexgrid-filterdropdown-wrapper .alopexgrid-filterdropdown .datafilter .wrapper {
+	border: 0;
+}
+
+/* 데이터 필터 영역의 적용 버튼에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .datafilter .filtersubmit {
+	cursor: pointer;
+	display: inline-block;
+	height: 20px;
+	padding: 0 8px 0 20px;
+	margin: 4px 0;
+	line-height: 6px;
+	font-weight: bold;
+	color: #666666;
+	background: #f9f9f9 url("grid/filter_icon.png") no-repeat 0 -237px;
+	border: 1px solid #a9a9a9;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+/* 데이터 필터 영역의 적용 버튼 비활성화 상태에 대한 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .filtersubmit.disabled {
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+
+/* 버튼 영역 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .buttonarea {
+	margin-top: 15px;
+	padding: 12px 0;
+	text-align: center;
+	border-top: 1px solid #dfdfe2;
+	background: #f7f7f7;
+}
+
+/* 버튼 영역의 닫기 버튼 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .buttonarea .filterclose {
+	position: relative;
+	cursor: pointer;
+	height: 20px;
+	padding: 0 8px;
+	line-height: 6px;
+	font-weight: bold;
+	color: #ffffff;
+	background: #9f9fa4;
+	border: 1px solid #9f9fa4;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+.alopexgrid .box-resizing-align {
+	position: absolute;
+	border: 1px solid #ff5f78;
+}
+
+/* 필터링 드롭다운 리사이징 indicator 관련 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .box-resizing-align {
+	top: 0;
+	left: 0;
+}
+
+/* 필터링 드롭다운 리사이징 핸들 관련 스타일 */
+.alopexgrid.alopexgrid-filterdropdown-wrapper .box-resizing-handle {
+	cursor: nwse-resize;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 8px;
+	height: 16px;
+	background: url("grid/grid_resizing_white.png") no-repeat 1px 9px;
+}
+
+/* v3.6.1- deprecated */
+/*.alopexgrid.alopexgrid-filterdropdown-wrapper .checkboxarea .alopexgrid-filter-checkbox {
+	vertical-align:middle;
+	margin-left: 10px;
+}*/
+/* v3.7.5- deplicated */
+/*.alopexgrid.alopexgrid-filterdropdown-wrapper .checkboxarea .af-buttonitem {
+	text-align: center;
+	background:#f5f5f5;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+}*/
+/* v3.10.13- deprecated */
+/*.alopexgrid.alopexgrid-filterdropdown-wrapper .cell.cell-fixrow-lastrow {
+	border-color: $filter-fixlow-lastrow-border;
+}*/
+/*.alopexgrid.alopexgrid-filterdropdown-wrapper .checkboxarea {
+	margin-top: -1px;
+	.wrapper{
+		border: 0;
+	}
+	.cell-fixrow.pinnedcell {
+	 	background: $filter-pinnedcell-bg;
+	 }
+	 .alopexgrid .row-odd {
+	 }
+}*/
+/*.alopexgrid.alopexgrid-filterdropdown-wrapper .checkboxarea .alopexgrid-filter-checkboxlabel {
+	vertical-align: middle;
+	padding-left: $filter-checklabel-gutter;
+}*/
+/**
+ * 그리드 상에서 오른쪽 마우스를 눌렀을 때 표시될 컨텍스트 메뉴 디자인 
+ */
+.alopexgrid.alopexgrid-contextmenu-wrapper, .alopexgrid.alopexgrid-newcontextmenu-wrapper {
+	position: absolute;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.alopexgrid.alopexgrid-contextmenu-wrapper .alopexgrid-contextmenu, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-contextmenu {
+	padding: 5px 0;
+	margin: 2px 0 0;
+	min-width: 120px;
+	background: #ffffff;
+	border: 1px solid #ecebf0;
+}
+
+/* seperator를 사용했을 때 스타일 */
+.alopexgrid.alopexgrid-contextmenu-wrapper .alopexgrid-contextmenu hr, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-contextmenu hr {
+	margin: 0;
+}
+
+.alopexgrid.alopexgrid-contextmenu-wrapper .alopexgrid-contextmenu li, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-contextmenu li {
+	list-style: none;
+	line-height: 20px;
+}
+
+.alopexgrid.alopexgrid-contextmenu-wrapper .alopexgrid-contextmenu li:hover, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-contextmenu li:hover {
+	background-color: #6f7595;
+}
+
+.alopexgrid.alopexgrid-contextmenu-wrapper .alopexgrid-contextmenu li:hover a, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-contextmenu li:hover a {
+	color: #ffffff;
+	background: url("grid/grid_white.png") no-repeat -490px -21px;
+}
+
+.alopexgrid.alopexgrid-contextmenu-wrapper .alopexgrid-contextmenu li a, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-contextmenu li a {
+	display: inline-block;
+	padding: 1px 16px 2px;
+	width: 100%;
+	font-size: 12px;
+	text-decoration: none;
+	color: #333333;
+	background: url("grid/grid_white.png") no-repeat -490px 8px;
+}
+
+/**
+ * 그리드 상에서 오른쪽 마우스를 눌렀을 때 표시될 커스텀 컨텍스트 메뉴의 NEW 디자인
+ */
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu {
+	padding: 5px 0;
+	margin: 2px 0 0;
+	min-width: 120px;
+	background: #ffffff;
+	border: 1px solid #ecebf0;
+}
+
+/* seperator를 사용했을 때 스타일 */
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu hr {
+	margin: 3px 0;
+	height: 1px;
+	background: #dfdfe2;
+	border: 0;
+}
+
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu li {
+	list-style: none;
+	line-height: 20px;
+}
+
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu li a {
+	display: inline-block;
+	padding: 1px 20px 2px 10px;
+	width: 100%;
+	font-size: 12px;
+	text-decoration: none;
+	color: #333333;
+}
+
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu li a:hover {
+	background: #6f7595;
+	color: #ffffff;
+}
+
+/* custom 하위 메뉴가 있을때의 스타일 */
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu .submenu a:after {
+	content: '';
+	position: relative;
+	top: 7px;
+	left: 12px;
+	float: right;
+	width: 4px;
+	height: 7px;
+	background: url("grid/grid_white.png") no-repeat -496px -62px;
+}
+
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu .submenu.active a, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu .submenu:hover a {
+	color: #222222;
+	background: #caeefb;
+}
+
+.alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu .submenu.active a:after, .alopexgrid.alopexgrid-newcontextmenu-wrapper .alopexgrid-newcontextmenu .submenu:hover a:after {
+	background: url("grid/grid_white.png") no-repeat -496px -96px;
+}
+
+/**
+ * 셀 편집 팝업 에디터 디자인
+ */
+.alopexgrid.alopexgrid-celledit-popupwrap {
+	position: absolute;
+	display: block;
+	/* min-width: $popup-minwidth; */
+	text-align: center;
+	background: #ffffff;
+	border: 1px solid #999999;
+	-webkit-box-shadow: 4px 4px 0 #b2b2b2;
+	-moz-box-shadow: 4px 4px 0 #b2b2b2;
+	box-shadow: 4px 4px 0 #b2b2b2;
+}
+
+/* 셀 편집 팝업 에디터 버튼영역 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-buttonarea {
+	padding: 10px 0;
+	text-align: center;
+	background: #f7f7f7;
+	border-top: 1px solid #dfdfe2;
+}
+
+/* 셀 편집 팝업 titlearea 스타일 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-celledit-titlearea.alopexgrid-titlearea {
+	margin-bottom: 10px;
+	height: 40px;
+	line-height: 41px;
+	text-align: center;
+	background: #f7f7f7;
+	border-bottom: 1px solid #d4d6da;
+}
+
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-celledit-titlearea.alopexgrid-titlearea .title {
+	font-weight: bold;
+	font-size: 16px;
+	color: #333333;
+}
+
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-celledit-titlearea.alopexgrid-titlearea .close {
+	position: absolute;
+	cursor: pointer;
+	top: 12px;
+	right: 10px;
+	text-indent: -9999px;
+	width: 18px;
+	height: 16px;
+	background: url("grid/grid_white.png") no-repeat 0 -176px;
+	border: 0;
+}
+
+/* 셀 편집 팝업 movable 상태일 때 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-titlearea.movable {
+	cursor: move;
+	border-bottom: 1px solid #d4d6da;
+	background: #f7f7f7 url("grid/draghandler_white.png") no-repeat 2px 2px;
+}
+
+/* 셀 편집 팝업 에디터 버튼 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-popupbutton {
+	position: relative;
+	cursor: pointer;
+	height: 20px;
+	padding: 0 8px;
+	font-size: 12px;
+	line-height: 6px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* 셀 편집 팝업 에디터 닫기 버튼 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-popupbutton.close {
+	margin: 0 2px;
+	color: #ffffff;
+	font-weight: bold;
+	background: #9f9fa4;
+	border: 1px solid #9f9fa4;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* 셀 편집 팝업 에디터 저장 버튼 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-popupbutton.save {
+	margin: 0 2px;
+	color: #666666;
+	font-weight: bold;
+	background: #f9f9f9;
+	border: 1px solid #999999;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* 셀 편집 팝업 에디터 textarea 영역 스타일 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-textareawrap {
+	padding: 0 5px;
+}
+
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-popuptextarea {
+	position: relative;
+	overflow: auto;
+	/*height: 273px; */
+	width: 100%;
+	padding: 3px 5px;
+	font-size: 12px;
+	border: 1px solid #a9a9a9;
+	resize: none;
+}
+
+/* 셀 편집 팝업 textarea readonly 스타일 */
+.alopexgrid.alopexgrid-celledit-popupwrap .alopexgrid-popuptextarea.disabled {
+	color: #727272;
+}
+
+/* 셀 편집 팝업이 띄워지는 선택된 셀에 대한 스타일*/
+.alopexgrid .cell.bodycell.cellpopupedit-focused {
+	background: #caeefb;
+}
+
+/* 셀 편집 팝업 리사이즈 indicator 관련 스타일 */
+.alopexgrid.alopexgrid-celledit-popupwrap .box-resizing-align {
+	top: 0;
+	left: 0;
+}
+
+/* 셀 편집 팝업 리사이징 핸들 관련 스타일 */
+.alopexgrid.alopexgrid-celledit-popupwrap .box-resizing-handle {
+	cursor: nwse-resize;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 8px;
+	height: 16px;
+	background: url(grid/grid_resizing.png) no-repeat 1px 9px;
+}
+
+/**
+ * 엑셀 Im/Export 다이얼로그 관련 디자인
+ */
+.alopexgrid.alopexgrid-excel-background {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=45)";
+	filter: alpha(opacity=45);
+	-khtml-opacity: 0.45;
+	-moz-opacity: 0.45;
+	opacity: 0.45;
+}
+
+/* 엑셀 내보내기 다이얼로그에 대한 스타일 */
+.alopexgrid.alopexgrid-excel-dialog {
+	position: absolute;
+	width: 300px;
+	height: 170px;
+	padding: 50px 30px 30px 30px;
+	text-align: center;
+	background-color: #ffffff;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* 엑셀 내보내기 다이얼로그 메시지 영역에 대한 스타일 */
+.alopexgrid.alopexgrid-excel-dialog .msgarea {
+	width: 80%;
+	margin-bottom: 30px;
+	text-align: center;
+	line-height: 150%;
+}
+
+/* 엑셀 내보내기 다이얼로그 버튼 영역에 대한 스타일 */
+.alopexgrid.alopexgrid-excel-dialog .buttonarea {
+	width: 100%;
+	margin: 30px 0 30px 0;
+	text-align: center;
+}
+
+/* 엑셀 내보내기 다이얼로그의 왼쪽 버튼에 대한 스타일 */
+.alopexgrid.alopexgrid-excel-dialog .buttonarea .ybutton {
+	margin-right: 10px;
+}
+
+/* 엑셀 내보내기 다이얼로그의 오른쪽 버튼에 대한 스타일 */
+.alopexgrid.alopexgrid-excel-dialog .buttonarea .nbutton {
+	/* none */
+}
+
+/* 고정 컬럼 관련 스타일 */
+.alopexgrid .bodycell.cell-fixcol {
+	background: #f2f2f3;
+	border: 0;
+}
+
+/* 고정 컬럼의 column fix 일 경우 우측 border 에 대한 스타일 */
+.alopexgrid .headercell.fixed.cell-fixcol {
+	/* none */
+}
+
+/* 고정 컬럼의 마지막 컬럼 스타일 정의*/
+.alopexgrid .bodycell.cell-fixcol.cell-fixcol-lastcolumn {
+	border-right: 1px solid #d4d6da;
+}
+
+/* 고정 컬럼 헤더의 마지막 컬럼 스타일 정의 */
+.alopexgrid .headercell.cell-fixcol.cell-fixcol-lastcolumn {
+	border-right: 1px solid #d4d6da;
+}
+
+/* 고정 컬럼 헤더의 컬럼 중 필터가 있는 컬럼의 마지막 컬럼 스타일 정의 */
+.alopexgrid .headercell.filtercell.cell-fixcol.cell-fixcol-lastcolumn {
+	border-right: 1px solid #d4d6da;
+}
+
+/*image checkbox & image radio */
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper {
+	position: relative;
+	vertical-align: middle;
+	font-size: 13px;
+	color: #989899;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 5px;
+	width: 13px;
+	height: 13px;
+	background: transparent url("grid/grid_white.png") no-repeat -113px -345px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:focus:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:hover:after {
+	background: transparent url("grid/grid_white.png") no-repeat -113px -303px;
+}
+
+.alopexgrid.alopexgrid-proxy .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:after {
+	bottom: 2px;
+}
+
+.alopexgrid .headercell .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:after {
+	content: '';
+	width: 13px;
+	height: 13px;
+	background: transparent url("grid/grid_white.png") no-repeat -113px -345px;
+}
+
+.alopexgrid .headercell .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:focus:after, .alopexgrid .headercell .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper:hover:after {
+	background: transparent url("grid/grid_white.png") no-repeat -113px -303px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.checked:after {
+	background: transparent url("grid/grid_white.png") no-repeat -74px -345px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.checked:focus:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.checked:hover:after {
+	background: transparent url("grid/grid_white.png") no-repeat -74px -303px;
+}
+
+/* selectorColumn 헤더 체크박스의 disabled 스타일 관련 v3.9.0+ */
+.alopexgrid .headercell .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled:after {
+	background: transparent url("grid/grid_white.png") no-repeat -351px -345px;
+}
+
+/* {type:'checkbox'} disabled 관련 스타일 v3.9.2+ */
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled {
+	cursor: not-allowed;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled:after {
+	background-position: -311px -345px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled.checked:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled.checked:focus:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled.checked:hover:after {
+	background-position: -272px -345px;
+}
+
+/* selectorColumn에 위치한 체크박스에 대한 스타일 */
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper .alopexgrid-default-renderer,
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper .selector-checkbox {
+	margin-top: 0px;
+	margin-left: -5px;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	-khtml-opacity: 0;
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper {
+	position: relative;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 14px;
+	height: 14px;
+	background: transparent url("grid/grid_white.png") no-repeat -34px -346px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper:focus:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper:hover:after {
+	background: transparent url("grid/grid_white.png") no-repeat -34px -304px;
+}
+
+/* {type:'radio'} disabled 관련 스타일 v3.9.2+ */
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.disabled {
+	cursor: not-allowed;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.disabled:after {
+	background-position: -233px -346px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.disabled.checked:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.disabled.checked:focus:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.disabled.checked:hover:after {
+	background-position: -196.3px -346px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked:after {
+	background-position: 2px -346px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked:focus:after, .alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper.checked:hover:after {
+	background-position: 2px -304px;
+}
+
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper .alopexgrid-default-renderer,
+.alopexgrid .alopexgrid-input-wrapper.alopexgrid-input-radio-wrapper .selector-radio {
+	margin-left: 0;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	-khtml-opacity: 0;
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+/**
+ * 검색기능 관련 스타일. v3.9.0+
+ * match - 검색결과에 포함된 행/컬럼
+ * highlight - 현재 사용자에게 하이라이트 표시된 행/컬럼
+ */
+.alopexgrid .alopexgrid-cell.cell-search-match-row {
+	/* none */
+}
+
+.alopexgrid .alopexgrid-cell.cell-search-match-column {
+	background-color: #dfdfe2 !important;
+}
+
+.alopexgrid .alopexgrid-cell.cell-search-highlight-row {
+	background-color: #fffbd4 !important;
+}
+
+.alopexgrid .alopexgrid-cell.cell-search-highlight-row.cell-search-match-column {
+	background-color: #f1eec8 !important;
+}
+
+.alopexgrid .alopexgrid-cell.cell-search-highlight-row.cell-search-highlight-column {
+	background-color: #ffd8a9 !important;
+}
+
+/**
+ *	확대보기 기능 관련 스타일
+ */
+/* 확대보기 blocker */
+.alopexgrid.alopexgrid-enlarge-blocker {
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+}
+
+/* 확대보기 컨텐츠 스타일 */
+.alopexgrid.alopexgrid-enlarge-content {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* 확대보기 버튼 스타일 */
+.alopexgrid.alopexgrid-enlarge-closebutton {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	margin: 5px;
+	min-width: 15px;
+	min-height: 15px;
+	text-align: center;
+	line-height: 15px;
+	background-color: #ffffff;
+	border: 1px solid #707070;
+	border-width: thin;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/** 
+ * 프로그래스 관련 스타일
+ */
+.alopexgrid .modal {
+	background-color: #aaaaaa;
+	_noFocusLine: expression(this.hideFocus = true);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+
+.alopexgrid .progress {
+	/* none */
+}
+
+/**
+ * 요소들이 스크롤을 반영하여 서로 겹치는 상황에서 의도에 맞게 가려지고 보일 수 있게
+ * z-index를 조절한다.
+ */
+/* 행 드래그 앤 드롭 불가상태 스타일 v3.8.0+ */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-row.disabled .cell:first-child:before {
+	z-index: 1;
+}
+
+/* 트리노드와 row-dragdrop-cell-handle 영역 분리를 위한 스타일 */
+.alopexgrid .alopexgrid-cell .alopexgrid-treecolumn-icon {
+	z-index: 1;
+}
+
+/* row-dragdrop-cell-handle 영역과 renderer 분리 */
+.alopexgrid a.alopexgrid-default-renderer {
+	z-index: 1;
+}
+
+/* bodycell 관련 스타일 */
+.alopexgrid .wrapper .cell.bodycell {
+	z-index: 8;
+}
+
+/* proxy selected일때 스타일 */
+.alopexgrid.alopexgrid-proxy .alopexgrid .cell.bodycell.selected {
+	z-index: 8;
+}
+
+/* 컬럼, 행 병합 관련 스타일 */
+.alopexgrid .wrapper .cell.bodycell.cell-colspan-column {
+	z-index: 9;
+}
+
+.alopexgrid .wrapper .cell.bodycell.cell-rowspan-column {
+	z-index: 9;
+}
+
+/* 헤더 드래그 앤 드롭이 불가능한 컬럼에 대한 스타일 */
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .columnhiddenarea .headercell:before {
+	z-index: 10;
+}
+
+.alopexgrid.alopexgrid-proxy.alopexgrid-dragdrop-header.disabled .cell.headercell:before {
+	z-index: 10;
+}
+
+/* 고정 컬럼, 고정 행 관련 스타일 */
+.alopexgrid .wrapper .cell.bodycell.cell-fixcol {
+	z-index: 10;
+}
+
+.alopexgrid .wrapper .cell.bodycell.cell-colspan-column.cell-fixcol {
+	z-index: 11;
+}
+
+.alopexgrid .wrapper .cell.bodycell.cell-rowspan-column.cell-fixcol {
+	z-index: 11;
+}
+
+.alopexgrid .wrapper .cell.bodycell.pinnedcell,
+.alopexgrid .wrapper .cell.bodycell.cell-fixrow {
+	z-index: 15;
+}
+
+.alopexgrid .wrapper .cell.bodycell.cell-fixcol.pinnedcell,
+.alopexgrid .wrapper .cell.bodycell.cell-fixcol.cell-fixrow {
+	z-index: 16;
+}
+
+.alopexgrid .wrapper .cell.bodycell.cell-colspan-column.cell-fixcol.pinnedcell,
+.alopexgrid .wrapper .cell.bodycell.cell-colspan-column.cell-fixcol.cell-fixrow {
+	z-index: 17;
+}
+
+.alopexgrid .wrapper .cell.bodycell.cell-rowspan-column.cell-fixcol.pinnedcell,
+.alopexgrid .wrapper .cell.bodycell.cell-rowspan-column.cell-fixcol.cell-fixrow {
+	z-index: 18;
+}
+
+/* 선택된 행 관련 스타일 */
+.alopexgrid .cell.bodycell.selected {
+	z-index: 27;
+}
+
+/* 선택된 고정 컬럼, 고정 행 관련 스타일 */
+.alopexgrid .cell.bodycell.cell-fixcol.selected {
+	z-index: 28;
+}
+
+/* footer 관련 스타일 */
+.alopexgrid .wrapper .cell.footercell {
+	z-index: 28;
+}
+
+/* 고정 셀 footer 관련 스타일 */
+.alopexgrid .wrapper .cell.footercell.cell-fixcol {
+	z-index: 29;
+}
+
+/* 헤더 스타일 */
+.alopexgrid .wrapper .cell.headercell {
+	z-index: 30;
+}
+
+/* 고정 컬럼 헤더 스타일 */
+.alopexgrid .wrapper .cell.headercell.cell-fixcol {
+	z-index: 31;
+}
+
+/* 스크롤바 스타일 */
+.alopexgrid .scrollbar {
+	z-index: 40;
+}
+
+/* 드래그 앤 드롭시 생성되는 엘리먼트 관련 스타일 */
+.alopexgrid .wrapper .alopexgrid-dragdrop-header-indicator {
+	z-index: 50;
+}
+
+.alopexgrid .wrapper .alopexgrid-dragdrop-row-indicator {
+	z-index: 50;
+}
+
+/* 칼럼, 행 리사이즈 indicator 스타일 */
+.alopexgrid .column-resize-align {
+	z-index: 50;
+}
+
+.alopexgrid .row-resize-align {
+	z-index: 50;
+}
+
+/* 기본 컨텍스트 메뉴 중 확대보기를 실행했을때 나타나는 컨텐츠, 배경화면 스타일 */
+.alopexgrid.alopexgrid-enlarge-blocker {
+	z-index: 60;
+}
+
+.alopexgrid.alopexgrid-enlarge-content {
+	z-index: 61;
+}
+
+/**
+ * 확대보기 했을때에도 먼저 보여야할 기능에 대한 스타일 
+ */
+/* 셀 팝업 에디팅 스타일 */
+.alopexgrid.alopexgrid-celledit-popupwrap {
+	z-index: 70;
+}
+
+/* 컨텍스트 메뉴 스타일 */
+.alopexgrid.alopexgrid-contextmenu-wrapper, .alopexgrid.alopexgrid-newcontextmenu-wrapper {
+	z-index: 70;
+}
+
+/* 엑셀 내보내기, 가져오기시 사용되는 다이얼로그 스타일 */
+.alopexgrid.alopexgrid-excel-background {
+	z-index: 70;
+}
+
+/* 필터링그리드 리사이징 시 보이는 리사이징 박스는 위에 보여야 함. */
+.alopexgrid .box-resizing-align {
+	z-index: 71;
+}
+
+.alopexgrid.alopexgrid-excel-dialog {
+	z-index: 71;
+}
+
+/* 드래그 앤 드롭 사용시 스타일 */
+.alopexgrid.alopexgrid-dragdrop-header {
+	z-index: 71;
+}
+
+.alopexgrid.alopexgrid-dragdrop-row {
+	z-index: 71;
+}
+
+/* 그리드 프로그래스 스타일 */
+.alopexgrid .modal {
+	z-index: 71;
+}
+
+.alopexgrid .progress {
+	z-index: 72;
+}
+
+/* 필터링 박스 스타일 */
+/* z-index 조정 v3.11.4+ */
+.alopexgrid.alopexgrid-filterdropdown-wrapper {
+	z-index: 73;
+}
